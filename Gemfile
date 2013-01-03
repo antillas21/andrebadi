@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'devise'
 
 group :development do
   gem 'quiet_assets'
