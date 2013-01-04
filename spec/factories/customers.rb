@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :customer do
+    name 'Jane Doe'
+    balance 0
   end
 end
