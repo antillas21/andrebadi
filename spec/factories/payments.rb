@@ -2,5 +2,8 @@
 
 FactoryGirl.define do
   factory :payment do
+    payment_date { Time.now }
+    amount 400
+    customer_id 1
   end
 end

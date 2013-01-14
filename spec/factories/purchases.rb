@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :purchase do
+    purchase_date { Time.now }
+    customer
   end
 end
