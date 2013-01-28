@@ -6,6 +6,7 @@ gem 'rails', '3.2.12'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem 'strong_parameters'
 
 
 # Gems used only for assets and not required
@@ -33,6 +34,7 @@ group :test, :development do
   gem 'pry-rails'
   gem 'factory_girl_rails', '4.1.0'
   gem 'timecop'
+  gem 'faker'
 end
 
 group :test do
