@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :customer do
-    name 'Jane Doe'
-    balance 0
+    name Faker::Name.name
+    phone Faker::PhoneNumber.phone_number
+    email Faker::Internet.free_email
   end
 end

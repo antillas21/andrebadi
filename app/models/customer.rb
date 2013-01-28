@@ -1,7 +1,10 @@
 class Customer < ActiveRecord::Base
+
+  include ActiveModel::ForbiddenAttributesProtection
   # attr_accessible :title, :body
   #
   validates :name, :balance, presence: true
+  validates :email, uniqueness: true
 
   belongs_to :user
   has_many :purchases
