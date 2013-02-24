@@ -33,6 +33,7 @@ group :test, :development do
   gem 'pry-rails'
   gem 'factory_girl_rails', '4.1.0'
   gem 'timecop'
+  gem 'faker'
 end
 
 group :test do
