@@ -191,6 +191,7 @@ DEPENDENCIES
   faker
   jquery-rails
   letter_opener
+  libv8 (~> 3.11.8)
   pg
   pry-rails
   quiet_assets
