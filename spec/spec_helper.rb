@@ -41,6 +41,7 @@ RSpec.configure do |config|
   # add FactoryGirl syntax methods
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
+  config.include ApiHelper, type: :api
 
   # add database_cleaner specific configuration
   config.before(:suite) do
