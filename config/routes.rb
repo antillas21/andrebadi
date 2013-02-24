@@ -1,6 +1,10 @@
 AndreBadi::Application.routes.draw do
   devise_for :users
 
+  namespace :api do
+    resources :customers
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

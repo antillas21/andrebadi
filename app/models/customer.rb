@@ -1,6 +1,8 @@
 class Customer < ActiveRecord::Base
   # attr_accessible :title, :body
   #
+  attr_accessible :name, :balance, :phone, :email
+
   validates :name, :balance, presence: true
 
   belongs_to :user
