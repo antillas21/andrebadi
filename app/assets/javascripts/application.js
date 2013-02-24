@@ -11,5 +11,9 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery_ujs
-//= require_tree .
+//= require jqm-config
+//= require jquery.mobile-1.3.0.min
+//= require underscore-min
+//= require backbone-min
+//= require json2
+//= require main
