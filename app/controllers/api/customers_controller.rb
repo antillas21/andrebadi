@@ -1,5 +1,6 @@
 class Api::CustomersController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :retrieve_customer, only: [ :show, :update, :destroy ]
 
   respond_to :json
 
@@ -14,19 +15,21 @@ class Api::CustomersController < ApplicationController
   end
 
   def show
-    @customer = current_user.customers.find(params[:id])
     respond_with @customer
   end
 
   def update
-    @customer = current_user.customers.find(params[:id])
     @customer.update_attributes(params[:customer])
     respond_with @customer
   end
 
   def destroy
-    @customer = current_user.customers.find(params[:id])
     @customer.destroy
     head :ok
+  end
+
+  private
+  def retrieve_customer
+    @customer = current_user.customers.find(params[:id])
   end
 end
