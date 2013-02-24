@@ -36,6 +36,19 @@ describe Api::CustomersController do
     end
   end
 
+  describe 'POST #create' do
+    before :each do
+      post 'create', customer: { name: 'Janeth Doe', email: 'janeth@example.com' }, format: :json
+    end
+
+    it 'is success' do
+    end
+
+    it 'assigns :customer to new current_user customer' do
+      assigns(:customer).should_not be_nil
+    end
+  end
+
   describe 'PUT #update' do
     context 'valida attributes' do
       before :each do

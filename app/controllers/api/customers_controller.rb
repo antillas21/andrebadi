@@ -8,6 +8,11 @@ class Api::CustomersController < ApplicationController
     respond_with @customers
   end
 
+  def create
+    @customer = current_user.customers.create(params[:customer])
+    respond_with @customer, location: api_customers_url
+  end
+
   def show
     @customer = current_user.customers.find(params[:id])
     respond_with @customer
