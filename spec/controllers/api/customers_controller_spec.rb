@@ -1,44 +1,47 @@
 require 'spec_helper'
 
-describe Api::CustomersController do
+describe Api::CustomersController, type: :api do
   let(:user) { create(:user) }
+  let(:token) { user.authentication_token }
   # let(:customer) { create(:customer, user: user) }
 
   before :each do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+    # @request.env["devise.mapping"] = Devise.mappings[:user]
     @customer = create(:customer, user: user)
 
-    sign_in user
-    get 'index', format: :json
+    # sign_in user
+    get 'index', token: token, format: :json
   end
 
   describe 'GET #index' do
-    it 'should be success' do
+   it 'should be success' do
       response.should be_success
     end
 
-    it 'assigns :customers to current_user.customers' do
+    it 'assigns :customers to logged_user.customers' do
       assigns(:customers).should include @customer
     end
   end
 
   describe 'GET #show' do
     before :each do
-      get 'show', id: @customer.id, format: :json
+      get 'show', id: @customer.id, token: token, format: :json
     end
 
     it 'should be success' do
       response.should be_success
     end
 
-    it 'assigns :customer to @customer, filtered from the current_user' do
+    it 'assigns :customer to @customer, filtered from the logged_user' do
       assigns(:customer).should == @customer
     end
   end
 
   describe 'POST #create' do
     before :each do
-      post 'create', customer: { name: 'Janeth Doe', email: 'janeth@example.com' }, format: :json
+      post 'create', 
+        customer: { name: 'Janeth Doe', email: 'janeth@example.com' }, 
+        token: token, format: :json
     end
 
     it 'is success' do
@@ -50,9 +53,10 @@ describe Api::CustomersController do
   end
 
   describe 'PUT #update' do
-    context 'valida attributes' do
+    context 'valid attributes' do
       before :each do
-        put 'update', id: @customer.id, customer: { name: 'Janeth Doe' }, format: :json
+        put 'update', id: @customer.id, customer: { name: 'Janeth Doe' }, 
+          token: token, format: :json
       end
 
       it 'updates record in database' do
@@ -79,7 +83,7 @@ describe Api::CustomersController do
 
   describe 'DELETE #destroy' do
     before :each do
-      delete 'destroy', id: @customer.id, format: :json
+      delete 'destroy', id: @customer.id, token: token, format: :json
     end
 
     it 'deletes record from database' do
