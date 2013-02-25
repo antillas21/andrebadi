@@ -30,5 +30,8 @@ class Api::CustomersController < Api::BaseController
   private
   def retrieve_customer
     @customer = logged_user.customers.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    error = { error: "Record could not be found or access not allowed." }
+    respond_with(error, status: 404)
   end
 end
