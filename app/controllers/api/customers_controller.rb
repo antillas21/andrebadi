@@ -10,7 +10,11 @@ class Api::CustomersController < Api::BaseController
 
   def create
     @customer = logged_user.customers.create(params[:customer])
-    respond_with @customer, location: api_customers_url
+    if @customer.valid?
+      respond_with @customer, location: api_customer_url(@customer)
+    else
+      respond_with @customer
+    end
   end
 
   def show
@@ -19,7 +23,7 @@ class Api::CustomersController < Api::BaseController
 
   def update
     @customer.update_attributes(params[:customer])
-    respond_with @customer
+    respond_with @customer, location: api_customer_url(@customer)
   end
 
   def destroy

@@ -3,13 +3,10 @@ require 'spec_helper'
 describe Api::CustomersController, type: :api do
   let(:user) { create(:user) }
   let(:token) { user.authentication_token }
-  # let(:customer) { create(:customer, user: user) }
 
   before :each do
-    # @request.env["devise.mapping"] = Devise.mappings[:user]
     @customer = create(:customer, user: user)
 
-    # sign_in user
     get 'index', token: token, format: :json
   end
 
@@ -38,17 +35,28 @@ describe Api::CustomersController, type: :api do
   end
 
   describe 'POST #create' do
-    before :each do
-      post 'create', 
-        customer: { name: 'Janeth Doe', email: 'janeth@example.com' }, 
-        token: token, format: :json
+    context "with valid params" do
+      before :each do
+        post 'create', 
+          customer: { name: 'Janeth Doe', email: 'janeth@example.com' }, 
+          token: token, format: :json
+      end
+
+      it 'is success' do
+        response.status.should eql 201
+      end
+
+      it 'assigns :customer to new logged_user customer' do
+        assigns(:customer).should_not be_nil
+      end
     end
 
-    it 'is success' do
-    end
+    context "with invalid params" do
+      it 'returns an error' do
+        post 'create', customer: { name: nil, email: nil }, token: token, format: :json
 
-    it 'assigns :customer to new current_user customer' do
-      assigns(:customer).should_not be_nil
+        response.status.should eql 422
+      end
     end
   end
 
@@ -65,7 +73,7 @@ describe Api::CustomersController, type: :api do
       end
 
       it 'responds with updated record' do
-        # response.should == '/api/customers/xyz'
+        response.location.should eql api_customer_url(@customer)
       end
     end
 
@@ -77,6 +85,10 @@ describe Api::CustomersController, type: :api do
       it 'does not update record in database' do
         @customer.reload
         @customer.should_not be_changed
+      end
+
+      it 'returns an error' do
+        response.status.should eql 204
       end
     end
   end
