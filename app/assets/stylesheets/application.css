@@ -11,4 +11,6 @@
  *= require_self
  *= require jquery.mobile-1.3.0.min
  *= require_tree .
+ *= require jquery.mobile-1.3.0.min
+ *= require jquery.mobile.structure-1.3.0
  */
