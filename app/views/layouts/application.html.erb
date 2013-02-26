@@ -7,24 +7,25 @@
 </head>
 <body>
   <div data-role="page">
-    <div data-role="header">
+    <div data-role="header" data-position="fixed">
+      <span class="ui-title"></span>
+      <%= link_to 'Home', root_path, data: { icon: "home" }, class: "ui-btn-left" %>
       <% if current_user %>
-        <%= link_to 'Dashboard', root_path, data: { icon: "home" } %>
-      <% end %>
-      <h1>Sale Tracker</h1>
-      <% if current_user %>
-        <%= link_to 'Logout', destroy_user_session_path, method: :delete, data: { icon: "close" } %>
-        <%# <a href="#" data-icon="bars">Logout</a> %>
+        <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+          <%= link_to 'Dashboard', root_path, data: { role: "button", icon: "home" } %>
+          <%= link_to 'My Account', edit_user_registration_path, data: { role: "button", icon: "gear" } %>
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete, data: { role: "button", icon: "close" } %>
+        </div>
       <% else %>
-        <%= link_to 'Login', new_user_session_path, data: { icon: "bars" } %>
+        <%= link_to 'Login', new_user_session_path, data: { icon: "bars" }, class: "ui-btn-right" %>
       <% end %>
     </div>
     <div data-role="content">
-      <div id="flash_messages" class="flash_message twelve columns centered">
         <% flash.each do |key, value| %>
-          <%= content_tag :div, value, :class => "flash #{key}" unless value.blank? %>
+          <div id="flash_messages" class="flash_message ui-bar ui-bar-e">
+            <%= content_tag :div, value, :class => "flash #{key}" unless value.blank? %>
+          </div>
         <% end %>
-      </div>
 
       <%= yield %>
     </div>
