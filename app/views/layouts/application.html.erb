@@ -1,19 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html class="ui-mobile">
 <head>
   <title>AndreBadi</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="flash_messages" class="flash_message twelve columns centered">
-    <% flash.each do |key, value| %>
-      <%= content_tag :div, value, :class => "flash #{key}" unless value.blank? %>
-    <% end %>
+  <div data-role="page">
+    <div data-role="header">
+      <a href="#" data-icon="home">Home</a>
+      <h1>Sale Tracker</h1>
+      <a href="#" data-icon="bars">Login</a>
+    </div>
+    <div data-role="content">
+      <div id="flash_messages" class="flash_message twelve columns centered">
+        <% flash.each do |key, value| %>
+          <%= content_tag :div, value, :class => "flash #{key}" unless value.blank? %>
+        <% end %>
+      </div>
+
+      <%= yield %>
+    </div>
+    <div data-role="footer" data-position="fixed">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#" class="ui-btn-active">Customers</a></li>
+          <li><a href="#">Sales</a></li>
+          <li><a href="#">Payments</a></li>
+          <li><a href="#">Reports</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 
-<%= yield %>
+
+  <%= javascript_include_tag "application" %>
 
 </body>
 </html>
