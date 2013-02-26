@@ -16,6 +16,7 @@ for a hobby job that my wife has.
 ### For Linux/Ubuntu
 * For a successful `bundle install`, you'll need to `sudo apt-get install libpq-dev`.
 * PostgresSql setup
+
 ```console
 # give a password to the main user
 sudo -u postgres psql postgres
@@ -26,6 +27,7 @@ sudo -u postgres createuser --superuser andre_badi
 sudo -u postgres psql
 postgres=# \password andre_badi
 ```
+
 - uncomment `listen_addresses = 'localhost'` in `postgresql.conf`
 - Then create databases via `phppgadmin` or console
 
