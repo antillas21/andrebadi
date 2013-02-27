@@ -18,4 +18,12 @@ class Customer < ActiveRecord::Base
 
     self.update_attribute(:balance, balance)
   end
+
+  def last_payment
+    payments.last
+  end
+
+  def last_purchase
+    purchases.last
+  end
 end

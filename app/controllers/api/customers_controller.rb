@@ -5,7 +5,8 @@ class Api::CustomersController < Api::BaseController
 
   def index
     @customers = logged_user.customers
-    respond_with @customers
+    respond_with @customers.includes(:payments, :purchases), 
+      methods: [ "last_payment", "last_purchase" ]
   end
 
   def create
@@ -18,7 +19,7 @@ class Api::CustomersController < Api::BaseController
   end
 
   def show
-    respond_with @customer
+    respond_with @customer, methods: ["last_payment", "last_purchase"]
   end
 
   def update
