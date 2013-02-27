@@ -7,9 +7,4 @@ class Payment < ActiveRecord::Base
 
   belongs_to :customer
 
-  after_save :update_customer_balance
-
-  def update_customer_balance
-    self.customer.calculate_balance
-  end
 end

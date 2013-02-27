@@ -10,20 +10,6 @@ describe Purchase do
     it { should have_many :purchase_items }
   end
 
-  describe ':purchase_total' do
-    it 'represents the sum of purchase_items.item_total' do
-      order = build(:purchase)
-      coat, sweater = build(:coat), build(:sweater)
-
-      order.purchase_items << coat
-      order.purchase_items << sweater
-
-      order.save
-      order.reload
-      order.purchase_total.should eql (sweater.item_total + coat.item_total)
-    end
-  end
-
   describe '#total' do
     it 'represents an updated sum of purchase_items, directly from the relationship' do
       order = build(:purchase)

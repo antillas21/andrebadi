@@ -11,19 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130224090029) do
+ActiveRecord::Schema.define(:version => 20130227050514) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
     t.string   "phone"
     t.string   "email"
-    t.integer  "balance",    :default => 0
     t.integer  "user_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "customers", ["balance"], :name => "index_customers_on_balance"
   add_index "customers", ["name"], :name => "index_customers_on_name"
   add_index "customers", ["user_id"], :name => "index_customers_on_user_id"
 
@@ -52,15 +50,13 @@ ActiveRecord::Schema.define(:version => 20130224090029) do
 
   create_table "purchases", :force => true do |t|
     t.date     "purchase_date"
-    t.integer  "purchase_total", :default => 0
     t.integer  "customer_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   add_index "purchases", ["customer_id"], :name => "index_purchases_on_customer_id"
   add_index "purchases", ["purchase_date"], :name => "index_purchases_on_purchase_date"
-  add_index "purchases", ["purchase_total"], :name => "index_purchases_on_purchase_total"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

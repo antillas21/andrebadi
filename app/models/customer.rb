@@ -1,23 +1,19 @@
 class Customer < ActiveRecord::Base
   # attr_accessible :title, :body
   #
-  attr_accessible :name, :balance, :phone, :email
+  attr_accessible :name, :phone, :email
 
-  validates :name, :balance, presence: true
+  validates :name, presence: true
+  delegate :purchases_total, to: :purchases
 
   belongs_to :user
-  has_many :purchases
-  has_many :payments
-
-  def calculate_balance
-    # code to calculate balance
-    purchases = self.purchases.pluck(:purchase_total).inject(0) { |sum, p| sum + p }
-    payments = self.payments.pluck(:amount).inject(0) { |sum, p| sum + p }
-
-    balance = purchases - payments
-
-    self.update_attribute(:balance, balance)
+  has_many :purchases do
+    def total
+      sum('purchase_total')
+    end
   end
+
+  has_many :payments
 
   def last_payment
     payments.last
