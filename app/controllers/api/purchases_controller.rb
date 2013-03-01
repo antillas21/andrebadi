@@ -4,11 +4,11 @@ class Api::PurchasesController < Api::BaseController
 
   def index
     @purchases = @customer.purchases
-    respond_with @purchases
+    respond_with @purchases.includes(:purchase_items), methods: [ "total" ]
   end
 
   def show
-    respond_with @purchase
+    respond_with @purchase, methods: [ "total", "items"]
   end
 
   def update

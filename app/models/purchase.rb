@@ -19,4 +19,8 @@ class Purchase < ActiveRecord::Base
     @total = purchase_items.total
   end
 
+  def items
+    purchase_items
+  end
+
 end
