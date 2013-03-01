@@ -19,7 +19,12 @@ class Customer < ActiveRecord::Base
     payments.last
   end
 
-  def last_purchase
-    purchases.last
+  def recent_payments
+    payments.recent
   end
+
+  def recent_purchases
+    purchases.recent
+  end
+
 end
