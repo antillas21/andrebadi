@@ -6,6 +6,8 @@ class Purchase < ActiveRecord::Base
 
   validates :purchase_date, presence: true
 
+  scope :recent, order("purchase_date desc").limit(3)
+
   belongs_to :customer
   has_many :purchase_items do
     def total

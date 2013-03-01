@@ -23,4 +23,23 @@ describe Purchase do
     end
   end
 
+  describe 'scopes' do
+    describe 'recent' do
+      it 'retrieves the 3 more recent purchases' do
+        5.times { create(:purchase) }
+
+        Purchase.recent.count.should eql 3
+      end
+
+      it 'retrieves records ordered by purchase_date in descending order' do
+        first = create(:purchase, purchase_date: '2013-01-01')
+        second = create(:purchase, purchase_date: '2013-02-01')
+        third = create(:purchase, purchase_date: '2013-03-01')
+
+        Purchase.recent.first.should eql third
+      end
+    end
+  end
+
+
 end

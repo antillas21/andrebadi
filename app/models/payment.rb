@@ -7,4 +7,5 @@ class Payment < ActiveRecord::Base
 
   belongs_to :customer
 
+  scope :recent, order("payment_date desc").limit(3)
 end
