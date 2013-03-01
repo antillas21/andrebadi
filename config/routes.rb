@@ -4,6 +4,7 @@ AndreBadi::Application.routes.draw do
   namespace :api do
     resources :customers do
       resources :payments
+      resources :purchases
     end
   end
 
