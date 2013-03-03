@@ -1,7 +1,8 @@
-<script>
-var token = '<%= @token %>';
-</script>
-
+<% content_for :js do %>
+  <script>
+    AndreBadiApp.initialize();
+  </script>
+<% end %>
 
 <script type="text/template" id="home">
 
