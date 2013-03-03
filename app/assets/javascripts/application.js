@@ -17,5 +17,4 @@
 //= require underscore-min
 //= require backbone-min
 //= require json2
-//= require main
 //= require_tree .
