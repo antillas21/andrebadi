@@ -4,4 +4,12 @@ class WelcomeController < ApplicationController
   def backbone
     @token = current_user.id
   end
+
+  def customers
+    @customers = current_user.customers.order(:name).all
+  end
+
+  def payments
+    
+  end
 end

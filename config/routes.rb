@@ -9,6 +9,7 @@ AndreBadi::Application.routes.draw do
   end
 
   match 'dashboard' => 'welcome#backbone'
+  match 'customers' => 'welcome#customers'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
