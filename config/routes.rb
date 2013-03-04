@@ -11,6 +11,12 @@ AndreBadi::Application.routes.draw do
   match 'dashboard' => 'welcome#backbone'
   match 'customers' => 'welcome#customers'
 
+  resources :customers
+  resources :sales
+  resources :payments
+  
+  match 'reports' => 'resports#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

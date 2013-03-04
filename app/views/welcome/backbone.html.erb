@@ -1,0 +1,22 @@
+<script type="text/template" id="customers">
+
+  <%= render 'shared/header', :title => 'Customers' %>
+
+  <div data-role="content" class="view-content">
+    <ul data-role="listview" data-inset="true" id="customerList">
+    </ul>
+  </div>
+
+  <%= render 'shared/footer_nav' %>
+
+</script>
+
+<%= content_for :js do %>
+  <%= javascript_tag do %>
+
+  var customers = new App.Collections.Customers();
+  customers.reset(<%= (@customers.to_json).html_safe %>);
+
+  <% end %>
+<% end %>
+
