@@ -3,6 +3,7 @@ class WelcomeController < ApplicationController
 
   def backbone
     @token = current_user.id
+    @customers = current_user.customers.order(:name).all
   end
 
   def customers

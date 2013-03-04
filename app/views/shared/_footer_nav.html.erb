@@ -1,0 +1,13 @@
+   <% if current_user %>
+      <div data-role="footer" data-position="fixed" data-id="myfooter">
+        <div data-role="navbar">
+          <ul><!-- ui-btn-active -->
+            <li><%= link_to 'Customers', customers_path %></li>
+            <li><%= link_to 'Sales', sales_path %></li>
+            <li><%= link_to 'Payments', payments_path %></li>
+            <li><%= link_to 'Reports', reports_path %></li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+

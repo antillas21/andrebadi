@@ -1,11 +1,13 @@
 <%= content_for :js do %>
   <%= javascript_tag do %>
+               /*
     window.customersList = new App.Collections.Customers(<%= (@customers.to_json).html_safe %>);
     console.log(customersList);
 
     window.customersListView = new App.Views.Customers({ collection: customersList });
     customersListView.render();
     $('#customers-placeholder').html(customersListView.el);
+                */
   <% end %>
 <% end %>
 
