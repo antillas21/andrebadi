@@ -1,45 +1,64 @@
-var AndreBadiApp = {
-  Models: {},
-  Collections: {},
-  Views: {},
-  Routers: {},
+(function(){
+  Backbone.old_sync = Backbone.sync
+  Backbone.sync = function(method, model, options) {
+      var new_options =  _.extend({
+          beforeSend: function(xhr) {
+              var token = $('meta[name="auth-token"]').attr('content');
+              if (token) xhr.setRequestHeader('X-AUTH-TOKEN', token);
+          }
+      }, options)
+      Backbone.old_sync(method, model, new_options);
+  };
+  
+  window.App = {
+    Models: {},
+    Collections: {},
+    Views: {},
+    Routers: {},
+  }
 
-  initialize: function() {
-    new AndreBadiApp.Routers.Customers();
-    Backbone.history.start();
-  },
-}
+  // Models
+  App.Models.Customer = Backbone.Model.extend({
+    urlRoot: 'api/customers'
+  });
 
-Backbone.old_sync = Backbone.sync
-Backbone.sync = function(method, model, options) {
-    var new_options =  _.extend({
-        beforeSend: function(xhr) {
-            var token = $('meta[name="auth-token"]').attr('content');
-            if (token) xhr.setRequestHeader('X-AUTH-TOKEN', token);
-        }
-    }, options)
-    Backbone.old_sync(method, model, new_options);
-};
+  App.Models.Payment = Backbone.Model.extend({});
 
-// Models
-AndreBadiApp.Models.Customer = Backbone.Model.extend({
-});
+  App.Models.Purchase = Backbone.Model.extend({});
 
-AndreBadiApp.Models.Payment = Backbone.Model.extend({});
-
-AndreBadiApp.Models.Purchase = Backbone.Model.extend({});
-
-AndreBadiApp.Models.PurchaseItem = Backbone.Model.extend({});
+  App.Models.PurchaseItem = Backbone.Model.extend({});
 
 
-// Collections
-AndreBadiApp.Collections.CustomersList = Backbone.Collection.extend({
-  model: AndreBadiApp.Models.Customer,
-  url: '/api/customers'
-});
+  // Collections
+  App.Collections.Customers = Backbone.Collection.extend({
+    model: App.Models.Customer,
+    url: 'api/customers',
+  });
 
-// Views
-AndreBadiApp.Views.Customers = Backbone.View.extend({});
+  // Views
+  App.Views.Customers = Backbone.View.extend({
+    el: '#customers-list',
 
-// Routers
-AndreBadiApp.Routers.Customers = Backbone.Router.extend({});
+    render: function() {
+      this.collection.each(function(customer) {
+        var customerView = new App.Views.Customer({ model: customer });
+        this.$el.append( customerView.render().el );
+      }, this);
+
+      return this;
+    }
+
+  });
+
+  App.Views.Customer = Backbone.View.extend({
+    tagName: 'li',
+    template: _.template("<a href='#'><%= name %></a>"),
+
+    render: function() {
+      this.$el.html( this.template( this.model.toJSON() ) );
+      return this;
+    }
+  });
+
+})();
+
