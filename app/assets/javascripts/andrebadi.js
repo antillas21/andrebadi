@@ -1,4 +1,4 @@
-(function(){
+(function(window, $) {
   Backbone.old_sync = Backbone.sync
   Backbone.sync = function(method, model, options) {
       var new_options =  _.extend({
@@ -60,5 +60,5 @@
     }
   });
 
-})();
+})(window, jQuery);
 
