@@ -1,0 +1,38 @@
+<h2><%= @customer.name %></h2>
+<p><%= @customer.email %></p>
+<p><%= @customer.phone %></p>
+
+<p>
+    <a href="#" data-role="button" data-inline="true" data-icon="plus">Add Purchase</a>
+    <a href="#" data-role="button" data-inline="true" data-icon="check">Add Payment</a>
+</p>
+
+
+<ul data-role="listview" data-inset="true">
+  <li data-role="list-divider">Most Recent Purchases <span class="ui-li-count"><%= @customer.recent_purchases.count %></span></li>
+  <% @customer.recent_purchases.each do |purchase| %>
+    <li>
+      <h2>Date: <%= purchase.purchase_date %></h2>
+    </li>
+  <% end %>
+  <li>
+    <a href="#">
+      <h2>View all</h2>
+    </a>
+  </li>
+</ul>
+
+<ul data-role="listview" data-inset="true">
+  <li data-role="list-divider">Most Recent Payments <span class="ui-li-count"><%= @customer.recent_payments.count %></span></li>
+  <% @customer.recent_payments.each do |payment| %>
+    <li>
+      <h2>Amount: <%= number_to_currency payment.amount / 100 %></h2>
+      <p><strong>Date: </strong><%= payment.payment_date %></p>
+    </li>
+  <% end %>
+  <li>
+    <a href="#">
+      <h2>View all</h2>
+    </a>
+  </li>
+</ul>
