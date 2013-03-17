@@ -17,6 +17,9 @@ AndreBadi::Application.routes.draw do
   
   match 'reports' => 'resports#index'
 
+  get '/wireframes/customers' => 'wireframes#customers'
+  get '/wireframes/customers/:id' => 'wireframes#customer', as: 'wireframe_customer'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
