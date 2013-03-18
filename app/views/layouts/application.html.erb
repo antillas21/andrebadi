@@ -19,9 +19,9 @@
             <%= content_tag :div, value, :class => "flash #{key}" unless value.blank? %>
           </div>
         <% end %>
-    </div>
 
-    <%= yield %>
+        <%= yield %>
+    </div>
 
     <%= render 'shared/footer_nav' %>
   </div>
