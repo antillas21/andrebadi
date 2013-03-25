@@ -14,7 +14,12 @@
 //= require jquery_ujs
 //= require jqm-config
 //= require jquery.mobile-1.3.0.min
-//= require underscore-min
-//= require backbone-min
+//= require underscore
 //= require json2
-//= require_tree .
+//= require backbone
+//= require andre_badi
+//= require_tree ../templates
+//= require_tree ./models
+//= require_tree ./collections
+//= require_tree ./views
+//= require_tree ./routers

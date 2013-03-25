@@ -7,7 +7,6 @@ class WelcomeController < ApplicationController
   end
 
   def customers
-    @customers = current_user.customers.order(:name).all
   end
 
   def payments
