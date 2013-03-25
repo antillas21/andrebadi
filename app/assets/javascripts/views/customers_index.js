@@ -13,7 +13,6 @@ App.Views.CustomersIndex = Backbone.View.extend({
   },
 
   render: function() {
-    // this.$el.html(JST['customers/index']());
     this.addAll();
 
     return this;
@@ -27,6 +26,6 @@ App.Views.CustomersIndex = Backbone.View.extend({
 
   addOne: function(customer) {
     var customerLi = new App.Views.CustomerAsListItem({ model: customer });
-    $(this.el).append(customerLi.render().el);
+    this.$el.append(customerLi.render().el);
   }
 });

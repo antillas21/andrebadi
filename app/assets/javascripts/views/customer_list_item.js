@@ -10,7 +10,7 @@ App.Views.CustomerAsListItem = Backbone.View.extend({
   },
 
   tagName: 'li',
-  className: "ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-first-child ui-btn-up-c",
+  className: "ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c",
 
   render: function() {
     this.$el.html(JST['customers/list_item']({ model: this.model }));
