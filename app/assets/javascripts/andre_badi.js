@@ -17,7 +17,7 @@ window.App = {
   initialize: function(data) {
     this.customers = new App.Collections.Customers;
     this.customers.fetch();
-    new App.Routers.Customers({ customers: this.customers.toJSON() });
+    new App.Routers.Customers;
     Backbone.history.start();
   }
 };
