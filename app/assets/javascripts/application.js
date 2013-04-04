@@ -12,8 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jqm-config
-//= require jquery.mobile-1.3.0.min
+//= require twitter/bootstrap
 //= require underscore
 //= require json2
 //= require backbone
