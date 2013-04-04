@@ -1,1 +1,32 @@
-<h4><%= model.escape('name') %></h4>
+<div class="well">
+  <div class="row">
+    <div class="span5">
+      <h2><%= model.escape('name') %></h2>
+    </div>
+    <div class="span5">
+      <p><i class="icon-envelope-alt"></i> <%= model.escape('email') %></p>
+      <p><i class="icon-phone-sign"></i> <%= model.escape('phone') %></p>
+    </div>
+  </div>
+</div>
+
+<div id="last-payments" class="payments">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Recent Payments</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+<div id="last-purchases" class="purchases">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Recent Purchases</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
