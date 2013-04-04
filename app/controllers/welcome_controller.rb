@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
   before_filter :authenticate_user!
+  layout 'bootstrap'
 
   def backbone
     @token = current_user.id
