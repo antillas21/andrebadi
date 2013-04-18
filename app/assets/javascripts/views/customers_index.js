@@ -3,7 +3,5 @@ App.Views.CustomersIndex = Backbone.Marionette.CompositeView.extend({
 
   itemView: App.Views.CustomerAsListItem,
 
-  appendHtml: function(collectionView, itemView){
-    collectionView.$("tbody").append(itemView.el);
-  }
+  itemViewContainer: 'tbody'
 });
