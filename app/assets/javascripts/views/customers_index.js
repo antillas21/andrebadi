@@ -1,25 +1,9 @@
-App.Views.CustomersIndex = Backbone.View.extend({
+App.Views.CustomersIndex = Backbone.Marionette.CompositeView.extend({
+  template: 'customers/index',
 
-  initialize: function() {
-    this.collection.on('add', this.addOne, this);
-    this.collection.on('reset', this.render, this);
-  },
+  itemView: App.Views.CustomerAsListItem,
 
-  render: function() {
-    this.$el.html(JST['customers/index']());
-    this.addAll();
-
-    return this;
-  },
-
-  addAll: function() {
-    this.collection.each(function(customer) {
-      this.addOne(customer);
-    }, this);
-  },
-
-  addOne: function(customer) {
-    var customerLi = new App.Views.CustomerAsListItem({ model: customer });
-    this.$('tbody').append(customerLi.render().el);
+  appendHtml: function(collectionView, itemView){
+    collectionView.$("tbody").append(itemView.el);
   }
 });

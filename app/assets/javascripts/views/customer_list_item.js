@@ -1,8 +1,5 @@
-App.Views.CustomerAsListItem = Backbone.View.extend({
+App.Views.CustomerAsListItem = Backbone.Marionette.ItemView.extend({
   tagName: 'tr',
 
-  render: function() {
-    this.$el.html(JST['customers/list_item']({ model: this.model }));
-    return this;
-  }
+  template: 'customers/list_item'
 });
