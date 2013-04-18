@@ -16,6 +16,10 @@
 //= require underscore
 //= require json2
 //= require backbone
+//= require backbone.wreqr
+//= require backbone.babysitter
+//= require backbone.marionette
+//= require marionette-config
 //= require andre_badi
 //= require_tree ../templates
 //= require_tree ./models
