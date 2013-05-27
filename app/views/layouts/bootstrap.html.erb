@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= include_gon %>
     <% if current_user %>
       <meta name="auth-token" content="<%= current_user.authentication_token %>">
     <% end %>
@@ -50,7 +51,7 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <% if current_user %>
-                <li><%= link_to 'Dashboard', dashboard_path %></li>
+                <li><%= link_to 'Dashboard', '/#dashboard' %></li>
                 <li><%= link_to 'Customers', '/#customers' %></li>
                 <li><%= link_to 'My Account', edit_user_registration_path %></li>
                 <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
@@ -71,7 +72,7 @@
                 <%= content_tag :div, value, :class => "flash alert alert-#{key}" unless value.blank? %>
               </div>
             <% end %>
-            <div id="backbone-container">
+            <div id="main-region">
               <%= yield %>
             </div>
           </div>

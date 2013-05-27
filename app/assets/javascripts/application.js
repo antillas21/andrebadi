@@ -12,17 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require lib/underscore
+//= require lib/json2
+//= require lib/backbone
+//= require lib/backbone.marionette
+//= require js-routes
+//= require_tree ./backbone/config
+//= require backbone/app
+//= require_tree ./backbone/entities
+//= require_tree ./backbone/apps
 //= require twitter/bootstrap
-//= require underscore
-//= require json2
-//= require backbone
-//= require backbone.wreqr
-//= require backbone.babysitter
-//= require backbone.marionette
-//= require marionette-config
-//= require andre_badi
-//= require_tree ../templates
-//= require_tree ./models
-//= require_tree ./collections
-//= require_tree ./views
-//= require_tree ./routers

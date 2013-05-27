@@ -1,0 +1,8 @@
+<td>
+  <div class="left-side">
+    <%= @name %>
+  </div>
+  <div class="right-side">
+    <%= @phone %>
+  </div>
+</td>
