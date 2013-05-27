@@ -8,14 +8,13 @@ AndreBadi::Application.routes.draw do
     end
   end
 
-  match 'dashboard' => 'welcome#backbone'
-  match 'customers' => 'welcome#customers'
+  match 'dashboard' => 'welcome#index'
 
   resources :customers
   resources :sales
   resources :payments
-  
-  match 'reports' => 'resports#index'
+
+  match 'reports' => 'reports#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -66,7 +65,7 @@ AndreBadi::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'welcome#backbone'
+  root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
