@@ -6,10 +6,10 @@
     template: 'customers/templates/list/customer_row'
 
     events:
-      "click" : "logCustomer"
+      "click h4" : "clickedCustomer"
 
-    logCustomer: ->
-      console.log @model
+    clickedCustomer: ->
+      @trigger "customer:show", @model
 
   class List.CustomersTable extends Marionette.CompositeView
     template: 'customers/templates/list/customers_table'

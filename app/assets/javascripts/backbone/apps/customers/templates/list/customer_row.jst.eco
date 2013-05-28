@@ -4,7 +4,7 @@
       Due: $ 300.00
     </div>
     <div>
-      <h4><span itemprop="name"><%= @name %></span></h4>
+      <h4><span itemprop="name"><a href="#customers/<%= @id %>"><%= @name %></a></span></h4>
     </div>
     <p>
       <span itemprop="email">
