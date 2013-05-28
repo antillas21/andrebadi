@@ -1,4 +1,6 @@
 class Customer < ActiveRecord::Base
+
+  include ActiveModel::ForbiddenAttributesProtection
   # attr_accessible :title, :body
   #
   attr_accessible :name, :phone, :email

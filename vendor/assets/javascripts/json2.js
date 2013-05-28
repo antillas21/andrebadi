@@ -484,3 +484,8 @@ if (typeof JSON !== 'object') {
         };
     }
 }());
+<<<<<<< HEAD
+=======
+Window size: x 
+Viewport size: x
+>>>>>>> master
