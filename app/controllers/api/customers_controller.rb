@@ -5,7 +5,7 @@ class Api::CustomersController < Api::BaseController
 
   def index
     @customers = logged_user.customers
-    respond_with @customers.order(:name).includes(:payments), 
+    respond_with @customers.order(:name).includes(:payments),
       methods: [ "last_payment"]
   end
 

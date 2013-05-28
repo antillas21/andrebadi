@@ -1,9 +1,9 @@
-<div class="ui-btn-inner ui-li">
-  <div class="ui-btn-text">
-    <a href="#" class="ui-link-inherit">
-      <h2 class="ui-li-heading"><%= model.escape('name') %></h2>
-      <p class="ui-li-desc"><strong>Last payment: </strong>$ <%= model.get('last_payment').amount / 100 %></p>
-    </a>
-  </div>
-  <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
-</div>
+<td>
+  <a href="/#customers/<%= id %>">
+    <h4 class="ui-li-heading"><%= name %></h4>
+    <p class="ui-li-desc"><strong>Last payment: </strong>$ <%= last_payment.amount / 100 %></p>
+  </a>
+</td>
+<td>
+  <i class="icon-chevron-right"></i>
+</td>
