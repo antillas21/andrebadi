@@ -1,8 +1,10 @@
 @Badi = do (Backbone, Marionette) ->
   App = new Marionette.Application
 
-  App.addRegions
-    mainRegion: '#main-region'
+
+  App.on "initialize:before", (options) ->
+    App.addRegions
+      mainRegion: options.appContainer
 
   App.on "initialize:after", ->
     if Backbone.history
