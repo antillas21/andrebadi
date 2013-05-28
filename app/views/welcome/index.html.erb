@@ -1,1 +1,9 @@
 <h1>Welcome</h1>
+
+<% content_for :js do %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    Badi.start({ appContainer: '#main-region'});
+  });
+</script>
+<% end %>
