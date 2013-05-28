@@ -9,6 +9,7 @@
       Routes.customers_path()
 
     model: Entities.Customer
+    comparator: 'name'
 
   API =
     fetchCustomers: ->
