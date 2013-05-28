@@ -9,7 +9,7 @@
       "click" : "logCustomer"
 
     logCustomer: ->
-      console.log @.model
+      console.log @model
 
   class List.CustomersTable extends Marionette.CompositeView
     template: 'customers/templates/list/customers_table'
