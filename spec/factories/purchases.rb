@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :purchase do
-    purchase_date { Time.now }
     customer { create(:customer) }
 
     factory :purchase_and_items do
@@ -12,6 +11,7 @@ FactoryGirl.define do
 
       before(:create) do |purchase, evaluator|
         create_list(:coat, evaluator.items_count, purchase: purchase)
+        # purchase.amount = purchase.line_items.sum(:item_total)
       end
     end
   end

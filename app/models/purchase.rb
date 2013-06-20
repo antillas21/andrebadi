@@ -1,26 +1,19 @@
-class Purchase < ActiveRecord::Base
+class Purchase < Transaction
   # attr_accessible :title, :body
-  #
-  attr_accessible :purchase_date, :customer_id, :customer
-  attr_accessor :total
+  # relationships
+  has_many :line_items, dependent: :destroy
 
-  validates :purchase_date, presence: true
+  accepts_nested_attributes_for :line_items
 
-  scope :recent, order("purchase_date desc").limit(3)
+  after_save :calculate_amount
+  after_save :update_customer_balance
 
-  belongs_to :customer
-  has_many :purchase_items do
-    def total
-      sum('item_total')
-    end
+  def calculate_amount
+    self.amount = self.line_items.sum(&:item_total)
   end
 
-  def total
-    @total = purchase_items.total
+  def update_customer_balance
+    # new_balance = customer.total_purchases - customer.total_payments
+    # customer.update_attribute(:balance, new_balance)
   end
-
-  def items
-    purchase_items
-  end
-
 end
