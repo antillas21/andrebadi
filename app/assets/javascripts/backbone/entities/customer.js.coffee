@@ -1,16 +1,18 @@
 @Badi.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
   class Entities.Customer extends Backbone.Model
-    urlRoot: ->
-      Routes.customers_path()
+    urlRoot: '/api/customers'
+    # urlRoot: ->
+    #   Routes.customers_path()
 
     initialize: ->
       editableFields = ['name', 'email', 'phone']
       @editableFields = editableFields
 
   class Entities.CustomersCollection extends Backbone.Collection
-    url: ->
-      Routes.customers_path()
+    url: '/api/customers'
+    # url: ->
+    #   Routes.customers_path()
 
     model: Entities.Customer
     comparator: 'name'
