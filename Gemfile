@@ -14,6 +14,7 @@ gem 'rabl'
 gem 'oj'
 gem 'gon'
 gem 'js-routes'
+gem 'active_model_serializers', '~> 0.8.1'
 
 
 # Gems used only for assets and not required
