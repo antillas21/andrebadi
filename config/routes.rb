@@ -2,10 +2,9 @@ AndreBadi::Application.routes.draw do
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
   namespace :api do
-    resources :customers do
-      resources :payments
-      resources :purchases
-    end
+    resources :customers
+    resources :payments
+    resources :purchases
   end
 
   match 'dashboard' => 'welcome#index'

@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :customers
+  has_many :payments, through: :customers
+  has_many :purchases, through: :customers
 
   before_save :ensure_authentication_token
 end

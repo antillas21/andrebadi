@@ -7,6 +7,7 @@ class Customer < ActiveRecord::Base
   belongs_to :user
   has_many :purchases, dependent: :destroy
   has_many :payments, dependent: :destroy
+  has_many :transactions
 
   def total_purchases
     self.purchases.sum(:amount)

@@ -1,9 +1,8 @@
 class Api::PaymentsController < Api::BaseController
-  before_filter :find_customer
   before_filter :find_payment, only: [:show, :update, :destroy]
 
   def index
-    @payments = @customer.payments
+    @payments = logged_user.payments
     respond_with @payments
   end
 
@@ -13,7 +12,7 @@ class Api::PaymentsController < Api::BaseController
 
   def update
     @payment.update_attributes(params[:payment])
-    respond_with @payment, location: api_customer_payment_url(@payment)
+    respond_with @payment, location: api_payment_url(@payment)
   end
 
   def destroy
@@ -22,12 +21,8 @@ class Api::PaymentsController < Api::BaseController
   end
 
   private
-  def find_customer
-    @customer = Customer.find(params[:customer_id])
-  end
-
   def find_payment
-    @payment = @customer.payments.find(params[:id])
+    @payment = logged_user.payments.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       error = { error: "Record could not be found or access not allowed." }
       respond_with(error, status: 404)

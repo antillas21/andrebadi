@@ -5,7 +5,7 @@ class Api::CustomersController < Api::BaseController
 
   def index
     @customers = logged_user.customers
-    respond_with @customers.order(:name).includes([:purchases,:payments])
+    respond_with @customers.order(:name), each_serializer: CustomerListSerializer
   end
 
   def create
