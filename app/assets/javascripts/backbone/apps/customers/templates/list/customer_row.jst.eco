@@ -1,7 +1,7 @@
 <td>
   <div itemscope="" itemtype="http://schema.org/Person">
     <div class="right-side">
-      Due: $ 300.00
+      Due: $ <%= @balance %>
     </div>
     <div>
       <h4><span itemprop="name"><a href="#customers/<%= @id %>"><%= @name %></a></span></h4>
