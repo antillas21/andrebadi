@@ -56,8 +56,8 @@ __Note:__ The API requires a user token to validate requests. Examples using the
 * using a browser:
   * `http://127.0.0.1/api/customers.json?token=y1ckhL3mB1GW985qaKRn`
 * using curl:
-  * `$ curl http://localhost:3000/api/customers.json?token=y1ckhL3mB1GW985qaKRn`
-  * `$ curl --header "X-AUTH-TOKEN: y1ckhL3mB1GW985qaKRn" http://localhost:3000/api/customers.json`
+  * `$ curl http://127.0.0.1/api/customers.json?token=y1ckhL3mB1GW985qaKRn`
+  * `$ curl --header "X-AUTH-TOKEN: y1ckhL3mB1GW985qaKRn" http://127.0.0.1/api/customers.json`
 
 Once a user exists, a unique authentication token is generated. All data requests to the API should use the token.
 
@@ -76,7 +76,7 @@ __List all customers__
 
 * Route: `/api/customers.json`
 * Method: GET
-* Example: `http://saletracker.herokuapp.com/api/customers.json?token=y1ckhL3mB1GW985qaKRn`.
+* Example: `http://127.0.0.1/api/customers.json?token=y1ckhL3mB1GW985qaKRn`.
 
 ```json
 [
@@ -97,7 +97,7 @@ __Show one customer__
 
 * Route: `/api/customers/:id.json`
 * Method: GET
-* Example: `http://saletracker.herokuapp.com/api/customers/1.json?token=y1ckhL3mB1GW985qaKRn`
+* Example: `http://127.0.0.1/api/customers/1.json?token=y1ckhL3mB1GW985qaKRn`
 
 ```json
 {
@@ -151,7 +151,7 @@ __List all paymentss__
 
 * Route: `/api/payments.json`
 * Method: GET
-* Example: `http://saletracker.herokuapp.com/api/payments.json?token=y1ckhL3mB1GW985qaKRn`.
+* Example: `http://127.0.0.1/api/payments.json?token=y1ckhL3mB1GW985qaKRn`.
 
 ```json
 [
@@ -179,7 +179,7 @@ __Show one payment__
 
 * Route: `/api/payments/:id.json`
 * Method: GET
-* Example: `http://saletracker.herokuapp.com/api/payments/1.json?token=y1ckhL3mB1GW985qaKRn`
+* Example: `http://127.0.0.1/api/payments/1.json?token=y1ckhL3mB1GW985qaKRn`
 
 ```json
 {
@@ -222,7 +222,7 @@ __List all purchases__
 
 * Route: `/api/purchases.json`
 * Method: GET
-* Example: `http://saletracker.herokuapp.com/api/purchases.json?token=y1ckhL3mB1GW985qaKRn`.
+* Example: `http://127.0.0.1/api/purchases.json?token=y1ckhL3mB1GW985qaKRn`.
 
 ```json
 [
@@ -265,7 +265,7 @@ __Show one purchase__
 
 * Route: `/api/purchases/:id.json`
 * Method: GET
-*Example: `http://saletracker.herokuapp.com/api/purchases/1.json?token=y1ckhL3mB1GW985qaKRn`
+*Example: `http://127.0.0.1/api/purchases/1.json?token=y1ckhL3mB1GW985qaKRn`
 
 ```json
 {
