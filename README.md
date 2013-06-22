@@ -1,64 +1,173 @@
 # About AndreBadi
 This is a sample app that will be used (for real) to track:
+
 * customers
 * sales
 * payments
 
 for a hobby job that my wife has.
 
+
 ## Reasons for this app
 * Build something useful to help track all things mentioned above
 * Play with Rails and Backbone.js
+* Discovered Marionette.js while developing and wanted to play with it
+
 
 ## Developer Setup
-* `cp config/database.yml.example config/database.yml` and adjust it to your local environment
+* `$ cp config/database.yml.example config/database.yml` and adjust it to your local environment
+
 
 ### For Linux/Ubuntu
 For a successful `bundle install`, you'll need to `sudo apt-get install libpq-dev`.
 
-```console
-bundle install
+```
+$ bundle install
+
+
 
 # give a password to the main db user
-sudo -u postgres psql postgres
+
+$ sudo -u postgres psql postgres
 postgres=# \password postgres
 \q
+
+
 # create a superadmin user for easier testing
-sudo -u postgres createuser --superuser andre_badi
-sudo -u postgres psql
+
+$ sudo -u postgres createuser --superuser andre_badi
+$ sudo -u postgres psql
 postgres=# \password andre_badi
 
-# uncomment `listen_addresses = 'localhost'` in `postgresql.conf`
 
-rake db:setup
+* uncomment `listen_addresses = 'localhost'` in `postgresql.conf`
+
+$ rake db:setup
 ```
 
-### API
-We have an API to let you build your own client and use the application.
+## API
+#### How it works
+The application has an API to let you build your own client and use the application.
+Just point all your requests to the `/api` namespace and you'll be good to go.
+Example: `http://127.0.0.1/api/customers.json?token=y1ckhL3mB1GW985qaKRn`.
+
+__Note:__ The API requires a user token to validate requests. Examples using the authentication token.
+
+* using a browser:
+  * `http://127.0.0.1/api/customers.json?token=y1ckhL3mB1GW985qaKRn`
+* using curl:
+  * `$ curl http://localhost:3000/api/customers.json?token=y1ckhL3mB1GW985qaKRn`
+  * `$ curl --header "X-AUTH-TOKEN: y1ckhL3mB1GW985qaKRn" http://localhost:3000/api/customers.json`
+
+Once a user exists, a unique authentication token is generated. All data requests to the API should use the token.
+
+All data responses are scoped to the authentication token owner. That is, users don't have access to overall and other users data and related models.
+
+The front-end code of the app, actually uses the API to retrieve all data presented to the user. This way we ensure that any data that can be displayed to the application user in a browser is also available to API clients.
+
+#### Sign up / Sign in
+__** TODO:__ Describe routes, methods and procedure. __**__
+
 
 #### Customers
-Customers are scoped to the user account making the requests.
-`http://saletracker.herokuapp.com/api/customers.json?token=y1ckhL3mB1GW985qaKRn`
+Customers are scoped to the user account making the request.
 
-retrieves the list of customers for the user with token `y1ckhL3mB1GW985qaKRn`.
+__List all customers__
+
+* Route: `/api/customers.json`
+* Method: GET
+* Example: `http://saletracker.herokuapp.com/api/customers.json?token=y1ckhL3mB1GW985qaKRn`.
 
 ```json
-
 [
   {
-    "created_at":"2013-02-26T23:02:54Z",
-    "email":"gage.wuckert@hotmail.com",
-    "id":1,
-    "name":"Ms. Westley Shields",
-    "phone":"314-564-0035",
-    "updated_at":"2013-02-27T02:20:17Z",
-    "user_id":1,
-    "last_payment":{
-      "amount":4000,
-      "created_at":"2013-02-27T02:20:17Z",
-      "customer_id":1,
-      "id":94,
-      "payment_date":"2013-02-27",
+    "id":8,
+    "name":"Dandre Satterfield",
+    "email":"cecile_dooley@gmail.com",
+    "phone":"1-801-142-8780 x5237",
+    "balance":9000.0,
+    "created_at":"2013-02-26T23:02:55Z",
+    "updated_at":"2013-02-27T02:20:17Z"
+  },
+  …
+]
+```
+
+__Show one customer__
+
+* Route: `/api/customers/:id.json`
+* Method: GET
+* Example: `http://saletracker.herokuapp.com/api/customers/1.json?token=y1ckhL3mB1GW985qaKRn`
+
+```json
+{
+  "id":1,
+  "name":"Ms. Westley Shields",
+  "email":"gage.wuckert@hotmail.com",
+  "phone":"314-564-0035",
+  "balance":0.0,
+  "created_at":"2013-02-26T23:02:54Z",
+  "updated_at":"2013-02-27T02:20:17Z",
+  "transactions":[
+    {
+      "id":5,
+      "type":"Purchase",
+      "amount":12000.0,
+      "created_at":"2013-06-21T01:08:30Z",
+      "updated_at":"2013-06-21T01:09:13Z"
+    },
+    {
+      "id":4,
+      "type":"Payment",
+      "amount":4000.0,
+      "created_at":"2013-06-21T00:54:34Z",
+      "updated_at":"2013-06-21T00:54:34Z"
+    },
+    …
+  ]
+}
+```
+
+__Create a customer__
+
+* Route: `/api/customers.json`
+* Method: POST
+* Required fields: __TODO__
+* Example: __TODO__
+
+__Update a customer__
+
+* Route: `/api/customers/:id.json`
+* Method: PUT/PATCH
+* Required fields: __TODO__
+* Example: __TODO__
+
+
+
+#### Payments
+Payments are scoped to the user account making the request.
+
+__List all paymentss__
+
+* Route: `/api/payments.json`
+* Method: GET
+* Example: `http://saletracker.herokuapp.com/api/payments.json?token=y1ckhL3mB1GW985qaKRn`.
+
+```json
+[
+  {
+    "id":4,
+    "type":"Payment",
+    "amount":4000.0,
+    "created_at":"2013-06-21T00:54:34Z",
+    "updated_at":"2013-06-21T00:54:34Z",
+    "customer":{
+      "id":1,
+      "name":"Ms. Westley Shields",
+      "email":"gage.wuckert@hotmail.com",
+      "phone":"314-564-0035",
+      "balance":0.0,
+      "created_at":"2013-02-26T23:02:54Z",
       "updated_at":"2013-02-27T02:20:17Z"
     }
   },
@@ -66,47 +175,141 @@ retrieves the list of customers for the user with token `y1ckhL3mB1GW985qaKRn`.
 ]
 ```
 
-#### Purchases
-Purchases are scoped from the user account making the request to a specific customer belonging to that account. Example:
-`http://saletracker.herokuapp.com/api/customers/1/purchases/15.json?token=y1ckhL3mB1GW985qaKRn`
+__Show one payment__
+
+* Route: `/api/payments/:id.json`
+* Method: GET
+* Example: `http://saletracker.herokuapp.com/api/payments/1.json?token=y1ckhL3mB1GW985qaKRn`
 
 ```json
-
 {
-  "created_at":"2013-03-01T19:12:58Z",
-  "customer_id":1,
-  "id":15,
-  "purchase_date":"2013-03-01",
-  "updated_at":"2013-03-01T19:12:58Z",
-  "total":4700,
-  "items":[
-    {
-      "created_at":"2013-03-01T19:19:53Z",
-      "id":27,
-      "item_total":1900,
-      "name":"French Coat",
-      "purchase_id":15,
-      "qty":1,
-      "updated_at":"2013-03-01T19:19:53Z"
+  "id":1,
+  "type":"Payment",
+  "amount":4000.0,
+  "created_at":"2013-06-21T00:54:34Z",
+  "updated_at":"2013-06-21T00:54:34Z",
+  "customer":{
+    "id":1,
+    "name":"Ms. Westley Shields",
+    "email":"gage.wuckert@hotmail.com",
+    "phone":"314-564-0035",
+    "balance":0.0,
+    "created_at":"2013-02-26T23:02:54Z",
+    "updated_at":"2013-02-27T02:20:17Z"
+  }
+}
+```
+
+__Create a payment__
+
+* Route: `/api/payments.json`
+* Method: POST
+* Required fields: __TODO__
+* Example: __TODO__
+
+__Update a payment__
+
+* Route: `/api/payments/:id.json`
+* Method: PUT/PATCH
+* Required fields: __TODO__
+* Example: __TODO__
+
+
+#### Purchases
+Purchases are scoped to the user account making the request.
+
+__List all purchases__
+
+* Route: `/api/purchases.json`
+* Method: GET
+* Example: `http://saletracker.herokuapp.com/api/purchases.json?token=y1ckhL3mB1GW985qaKRn`.
+
+```json
+[
+  {
+    "id":5,
+    "type":"Purchase",
+    "amount":12000.0,
+    "created_at":"2013-06-21T01:08:30Z",
+    "updated_at":"2013-06-21T01:09:13Z",
+    "customer":{
+      "id":1,
+      "name":"Ms. Westley Shields",
+      "email":"gage.wuckert@hotmail.com",
+      "phone":"314-564-0035",
+      "balance":0.0,
+      "created_at":"2013-02-26T23:02:54Z",
+      "updated_at":"2013-02-27T02:20:17Z"
     },
+    "line_items":[
+      {
+        "id":335,
+        "name":"French Coat",
+        "color":"Gray",
+        "size":"38",
+        "cost":800.0,
+        "qty":1,
+        "price":1200.0,
+        "item_total":1200.0,
+        "created_at":"2013-06-21T01:40:44Z",
+        "updated_at":"2013-06-21T01:43:32Z"
+      },
+      ...
+    ]
+  },
+  ...
+]
+```
+
+__Show one purchase__
+
+* Route: `/api/purchases/:id.json`
+* Method: GET
+*Example: `http://saletracker.herokuapp.com/api/purchases/1.json?token=y1ckhL3mB1GW985qaKRn`
+
+```json
+{
+  "id":1,
+  "type":"Purchase",
+  "amount":12000.0,
+  "created_at":"2013-06-21T01:08:30Z",
+  "updated_at":"2013-06-21T01:09:13Z",
+  "customer":{
+    "id":1,
+    "name":"Ms. Westley Shields",
+    "email":"gage.wuckert@hotmail.com",
+    "phone":"314-564-0035",
+    "balance":0.0,
+    "created_at":"2013-02-26T23:02:54Z",
+    "updated_at":"2013-02-27T02:20:17Z"
+  },
+  "line_items":[
     {
-      "created_at":"2013-03-01T19:19:53Z",
-      "id":28,
-      "item_total":1900,
+      "id":335,
       "name":"French Coat",
-      "purchase_id":15,
+      "color":"Gray",
+      "size":"38",
+      "cost":800.0,
       "qty":1,
-      "updated_at":"2013-03-01T19:19:53Z"
+      "price":1200.0,
+      "item_total":1200.0,
+      "created_at":"2013-06-21T01:40:44Z",
+      "updated_at":"2013-06-21T01:43:32Z"
     },
-    {
-      "created_at":"2013-03-01T19:19:53Z",
-      "id":29,
-      "item_total":900,
-      "name":"Turtle Neck Sweater",
-      "purchase_id":15,
-      "qty":1,
-      "updated_at":"2013-03-01T19:19:53Z"
-    }
+    ...
   ]
 }
 ```
+__Create a purchase__
+
+* Route: `/api/purchases.json`
+* Method: POST
+* Required fields: __TODO__
+* Example: __TODO__
+
+__Update a purchase__
+
+* Route: `/api/purchases/:id.json`
+* Method: PUT/PATCH
+* Required fields: __TODO__
+* Example: __TODO__
