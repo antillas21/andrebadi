@@ -3,6 +3,5 @@
 FactoryGirl.define do
   factory :payment do
     amount 4000
-    customer { create(:customer) }
   end
 end

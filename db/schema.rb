@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130620080349) do
+ActiveRecord::Schema.define(:version => 20130625011835) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -41,27 +41,6 @@ ActiveRecord::Schema.define(:version => 20130620080349) do
 
   add_index "line_items", ["name"], :name => "index_purchase_items_on_name"
   add_index "line_items", ["purchase_id"], :name => "index_purchase_items_on_purchase_id"
-
-  create_table "payments", :force => true do |t|
-    t.date     "payment_date"
-    t.integer  "amount"
-    t.integer  "customer_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "payments", ["customer_id"], :name => "index_payments_on_customer_id"
-  add_index "payments", ["payment_date"], :name => "index_payments_on_payment_date"
-
-  create_table "purchases", :force => true do |t|
-    t.date     "purchase_date"
-    t.integer  "customer_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "purchases", ["customer_id"], :name => "index_purchases_on_customer_id"
-  add_index "purchases", ["purchase_date"], :name => "index_purchases_on_purchase_date"
 
   create_table "transactions", :force => true do |t|
     t.string   "type"

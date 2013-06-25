@@ -4,7 +4,6 @@ FactoryGirl.define do
   factory :coat, class: LineItem do
     name 'French Coat'
     qty 1
-    purchase_id 1
     cost 800.0
     price 1200.00
   end
@@ -12,7 +11,6 @@ FactoryGirl.define do
   factory :sweater, class: LineItem do
     name 'Turtle Neck Sweater'
     qty 1
-    purchase_id 1
     cost 400.0
     price 650.0
   end
