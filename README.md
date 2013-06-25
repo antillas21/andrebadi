@@ -65,8 +65,22 @@ All data responses are scoped to the authentication token owner. That is, users 
 
 The front-end code of the app, actually uses the API to retrieve all data presented to the user. This way we ensure that any data that can be displayed to the application user in a browser is also available to API clients.
 
-#### Sign up / Sign in
-__** TODO:__ Describe routes, methods and procedure. __**__
+#### Sign up
+__Registration__
+
+* Route: `/api/registration.json`
+* Method: POST
+* Example: `curl -X POST --data "user[email]=johndoe@example.com&user[password]=password" http://localhost:3000/api/registration.json`
+
+```json
+{
+  "id":1,
+  "email":"johndoe@example.com",
+  "authentication_token":"B43v36B7dQ1oaN6K9jRs",
+  "created_at":"2013-06-25T07:44:46Z",
+  "updated_at":"2013-06-25T07:44:46Z"
+}
+```
 
 
 #### Customers
