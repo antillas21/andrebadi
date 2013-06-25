@@ -151,15 +151,38 @@ __Create a customer__
 
 * Route: `/api/customers.json`
 * Method: POST
-* Required fields: __TODO__
-* Example: __TODO__
+* Required fields: `{customer: {name: cannot be blank}}`
+* Example:
+
+```shell
+$ curl -X POST --data "token=9tbnwEBuV5jndAoNzXKq&customer[name]=James&customer[phone]=555-555-5555" \n
+http://127.0.0.1/api/customers.json
+```
+
+```json
+{
+  "phone" : "555-555-5555",
+  "id" : 1,
+  "created_at" : "2013-06-25T08:08:51Z",
+  "email" : null,
+  "transactions" : [],
+  "updated_at" : "2013-06-25T08:08:51Z",
+  "name" : "James",
+  "balance" : 0
+}
+```
 
 __Update a customer__
 
 * Route: `/api/customers/:id.json`
-* Method: PUT/PATCH
-* Required fields: __TODO__
-* Example: __TODO__
+* Method: PUT
+* Required fields: `{customer: {name: cannot be blank}}`
+* Example:
+
+```shell
+$ curl -X POST --data "token=9tbnwEBuV5jndAoNzXKq&customer[name]=Xavier" \n
+http://127.0.0.1/api/customers/1.json
+```
 
 
 
