@@ -18,6 +18,8 @@
 //= require lib/backbone.marionette
 //= require js-routes
 //= require_tree ./backbone/config
+//= require accounting.min
+//= require moment.min
 //= require backbone/app
 //= require_tree ./backbone/entities
 //= require_tree ./backbone/apps

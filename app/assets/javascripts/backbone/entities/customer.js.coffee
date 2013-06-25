@@ -19,7 +19,7 @@
     fetchCustomers: ->
       customers = new Entities.CustomersCollection
       customers.fetch
-        fetch: true
+        reset: true
       customers
 
     fetchCustomer: (customerId, cb) ->

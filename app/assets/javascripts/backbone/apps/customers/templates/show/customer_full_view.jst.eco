@@ -1,9 +1,9 @@
-<%= console.log @ %>
 <div itemscope="" itemtype="http://schema.org/Person">
   <div class="well">
     <div class="row">
       <div class="span5">
         <h2><span itemprop="name"><%= @name %></span></h2>
+        <strong>Balance: <%= accounting.formatMoney @balance %></strong>
       </div>
       <div class="span5">
         <p>
@@ -20,25 +20,5 @@
     </div>
   </div>
 
-  <div id="last-payments" class="payments">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Recent Payments</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-  <div id="last-purchases" class="purchases">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Recent Purchases</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+  <div id="transaction-data-region"></div>
 </div>

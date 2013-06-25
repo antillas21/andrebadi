@@ -1,10 +1,10 @@
 <td>
   <div itemscope="" itemtype="http://schema.org/Person">
     <div class="right-side">
-      Due: $ <%= @balance %>
+      Due: <%= accounting.formatMoney @balance %>
     </div>
     <div>
-      <h4><span itemprop="name"><a href="#customers/<%= @id %>"><%= @name %></a></span></h4>
+      <h4><span itemprop="name"><a href="/#/customers/<%= @id %>"><%= @name %></a></span></h4>
     </div>
     <p>
       <span itemprop="email">
