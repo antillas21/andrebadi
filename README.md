@@ -70,7 +70,12 @@ __Registration__
 
 * Route: `/api/registration.json`
 * Method: POST
-* Example: `curl -X POST --data "user[email]=johndoe@example.com&user[password]=password" http://localhost:3000/api/registration.json`
+* Example:
+
+```shell
+curl -X POST --data "user[email]=johndoe@example.com&user[password]=password" \n
+  http://localhost:3000/api/registration.json
+```
 
 ```json
 {
