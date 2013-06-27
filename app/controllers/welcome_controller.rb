@@ -4,6 +4,7 @@ class WelcomeController < ApplicationController
 
   def index
     gon.currentUser = current_user
+    gon.authToken = current_user.authentication_token
   end
 
   def backbone

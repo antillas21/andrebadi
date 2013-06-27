@@ -2,7 +2,7 @@
 
   class Entities.Customer extends Backbone.Model
     urlRoot: ->
-      Routes.customers_path()
+      Routes.api_customers_path()
 
     initialize: ->
       editableFields = ['name', 'email', 'phone']
@@ -10,7 +10,7 @@
 
   class Entities.CustomersCollection extends Backbone.Collection
     url: ->
-      Routes.customers_path()
+      Routes.api_customers_path()
 
     model: Entities.Customer
     comparator: 'name'
@@ -19,7 +19,7 @@
     fetchCustomers: ->
       customers = new Entities.CustomersCollection
       customers.fetch
-        fetch: true
+        reset: true
       customers
 
     fetchCustomer: (customerId, cb) ->

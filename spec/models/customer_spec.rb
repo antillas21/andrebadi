@@ -12,32 +12,35 @@ describe Customer do
     it { should belong_to :user }
   end
 
-  describe '#last_payment' do
+  describe '#total_purchases' do
     let(:customer) { create(:customer) }
 
-    it 'displays the latest payment from customer' do
-      payment = create(:payment, customer: customer)
-      last = create(:payment, customer: customer)
-
-      customer.last_payment.should eql last
+    it 'returns sum of purchase amounts' do
+      2.times { FactoryGirl.create(:purchase_and_items, customer: customer) }
+      customer.total_purchases.should == 2400.0
     end
   end
 
-  describe '#recent_payments' do
+  describe '#total_payments' do
     let(:customer) { create(:customer) }
 
-    it 'retrieves the 3 more recent payments' do
-      5.times { create(:payment, customer: customer) }
-      customer.recent_payments.count.should eql 3
+    it 'returns sum of payment amounts' do
+      2.times { create(:payment, amount: 900.0, customer: customer) }
+      binding.pry
+      customer.total_payments.should == 1800.0
     end
   end
 
-  describe '#recent_purchases' do
+  describe "#balance" do
     let(:customer) { create(:customer) }
 
-    it 'retrieves the 3 more recent purchases' do
-      5.times { create(:purchase, customer: customer) }
-      customer.recent_purchases.count.should eql 3
+    it 'returns balance between purchases and payments' do
+      2.times { create(:purchase_and_items, customer: customer) }
+      1.times { create(:payment, customer: customer) }
+
+      customer.balance.should_not == 0
+
+      customer.balance.should == ( customer.total_purchases - customer.total_payments )
     end
   end
 

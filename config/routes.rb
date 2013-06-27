@@ -1,22 +1,28 @@
 AndreBadi::Application.routes.draw do
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+  devise_scope :user do
+    post '/api/registration' => 'api/registrations#create'
+  end
 
   namespace :api do
-    resources :customers do
-      resources :payments
-      resources :purchases
-    end
+
+    resources :customers
+    resources :payments
+    resources :purchases
   end
+
+  # post '/api/registration' => 'api/registrations#create'
 
   match 'dashboard' => 'welcome#index'
 
-  resources :customers
-  resources :sales
-  resources :payments
+  # resources :customers
+  # resources :sales
+  # resources :payments
 
   match 'reports' => 'reports#index'
 
-  resources :customers
+  # resources :customers
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -68,6 +74,7 @@ AndreBadi::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'welcome#index'
+  match '*path' => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 

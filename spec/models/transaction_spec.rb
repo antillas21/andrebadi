@@ -1,6 +1,7 @@
 require 'spec_helper'
 
-describe Payment do
+describe Transaction do
+
   describe 'relationships' do
     it { should belong_to :customer }
   end
@@ -9,4 +10,5 @@ describe Payment do
     it { should validate_presence_of :amount }
     it { should validate_presence_of :customer_id }
   end
+
 end

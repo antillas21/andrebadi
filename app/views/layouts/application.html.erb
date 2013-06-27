@@ -4,9 +4,6 @@
   <title>Sale Tracker</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
-  <% if current_user %>
-    <meta name="auth-token" content="<%= current_user.authentication_token %>">
-  <% end %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>

@@ -18,6 +18,7 @@ describe Api::CustomersController, type: :api do
     it 'assigns :customers to logged_user.customers' do
       assigns(:customers).should include @customer
     end
+
   end
 
   describe 'GET #show' do
@@ -37,8 +38,8 @@ describe Api::CustomersController, type: :api do
   describe 'POST #create' do
     context "with valid params" do
       before :each do
-        post 'create', 
-          customer: { name: 'Janeth Doe', email: 'janeth@example.com' }, 
+        post 'create',
+          customer: { name: 'Janeth Doe', email: 'janeth@example.com' },
           token: token, format: :json
       end
 
@@ -63,7 +64,7 @@ describe Api::CustomersController, type: :api do
   describe 'PUT #update' do
     context 'valid attributes' do
       before :each do
-        put 'update', id: @customer.id, customer: { name: 'Janeth Doe' }, 
+        put 'update', id: @customer.id, customer: { name: 'Janeth Doe' },
           token: token, format: :json
       end
 

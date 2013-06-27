@@ -1,29 +1,19 @@
 class Customer < ActiveRecord::Base
 
-  attr_accessible :name, :phone, :email
+  attr_accessible :name, :phone, :email, :balance
 
   validates :name, presence: true
-  delegate :purchases_total, to: :purchases
 
   belongs_to :user
-  has_many :purchases do
-    def total
-      sum('purchase_total')
-    end
+  has_many :purchases, dependent: :destroy
+  has_many :payments, dependent: :destroy
+  has_many :transactions
+
+  def total_purchases
+    self.purchases.sum(:amount)
   end
 
-  has_many :payments
-
-  def last_payment
-    payments.last
+  def total_payments
+    self.payments.sum(:amount)
   end
-
-  def recent_payments
-    payments.recent
-  end
-
-  def recent_purchases
-    purchases.recent
-  end
-
 end
