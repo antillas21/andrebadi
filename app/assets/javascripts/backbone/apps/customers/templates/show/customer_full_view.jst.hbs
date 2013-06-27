@@ -2,18 +2,18 @@
   <div class="well">
     <div class="row">
       <div class="span5">
-        <h2><span itemprop="name"><%= @name %></span></h2>
-        <strong>Balance: <%= accounting.formatMoney @balance %></strong>
+        <h2><span itemprop="name">{{ name }}</span></h2>
+        <strong>Balance: {{ toCurrency balance }}</strong>
       </div>
       <div class="span5">
         <p>
           <span itemprop="email">
-            <i class="icon-envelope-alt"></i> <a href="mailto:<%= @email %>"><%= @email %></a>
+            <i class="icon-envelope-alt"></i> <a href="mailto:{{ email }}">{{ email }}</a>
           </span>
         </p>
         <p>
           <span itemprop="telephone">
-            <i class="icon-phone-sign"></i> <a href="tel:<%= @phone %>"><%= @phone %></a>
+            <i class="icon-phone-sign"></i> <a href="tel:{{ phone }}">{{ phone }}</a>
           </span>
         </p>
       </div>

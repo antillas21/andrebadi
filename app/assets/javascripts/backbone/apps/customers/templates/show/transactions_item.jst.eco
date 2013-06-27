@@ -1,3 +1,0 @@
-<td class="span4"><%= @type %></td>
-<td class="span4"><%= moment(@created_at).format('MMM D YYYY, h:mm a') %></td>
-<td class="span4 currency"><%= accounting.formatMoney @amount %></td>
