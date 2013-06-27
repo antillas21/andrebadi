@@ -12,14 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require accounting.min
+//= require moment.min
 //= require lib/underscore
 //= require lib/json2
 //= require lib/backbone
 //= require lib/backbone.marionette
+//= require handlebars.runtime
 //= require js-routes
 //= require_tree ./backbone/config
-//= require accounting.min
-//= require moment.min
 //= require backbone/app
 //= require_tree ./backbone/entities
 //= require_tree ./backbone/apps

@@ -25,6 +25,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   gem 'compass-rails'
+  gem 'handlebars_assets'
   gem 'eco'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
