@@ -7,5 +7,19 @@
         customer_view = new Show.CustomerFullView
                           model: customer
 
-        App.mainRegion.show customer_view
+        transactions = Show.Controller.buildTransactions customer.attributes.transactions
 
+        transactions_view = new Show.TransactionsList
+                              collection: transactions
+
+        layout = new Show.CustomerLayout
+
+        layout.on "show", ->
+          @customerRegion.show customer_view
+          @transactionsRegion.show transactions_view
+
+        App.mainRegion.show layout
+
+    buildTransactions: (collection) ->
+      transactions = new App.Entities.TransactionsCollection collection
+      transactions
