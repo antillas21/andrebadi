@@ -1,11 +1,9 @@
-class Payment < ActiveRecord::Base
-  # attr_accessible :title, :body
+class Payment < Transaction
 
-  attr_accessible :payment_date, :amount, :customer_id
+  after_save :update_customer_balance
 
-  validates :payment_date, :amount, presence: true
-
-  belongs_to :customer
-
-  scope :recent, order("payment_date desc").limit(3)
+  def update_customer_balance
+    new_balance = customer.total_purchases - customer.total_payments
+    customer.update_attribute(:balance, new_balance)
+  end
 end

@@ -11,52 +11,44 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227050514) do
+ActiveRecord::Schema.define(:version => 20130625011835) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
     t.string   "phone"
     t.string   "email"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.float    "balance",    :default => 0.0
   end
 
   add_index "customers", ["name"], :name => "index_customers_on_name"
   add_index "customers", ["user_id"], :name => "index_customers_on_user_id"
 
-  create_table "payments", :force => true do |t|
-    t.date     "payment_date"
-    t.integer  "amount"
-    t.integer  "customer_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "payments", ["customer_id"], :name => "index_payments_on_customer_id"
-  add_index "payments", ["payment_date"], :name => "index_payments_on_payment_date"
-
-  create_table "purchase_items", :force => true do |t|
+  create_table "line_items", :force => true do |t|
     t.integer  "qty",         :default => 1
     t.string   "name"
-    t.integer  "item_total",  :default => 0
+    t.float    "item_total"
     t.integer  "purchase_id"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.string   "color"
+    t.string   "size"
+    t.float    "cost"
+    t.float    "price"
   end
 
-  add_index "purchase_items", ["name"], :name => "index_purchase_items_on_name"
-  add_index "purchase_items", ["purchase_id"], :name => "index_purchase_items_on_purchase_id"
+  add_index "line_items", ["name"], :name => "index_purchase_items_on_name"
+  add_index "line_items", ["purchase_id"], :name => "index_purchase_items_on_purchase_id"
 
-  create_table "purchases", :force => true do |t|
-    t.date     "purchase_date"
+  create_table "transactions", :force => true do |t|
+    t.string   "type"
+    t.float    "amount",      :default => 0.0
     t.integer  "customer_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
-
-  add_index "purchases", ["customer_id"], :name => "index_purchases_on_customer_id"
-  add_index "purchases", ["purchase_date"], :name => "index_purchases_on_purchase_date"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

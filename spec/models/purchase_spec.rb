@@ -1,45 +1,39 @@
 require 'spec_helper'
 
 describe Purchase do
-  describe 'validations' do
-    it { should validate_presence_of :purchase_date }
-  end
-
-  describe 'relationships' do
+ describe 'relationships' do
     it { should belong_to :customer }
-    it { should have_many :purchase_items }
+    it { should have_many :line_items }
   end
 
-  describe '#total' do
-    it 'represents an updated sum of purchase_items, directly from the relationship' do
-      order = build(:purchase)
-      coat, sweater = build(:coat), build(:sweater)
+  describe 'validations' do
+    it { should validate_presence_of :amount }
+    it { should validate_presence_of :customer_id }
+  end
 
-      order.purchase_items << coat
-      order.purchase_items << sweater
-
-      order.save
-      order.total.should eql ( coat.item_total + sweater.item_total )
+  describe 'amount' do
+    it 'is auto-calculated with the sum of all line_items' do
+      purchase = FactoryGirl.create(:purchase_and_items)
+      purchase.amount.should_not == 0
+      purchase.amount.should == 2400.0
     end
   end
 
-  describe 'scopes' do
-    describe 'recent' do
-      it 'retrieves the 3 more recent purchases' do
-        5.times { create(:purchase) }
+  describe 'deleting a purchase' do
+    it 'deletes associated line_items' do
+      purchase = FactoryGirl.create(:purchase_and_items)
 
-        Purchase.recent.count.should eql 3
-      end
+      LineItem.count.should == 2
 
-      it 'retrieves records ordered by purchase_date in descending order' do
-        first = create(:purchase, purchase_date: '2013-01-01')
-        second = create(:purchase, purchase_date: '2013-02-01')
-        third = create(:purchase, purchase_date: '2013-03-01')
-
-        Purchase.recent.first.should eql third
-      end
+      expect{ purchase.destroy }.to change{ LineItem.count }.to(0)
     end
   end
 
-
+  describe 'role on customer balance' do
+    let(:customer) { create(:customer) }
+    it 'updates customer balance' do
+      purchase = FactoryGirl.build(:purchase_and_items, customer: customer)
+      expect{ purchase.save }.to change{ customer.balance }
+    end
+  end
 end

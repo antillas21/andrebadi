@@ -5,8 +5,7 @@ class Api::CustomersController < Api::BaseController
 
   def index
     @customers = logged_user.customers
-    respond_with @customers.order(:name).includes(:payments),
-      methods: [ "last_payment"]
+    respond_with @customers.order(:name), each_serializer: CustomerListSerializer
   end
 
   def create
@@ -19,7 +18,7 @@ class Api::CustomersController < Api::BaseController
   end
 
   def show
-    respond_with @customer, methods: [ "recent_payments", "recent_purchases" ]
+    respond_with @customer
   end
 
   def update
