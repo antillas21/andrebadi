@@ -25,7 +25,7 @@ describe Api::BaseController do
       nil_customer = create(:customer)
       payment = create(:payment, customer: nil_customer)
 
-      get "/api/customers/#{customer.id}/payments/#{payment.id}.json", token: token
+      get "/api/payments/#{payment.id}.json", token: token
       error = { error: "Record could not be found or access not allowed." }
       last_response.body.should eql error.to_json
     end

@@ -1,5 +1,5 @@
 class Purchase < Transaction
-  attr_accessible :amount, :customer, :customer_id, :line_items_attributes, :line_items
+  # attr_accessible :amount, :customer, :customer_id, :line_items_attributes, :line_items
   # relationships
   has_many :line_items, dependent: :destroy
 
