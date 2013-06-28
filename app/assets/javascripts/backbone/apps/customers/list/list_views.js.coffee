@@ -13,10 +13,15 @@
     className: 'js'
     template: 'customers/templates/list/row'
 
+  class List.Empty extends Marionette.ItemView
+    className: 'js empty well well-large'
+    template: 'customers/templates/list/empty'
+
   class List.CustomerTable extends Marionette.CompositeView
     template: 'customers/templates/list/table'
     itemView: List.CustomerRow
     itemViewContainer: 'tbody'
+    emptyView: List.Empty
 
 
   class List.Panel extends Marionette.ItemView
