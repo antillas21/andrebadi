@@ -11,7 +11,7 @@ class Api::PaymentsController < Api::BaseController
   end
 
   def update
-    @payment.update_attributes(params[:payment])
+    @payment.update_attributes(accepted_params)
     respond_with @payment, location: api_payment_url(@payment)
   end
 
@@ -26,5 +26,9 @@ class Api::PaymentsController < Api::BaseController
     rescue ActiveRecord::RecordNotFound
       error = { error: "Record could not be found or access not allowed." }
       respond_with(error, status: 404)
+  end
+
+  def accepted_params
+    params.require(:payment).permit(:amount, :customer_id)
   end
 end

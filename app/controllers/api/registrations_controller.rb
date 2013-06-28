@@ -3,7 +3,7 @@ class Api::RegistrationsController < Devise::RegistrationsController
   # skip_filter :authenticate_user
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(accepted_params)
     if @user.save
       # render :json=> @user.as_json(auth_token: @user.authentication_token, email: @user.email), status: 201
       render json: {
@@ -16,9 +16,11 @@ class Api::RegistrationsController < Devise::RegistrationsController
       warden.custom_failure!
       message = "There are some errors with your request."
       render json: { message: message, errors: @user.errors }, status: 422
-      # respond_with @user, status: 422
-      # render :json=> user.errors, :status=>422
     end
+  end
+
+  def accepted_params
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
 end
