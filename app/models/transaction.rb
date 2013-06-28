@@ -7,5 +7,5 @@ class Transaction < ActiveRecord::Base
   # realtionships
   belongs_to :customer
 
-  default_scope order: 'created_at ASC'
+  default_scope { order('created_at ASC') }
 end
