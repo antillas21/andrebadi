@@ -6,6 +6,7 @@ gem 'rails', '4.0.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'unicorn'
 gem 'pg'
 # gem 'backbone-on-rails', '1.0.0.0'
 gem 'twitter-bootstrap-rails', '~> 2.1.0'
@@ -16,6 +17,7 @@ gem 'oj'
 gem 'gon'
 gem 'js-routes'
 gem 'active_model_serializers', '~> 0.8.1'
+gem 'foreman'
 
 
 # Gems used only for assets and not required
