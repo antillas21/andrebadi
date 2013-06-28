@@ -6,6 +6,7 @@
 
     regions:
       panelRegion: '#panel'
+      newRegion: '#new'
       customerRegion: '#customers'
 
   class List.CustomerRow extends Marionette.ItemView
@@ -27,3 +28,6 @@
   class List.Panel extends Marionette.ItemView
     className: 'js-view'
     template: 'customers/templates/list/panel'
+
+    triggers:
+      "click #add-customer" : "add:customer:button:clicked"

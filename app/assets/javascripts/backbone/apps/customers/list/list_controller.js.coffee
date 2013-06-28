@@ -7,7 +7,8 @@
       @layout = @getLayoutView()
 
       @layout.on "show", =>
-        @panelView()
+        @panelRegion()
+        # @newRegion()
         @customersRegion customers
 
       App.mainRegion.show @layout
@@ -23,8 +24,22 @@
     getCustomersView: (customers) ->
       new List.CustomerTable collection: customers
 
-    panelView: ->
+    newRegion: ->
+      newView = App.request "new:customer:form:view"
+
+      newView.on "form:cancel:button:clicked", =>
+        @layout.newRegion.close()
+
+      @layout.newRegion.show newView
+
+    getNewView: ->
+      new List.New
+
+    panelRegion: ->
       panelView = @getPanelView()
+      panelView.on "add:customer:button:clicked", =>
+        @newRegion()
+
       @layout.panelRegion.show panelView
 
     getPanelView: ->
