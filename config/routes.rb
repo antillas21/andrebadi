@@ -13,13 +13,13 @@ AndreBadi::Application.routes.draw do
 
   # post '/api/registration' => 'api/registrations#create'
 
-  match 'dashboard' => 'welcome#index'
+  get 'dashboard' => 'welcome#index'
 
   # resources :customers
   # resources :sales
   # resources :payments
 
-  match 'reports' => 'reports#index'
+  get 'reports' => 'reports#index'
 
   # resources :customers
 
@@ -74,7 +74,7 @@ AndreBadi::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'welcome#index'
-  match '*path' => 'welcome#index'
+  get '*path' => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
