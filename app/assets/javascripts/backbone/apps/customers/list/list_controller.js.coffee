@@ -2,14 +2,45 @@
 
   List.Controller =
     listCustomers: ->
-      console.log 'called listCustomers from the CustomersApp.List.Controller'
       customers = App.request "customers:fetch"
 
-      customers_table = new List.CustomersTable
-                          collection: customers
+      @layout = @getLayoutView()
 
-      customers_table.on "itemview:customer:show", (childView, model) ->
-        App.request "customer:show", model
+      @layout.on "show", =>
+        @panelRegion()
+        # @newRegion()
+        @customersRegion customers
 
+      App.mainRegion.show @layout
 
-      App.mainRegion.show customers_table
+    getLayoutView: ->
+      new List.Layout
+
+    customersRegion: (customers) ->
+      customersView = @getCustomersView(customers)
+
+      @layout.customerRegion.show customersView
+
+    getCustomersView: (customers) ->
+      new List.CustomerTable collection: customers
+
+    newRegion: ->
+      newView = App.request "new:customer:form:view"
+
+      newView.on "form:cancel:button:clicked", =>
+        @layout.newRegion.close()
+
+      @layout.newRegion.show newView
+
+    getNewView: ->
+      new List.New
+
+    panelRegion: ->
+      panelView = @getPanelView()
+      panelView.on "add:customer:button:clicked", =>
+        @newRegion()
+
+      @layout.panelRegion.show panelView
+
+    getPanelView: ->
+      new List.Panel

@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 ruby "2.0.0"
 
-gem 'rails', '3.2.12'
+gem 'rails', '4.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'unicorn'
 gem 'pg'
 # gem 'backbone-on-rails', '1.0.0.0'
 gem 'twitter-bootstrap-rails', '~> 2.1.0'
@@ -16,27 +17,26 @@ gem 'oj'
 gem 'gon'
 gem 'js-routes'
 gem 'active_model_serializers', '~> 0.8.1'
+gem 'foreman'
 
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+gem 'sass-rails',   '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
 
-  gem 'compass-rails'
-  gem 'handlebars_assets'
-  gem 'eco'
+gem 'compass-rails'
+gem 'handlebars_assets'
+gem 'eco'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'libv8', '~> 3.11.8'
-  gem 'therubyracer', :platforms => :ruby
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+gem 'libv8', '~> 3.11.8'
+gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'uglifier', '>= 1.3.0'
 
 gem 'jquery-rails'
-gem 'devise'
+gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 
 group :development do
   gem 'quiet_assets'
@@ -55,6 +55,10 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', '1.4.2'
   gem 'capybara', '2.0.1'
+end
+
+group :doc do
+  gem 'sdoc', require: false
 end
 
 

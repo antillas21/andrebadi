@@ -9,7 +9,7 @@ class Api::CustomersController < Api::BaseController
   end
 
   def create
-    @customer = logged_user.customers.create(params[:customer])
+    @customer = logged_user.customers.create(accepted_params)
     if @customer.valid?
       respond_with @customer, location: api_customer_url(@customer)
     else
@@ -22,7 +22,7 @@ class Api::CustomersController < Api::BaseController
   end
 
   def update
-    @customer.update_attributes(params[:customer])
+    @customer.update_attributes(accepted_params)
     respond_with @customer, location: api_customer_url(@customer)
   end
 
@@ -37,5 +37,9 @@ class Api::CustomersController < Api::BaseController
   rescue ActiveRecord::RecordNotFound
     error = { error: "Record could not be found or access not allowed." }
     respond_with(error, status: 404)
+  end
+
+  def accepted_params
+    params.require(:customer).permit(:name, :email, :phone, :balance)
   end
 end

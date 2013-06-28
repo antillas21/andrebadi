@@ -8,9 +8,17 @@ describe Api::RegistrationsController do
   describe '#create' do
     context 'with valid params' do
       it 'should create a new User' do
-        binding.pry
-        post :create, user: {email: 'user@example.com', password: 'password', password_confirmation: 'password'}, format: :json
-        response.status.should == 422
+        post :create,
+          user: {email: 'user@example.com', password: 'password', password_confirmation: 'password'},
+          format: :json
+
+        json = JSON.parse(response.body)
+        ["email", "authentication_token"].each do |key|
+          json.keys.should include key
+        end
+
+        response.status.should == 201
+
       end
     end
 

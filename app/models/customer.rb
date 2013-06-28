@@ -1,6 +1,6 @@
 class Customer < ActiveRecord::Base
 
-  attr_accessible :name, :phone, :email, :balance
+  # attr_accessible :name, :phone, :email, :balance
 
   validates :name, presence: true
 

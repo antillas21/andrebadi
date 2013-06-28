@@ -16,7 +16,10 @@ describe Customer do
     let(:customer) { create(:customer) }
 
     it 'returns sum of purchase amounts' do
-      2.times { FactoryGirl.create(:purchase_and_items, customer: customer) }
+      2.times do
+        item = build(:coat)
+        purchase = create(:purchase, customer: customer, line_items: [item])
+      end
       customer.total_purchases.should == 2400.0
     end
   end
@@ -26,7 +29,6 @@ describe Customer do
 
     it 'returns sum of payment amounts' do
       2.times { create(:payment, amount: 900.0, customer: customer) }
-      binding.pry
       customer.total_payments.should == 1800.0
     end
   end
@@ -35,7 +37,10 @@ describe Customer do
     let(:customer) { create(:customer) }
 
     it 'returns balance between purchases and payments' do
-      2.times { create(:purchase_and_items, customer: customer) }
+      2.times do
+        item = build(:coat)
+        purchase = create(:purchase, customer: customer, line_items: [item])
+      end
       1.times { create(:payment, customer: customer) }
 
       customer.balance.should_not == 0
