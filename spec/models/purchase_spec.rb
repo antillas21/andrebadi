@@ -12,18 +12,26 @@ describe Purchase do
   end
 
   describe 'amount' do
+    let(:item) { build(:coat) }
+    let(:purchase) { create(:purchase, line_items: [item]) }
+
     it 'is auto-calculated with the sum of all line_items' do
-      purchase = FactoryGirl.create(:purchase_and_items)
+      # purchase = FactoryGirl.create(:purchase_and_items)
       purchase.amount.should_not == 0
-      purchase.amount.should == 2400.0
+      purchase.amount.should == 1200.0
     end
   end
 
   describe 'deleting a purchase' do
-    it 'deletes associated line_items' do
-      purchase = FactoryGirl.create(:purchase_and_items)
+    let(:purchase) { create(:purchase) }
 
-      LineItem.count.should == 2
+    it 'deletes associated line_items' do
+      item = build(:coat, purchase: purchase)
+      purchase.line_items << item
+      purchase.save
+
+      LineItem.count.should == 1
+      purchase.line_items.should include item
 
       expect{ purchase.destroy }.to change{ LineItem.count }.to(0)
     end
@@ -31,8 +39,10 @@ describe Purchase do
 
   describe 'role on customer balance' do
     let(:customer) { create(:customer) }
+    let(:item) { build(:coat) }
+    let(:purchase) { build(:purchase, customer: customer, line_items: [item]) }
+
     it 'updates customer balance' do
-      purchase = FactoryGirl.build(:purchase_and_items, customer: customer)
       expect{ purchase.save }.to change{ customer.balance }
     end
   end
