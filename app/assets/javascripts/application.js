@@ -25,3 +25,4 @@
 //= require_tree ./backbone/entities
 //= require_tree ./backbone/apps
 //= require twitter/bootstrap
+//= require app-loader
