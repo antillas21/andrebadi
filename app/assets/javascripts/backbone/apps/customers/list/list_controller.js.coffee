@@ -8,7 +8,6 @@
 
       @layout.on "show", =>
         @panelRegion()
-        # @newRegion()
         @customersRegion customers
 
       App.mainRegion.show @layout

@@ -1,24 +1,22 @@
 <div itemscope="" itemtype="http://schema.org/Person">
-  <div class="well">
-    <div class="row">
-      <div class="span5">
-        <h2><span itemprop="name">{{ name }}</span></h2>
-      </div>
-      <div class="span5">
-        <p>
-          <strong>Balance: {{ toCurrency balance }}</strong>
-        </p>
-        <p>
-          <span itemprop="email">
-            <i class="icon-envelope-alt"></i> <a href="mailto:{{ email }}">{{ email }}</a>
-          </span>
-        </p>
-        <p>
-          <span itemprop="telephone">
-            <i class="icon-phone-sign"></i> <a href="tel:{{ phone }}">{{ phone }}</a>
-          </span>
-        </p>
-      </div>
+  <div class="row">
+    <div class="span5">
+      <h2><span itemprop="name">{{ name }}</span></h2>
+    </div>
+    <div class="span5">
+      <p>
+        <strong>Balance: {{ toCurrency balance }}</strong>
+      </p>
+      <p>
+        <span itemprop="email">
+          <i class="icon-envelope-alt"></i> <a href="mailto:{{ email }}">{{ email }}</a>
+        </span>
+      </p>
+      <p>
+        <span itemprop="telephone">
+          <i class="icon-phone-sign"></i> <a href="tel:{{ phone }}">{{ phone }}</a>
+        </span>
+      </p>
     </div>
   </div>
 </div>

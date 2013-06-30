@@ -6,3 +6,6 @@
 
     modelEvents:
       "sync" : "render"
+
+    triggers:
+      "click #cancel" : "form:cancel:button:clicked"

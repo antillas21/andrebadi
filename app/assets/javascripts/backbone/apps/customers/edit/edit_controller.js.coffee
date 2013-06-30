@@ -1,12 +1,9 @@
 @Badi.module "CustomersApp.Edit", (Edit, App, Backbone, Marionette, $, _) ->
 
   Edit.Controller =
-    editCustomer: (customerId)->
-      customer = App.request "customer:get", customerId
-
+    editCustomer: (customer)->
       editView = @getEditView customer
-
-      App.mainRegion.show editView
+      editView
 
     getEditView: (customer) ->
       new Edit.EditCustomerForm

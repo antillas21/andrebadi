@@ -2,36 +2,49 @@
 
   Show.Controller =
     showCustomer: (customerId) ->
-
       App.request "customer:fetch", customerId, (customer) =>
 
-        panelView = new Show.CustomerPanel
-        panelView.on "edit:customer:button:clicked", =>
-          App.vent.trigger "edit:customer:form", customer.id
+        transactions = @buildTransactions customer.attributes.transactions
 
-        panelView.on "add:purchase:button:clicked", =>
-          App.request "add:purchase:form:view", customer.id
+        @layout = new Show.CustomerLayout
 
-        panelView.on "add:payment:button:clicked", =>
-          App.request "add:payment:form:view", customer.id
+        @layout.on "show", =>
+          @panelRegion customer
+          @customerRegion customer
+          @transactionsRegion transactions
 
-        customer_view = new Show.CustomerFullView
-                          model: customer
-
-        transactions = Show.Controller.buildTransactions customer.attributes.transactions
-
-        transactions_view = new Show.TransactionsList
-                              collection: transactions
-
-        layout = new Show.CustomerLayout
-
-        layout.on "show", ->
-          @panelRegion.show panelView
-          @customerRegion.show customer_view
-          @transactionsRegion.show transactions_view
-
-        App.mainRegion.show layout
+        App.mainRegion.show @layout
 
     buildTransactions: (collection) ->
       transactions = new App.Entities.TransactionsCollection collection
       transactions
+
+    customerRegion: (customer) ->
+      view = new Show.CustomerFullView model: customer
+      @layout.customerRegion.show view
+
+    panelRegion: (customer) ->
+      view = new Show.CustomerPanel
+      view.on "edit:customer:button:clicked", =>
+        @editCustomer customer
+
+      view.on "add:purchase:button:clicked", =>
+        App.request "add:purchase:form:view", customer.id
+
+      view.on "add:payment:button:clicked", =>
+        App.request "add:payment:form:view", customer.id
+
+      @layout.panelRegion.show view
+
+    transactionsRegion: (transactions) ->
+      view = new Show.TransactionsList collection: transactions
+      @layout.transactionsRegion.show view
+
+    editCustomer: (customer) ->
+      editView = App.request "edit:customer:form", customer
+
+      editView.on "form:cancel:button:clicked", =>
+        @layout.customerRegion.close()
+        @customerRegion customer
+
+      @layout.customerRegion.show editView

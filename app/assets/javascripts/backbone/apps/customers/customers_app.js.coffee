@@ -15,8 +15,8 @@
     newCustomerForm: ->
       CustomersApp.New.Controller.newCustomer()
 
-    editCustomer: (id) ->
-      CustomersApp.Edit.Controller.editCustomer id
+    editCustomer: (customer) ->
+      CustomersApp.Edit.Controller.editCustomer customer
 
   App.addInitializer ->
     new CustomersApp.Router
@@ -28,9 +28,9 @@
   App.reqres.setHandler "new:customer:form:view", ->
     API.newCustomerForm()
 
-  App.vent.on "edit:customer:form", (customerId) ->
-    App.navigate Routes.edit_customer_path(customerId)
-    API.editCustomer customerId
+  App.reqres.setHandler "edit:customer:form", (customer) ->
+    # App.navigate Routes.edit_customer_path(customer)
+    API.editCustomer customer
 
   App.reqres.setHandler "add:purchase:form:view", (customerId) ->
     console.log 'catched call to purchase form for customer with id ' + customerId
