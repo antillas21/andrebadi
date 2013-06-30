@@ -28,8 +28,16 @@
         success: ->
           cb customer
 
+    getCustomer: (customerId) ->
+      customer= new Entities.Customer id: customerId
+      customer.fetch()
+      customer
+
   App.reqres.setHandler "customers:fetch", ->
     API.fetchCustomers()
 
   App.reqres.setHandler "customer:fetch", (customerId, cb) ->
     API.fetchCustomer(customerId, cb)
+
+  App.reqres.setHandler "customer:get", (customerId) ->
+    API.getCustomer customerId
