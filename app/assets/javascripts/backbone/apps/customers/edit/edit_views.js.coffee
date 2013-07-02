@@ -9,3 +9,4 @@
 
     triggers:
       "click #cancel" : "form:cancel:button:clicked"
+      "submit" : "form:submit"

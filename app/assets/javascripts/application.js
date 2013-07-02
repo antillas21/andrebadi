@@ -21,6 +21,7 @@
 //= require handlebars.runtime
 //= require js-routes
 //= require_tree ./backbone/config
+//= require backbone.syphon.min
 //= require backbone/app
 //= require_tree ./backbone/entities
 //= require_tree ./backbone/apps

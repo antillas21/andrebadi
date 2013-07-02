@@ -47,4 +47,14 @@
         @layout.customerRegion.close()
         @customerRegion customer
 
+      editView.on "form:submit", (form) =>
+        data = Backbone.Syphon.serialize form.view
+        @updateModel data, customer
+        form.view.close()
+        @customerRegion customer
+
       @layout.customerRegion.show editView
+
+    updateModel: (data, customer) ->
+      console.log data
+      customer.save data
