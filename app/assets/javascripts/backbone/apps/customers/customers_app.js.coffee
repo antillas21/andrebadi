@@ -29,7 +29,6 @@
     API.newCustomerForm()
 
   App.reqres.setHandler "edit:customer:form", (customer) ->
-    # App.navigate Routes.edit_customer_path(customer)
     API.editCustomer customer
 
   App.reqres.setHandler "add:purchase:form:view", (customerId) ->
@@ -37,3 +36,6 @@
 
   App.reqres.setHandler "add:payment:form:view", (customerId) ->
     console.log 'catched call to payment form for customer with id ' + customerId
+
+  App.vent.on "customer:cancelled customer:updated", (customer) ->
+    API.showCustomer customer.id

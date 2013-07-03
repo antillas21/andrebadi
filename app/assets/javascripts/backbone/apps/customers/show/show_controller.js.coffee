@@ -4,6 +4,9 @@
     showCustomer: (customerId) ->
       App.request "customer:fetch", customerId, (customer) =>
 
+        customer.on "updated", ->
+          App.vent.trigger "customer:updated", customer
+
         transactions = @buildTransactions customer.attributes.transactions
 
         @layout = new Show.CustomerLayout
@@ -44,17 +47,16 @@
       editView = App.request "edit:customer:form", customer
 
       editView.on "form:cancel:button:clicked", =>
-        @layout.customerRegion.close()
-        @customerRegion customer
+        App.vent.trigger "customer:cancelled", customer
 
       editView.on "form:submit", (form) =>
         data = Backbone.Syphon.serialize form.view
-        @updateModel data, customer
-        form.view.close()
-        @customerRegion customer
+        model = form.view.model
+
+        @updateModel data, model
 
       @layout.customerRegion.show editView
 
-    updateModel: (data, customer) ->
+    updateModel: (data, model) ->
       console.log data
-      customer.save data
+      model.save data

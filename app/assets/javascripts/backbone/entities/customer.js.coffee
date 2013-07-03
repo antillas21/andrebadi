@@ -1,6 +1,6 @@
 @Badi.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
-  class Entities.Customer extends Backbone.Model
+  class Entities.Customer extends Entities.Model
     urlRoot: ->
       Routes.api_customers_path()
 
