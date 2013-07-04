@@ -33,6 +33,10 @@
       customer.fetch()
       customer
 
+    newCustomer: (customers) ->
+      new Entities.Customer
+        collection: customers
+
   App.reqres.setHandler "customers:fetch", ->
     API.fetchCustomers()
 
@@ -41,3 +45,6 @@
 
   App.reqres.setHandler "customer:get", (customerId) ->
     API.getCustomer customerId
+
+  App.reqres.setHandler "new:customer:entity", (customers) ->
+    API.newCustomer(customers)

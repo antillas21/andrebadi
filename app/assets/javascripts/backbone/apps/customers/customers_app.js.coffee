@@ -12,8 +12,8 @@
     showCustomer: (id) ->
       CustomersApp.Show.Controller.showCustomer id
 
-    newCustomerForm: ->
-      CustomersApp.New.Controller.newCustomer()
+    newCustomerForm: (customer, customers) ->
+      CustomersApp.New.Controller.newCustomer customer, customers
 
     editCustomer: (customer) ->
       CustomersApp.Edit.Controller.editCustomer customer
@@ -25,8 +25,8 @@
   App.reqres.setHandler "customer:show", (customer) ->
     API.showCustomer(customer.id)
 
-  App.reqres.setHandler "new:customer:form:view", ->
-    API.newCustomerForm()
+  App.reqres.setHandler "new:customer:form:view", (customer, customers) ->
+    API.newCustomerForm(customer, customers)
 
   App.reqres.setHandler "edit:customer:form", (customer) ->
     API.editCustomer customer
@@ -39,3 +39,6 @@
 
   App.vent.on "customer:cancelled customer:updated", (customer) ->
     API.showCustomer customer.id
+
+  App.vent.on "customer:created", (customer, customers) ->
+    customers.add customer
