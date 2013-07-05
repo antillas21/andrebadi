@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require accounting.min
 //= require moment.min
+//= require jquery.fastLiveFilter
 //= require lib/underscore
 //= require lib/json2
 //= require lib/backbone

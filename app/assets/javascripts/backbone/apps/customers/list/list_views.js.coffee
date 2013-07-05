@@ -31,3 +31,4 @@
 
     triggers:
       "click #add-customer" : "add:customer:button:clicked"
+      "submit" : "search:customers"
