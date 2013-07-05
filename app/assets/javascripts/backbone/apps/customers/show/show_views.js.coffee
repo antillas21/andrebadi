@@ -17,8 +17,21 @@
     template: 'customers/templates/show/customer_layout'
 
     regions:
+      panelRegion: "#panel-region"
       customerRegion: "#customer-region"
       transactionsRegion: "#transactions-region"
 
   class Show.CustomerFullView extends Marionette.ItemView
     template: 'customers/templates/show/customer_full_view'
+
+    modelEvents:
+      "sync" : "render"
+
+  class Show.CustomerPanel extends Marionette.ItemView
+    template: 'customers/templates/show/panel'
+
+    triggers:
+      "click #edit-customer" : "edit:customer:button:clicked"
+      "click #add-purchase" : "add:purchase:button:clicked"
+      "click #add-payment" : "add:payment:button:clicked"
+      "click #delete-customer" : "delete:customer:button:clicked"

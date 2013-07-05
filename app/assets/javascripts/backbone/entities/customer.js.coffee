@@ -1,6 +1,6 @@
 @Badi.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
-  class Entities.Customer extends Backbone.Model
+  class Entities.Customer extends Entities.Model
     urlRoot: ->
       Routes.api_customers_path()
 
@@ -28,8 +28,22 @@
         success: ->
           cb customer
 
+    getCustomer: (customerId) ->
+      customer= new Entities.Customer id: customerId
+      customer.fetch()
+      customer
+
+    newCustomer: ->
+      new Entities.Customer
+
   App.reqres.setHandler "customers:fetch", ->
     API.fetchCustomers()
 
   App.reqres.setHandler "customer:fetch", (customerId, cb) ->
     API.fetchCustomer(customerId, cb)
+
+  App.reqres.setHandler "customer:get", (customerId) ->
+    API.getCustomer customerId
+
+  App.reqres.setHandler "new:customer:entity", ->
+    API.newCustomer()

@@ -4,6 +4,9 @@ AndreBadi::Application.routes.draw do
     post '/api/registration' => 'api/registrations#create'
   end
 
+  ## resources declaration to be available on Marionette Routing
+  resources :customers
+
   namespace :api do
 
     resources :customers
