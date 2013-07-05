@@ -45,18 +45,9 @@
 
     editCustomer: (customer) ->
       editView = App.request "edit:customer:form", customer
-
-      editView.on "form:cancel:button:clicked", =>
+      editView.on "form:cancel", ->
         App.vent.trigger "customer:cancelled", customer
 
-      editView.on "form:submit", (form) =>
-        data = Backbone.Syphon.serialize form.view
-        model = form.view.model
+      formView = App.request "form:wrapper", editView
 
-        @updateModel data, model
-
-      @layout.customerRegion.show editView
-
-    updateModel: (data, model) ->
-      console.log data
-      model.save data
+      @layout.customerRegion.show formView
