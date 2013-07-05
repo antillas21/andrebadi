@@ -1,7 +1,13 @@
-Backbone.Marionette.Renderer.render = (template, data) ->
-  path = HandlebarsTemplates["backbone/apps/" + template]
+do (Marionette) ->
+  _.extend Marionette.Renderer,
 
-  unless path
-    throw "Template #{template} not found!"
+    lookups: ["backbone/apps/", "backbone/templates/"]
 
-  path(data)
+    render: (template, data) ->
+      path = @getTemplate template
+      throw "Template #{template} not found!" unless path
+      path(data)
+
+    getTemplate: (template) ->
+      for lookup in @lookups
+        return HandlebarsTemplates[lookup + template] if HandlebarsTemplates[lookup + template]

@@ -1,0 +1,11 @@
+{{log "foobar"}}
+<div id="form-content"></div>
+
+{{#if footer}}
+  <footer class="form-actions">
+    <div class="placement {{ buttons.placement }}">
+      <button data-form-button="primary" class="btn btn-primary">{{ buttons.primary }}</button>
+      <a class="btn" id="cancel" data-form-button="cancel">{{ buttons.cancel }}</a>
+    </div>
+  </footer>
+{{/if}}

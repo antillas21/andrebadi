@@ -1,9 +1,11 @@
 @Badi.module "CustomersApp.New", (New, App, Backbone, Marionette, $, _) ->
 
   New.Controller =
-    newCustomer: ->
-      newView = @getNewView()
+    newCustomer: (customer, customers) ->
+      newView = @getNewView customer, customers
       newView
 
-    getNewView: ->
+    getNewView: (customer, customers) ->
       new New.Form
+        model: customer
+        collection: customers
