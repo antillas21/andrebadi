@@ -34,3 +34,4 @@
       "click #edit-customer" : "edit:customer:button:clicked"
       "click #add-purchase" : "add:purchase:button:clicked"
       "click #add-payment" : "add:payment:button:clicked"
+      "click #delete-customer" : "delete:customer:button:clicked"

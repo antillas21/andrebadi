@@ -37,6 +37,10 @@
       view.on "add:payment:button:clicked", =>
         App.request "add:payment:form:view", customer.id
 
+      view.on "delete:customer:button:clicked", =>
+        @layout.close()
+        App.vent.trigger "customer:destroyed", customer
+
       @layout.panelRegion.show view
 
     transactionsRegion: (transactions) ->

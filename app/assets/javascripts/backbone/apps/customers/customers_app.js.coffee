@@ -42,3 +42,7 @@
 
   App.vent.on "customer:created", (customer, customers) ->
     customers.add customer
+
+  App.vent.on "customer:destroyed", (customer) ->
+    customer.destroy()
+    App.navigate( Routes.customers_path(), trigger: true )
