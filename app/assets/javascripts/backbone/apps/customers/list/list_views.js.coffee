@@ -24,6 +24,9 @@
     itemViewContainer: 'tbody'
     emptyView: List.Empty
 
+    collectionEvents:
+      "reset" : "render"
+
 
   class List.Panel extends Marionette.ItemView
     className: 'js-view'

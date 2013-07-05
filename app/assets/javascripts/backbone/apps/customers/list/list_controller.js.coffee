@@ -58,7 +58,18 @@
       new List.Panel
         collection: @customers
 
-    filterCustomers: (query) ->
-      console.log "filterCustomers", query
-      # @customers.where name: query.query
-      # window.customersFiltered = @customers.where name: query.query
+    filterCustomers: (filter) ->
+      console.log "filterCustomers", filter
+      unless _.isEmpty(filter.query)
+        filteredCustomers = @getFilteredCustomers filter.query
+        @customersRegion filteredCustomers
+      else
+        console.log "@customers", @customers
+        @customersRegion @customers
+
+    getFilteredCustomers: (search) ->
+      matched = @customers.query
+        name:
+          $likeI: search
+      new App.Entities.CustomersCollection matched
+
