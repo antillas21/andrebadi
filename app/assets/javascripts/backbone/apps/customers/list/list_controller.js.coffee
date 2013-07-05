@@ -31,18 +31,12 @@
         @layout.newRegion.close()
 
       newView = App.request "new:customer:form:view", customer, @customers
+      formView = App.request "form:wrapper", newView
 
-      newView.on "form:cancel:button:clicked", =>
+      newView.on "form:cancel", =>
         @layout.newRegion.close()
 
-      newView.on "form:submit", (form) =>
-        data = Backbone.Syphon.serialize form.view
-        model = form.model
-        collection = form.collection
-
-        @createModel collection, model, data
-
-      @layout.newRegion.show newView
+      @layout.newRegion.show formView
 
     getNewView: ->
       new List.New
@@ -57,6 +51,3 @@
     getPanelView: (customers) ->
       new List.Panel
         collection: @customers
-
-    createModel: (collection, model, data) ->
-      model.save data
