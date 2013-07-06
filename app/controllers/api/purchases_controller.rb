@@ -3,7 +3,7 @@ class Api::PurchasesController < Api::BaseController
 
   def index
     @purchases = logged_user.purchases
-    respond_with @purchases
+    respond_with @purchases.includes(:customer, :line_items)
   end
 
   def show
