@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require accounting.min
 //= require moment.min
+//= require twitter/bootstrap
 //= require lib/underscore
 //= require lib/json2
 //= require lib/backbone
@@ -28,5 +29,4 @@
 //= require_tree ./backbone/components
 //= require_tree ./backbone/templates
 //= require_tree ./backbone/apps
-//= require twitter/bootstrap
 //= require app-loader
