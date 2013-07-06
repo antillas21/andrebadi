@@ -11,10 +11,17 @@ describe LineItem do
     it { should belong_to :purchase }
   end
 
-  describe 'item_total' do
+  describe 'item_sale_total' do
     it 'is auto-calculated' do
       item = FactoryGirl.create(:coat, qty: 3, price: 900.0)
-      item.item_total.should == 2700.0
+      item.item_sale_total.should == 2700.0
+    end
+  end
+
+  describe 'item_cost_total' do
+    it 'is auto-calculated' do
+      item = FactoryGirl.create(:coat, qty: 3, price: 900.0, cost: 600)
+      item.item_cost_total.should == 1800.0
     end
   end
 end
