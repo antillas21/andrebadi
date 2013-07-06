@@ -12,6 +12,12 @@
       @unset "_errors"
       super data, options
 
+    destroy: (options = {}) ->
+      _.defaults options,
+        wait: true
+
+      super options
+
     saveSuccess: (isNew, collection) ->
       console.info "success", @, isNew
       if isNew

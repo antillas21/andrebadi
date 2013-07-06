@@ -1,6 +1,20 @@
 <div class="btn-group">
-  <a href="#" class="btn btn-small" id="edit-customer">Edit</a>
-  <a href="#" class="btn btn-small" id="add-purchase"><i class="icon icon-plus-sign"></i> Purchase</a>
-  <a href="#" class="btn btn-small" id="add-payment"><i class="icon icon-plus-sign"></i> Payment</a>
-  <a href="#" class="btn btn-danger btn-small" id="delete-customer"><i class="icon icon-remove-sign"></i> Customer</a>
+  <a href="#" class="btn" id="edit-customer">Edit</a>
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    <i class="icon icon-plus-sign"></i> Transactions
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a href="#">Add Purchase</a></li>
+    <li><a href="#">Add Payment</a></li>
+  </ul>
+</div>
+<div class="btn-group">
+  <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
+    <i class="icon icon-remove-sign"></i> Delete
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a href="#" id="delete-customer">Yes, Delete</a></li>
+  </ul>
 </div>
