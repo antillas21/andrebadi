@@ -20,6 +20,7 @@ AndreBadi::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
+  config.assets.initialize_on_precompile = true
   config.serve_static_assets = false
   config.static_cache_control = "public, max-age=#{2.months.to_i}"
 

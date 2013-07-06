@@ -3,7 +3,7 @@ class Api::PaymentsController < Api::BaseController
 
   def index
     @payments = logged_user.payments
-    respond_with @payments
+    respond_with @payments.includes(:customer)
   end
 
   def show

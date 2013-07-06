@@ -5,9 +5,14 @@ class LineItem < ActiveRecord::Base
 
   belongs_to :purchase
 
-  before_save :calculate_total
+  before_save :calculate_sale_total
+  before_save :calculate_cost_total
 
-  def calculate_total
-    self.item_total = self.qty * self.price
+  def calculate_sale_total
+    self.item_sale_total = self.qty * self.price
+  end
+
+  def calculate_cost_total
+    self.item_cost_total = self.qty * self.cost
   end
 end
