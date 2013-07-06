@@ -38,7 +38,7 @@
         App.request "add:payment:form:view", customer.id
 
       view.on "delete:customer:button:clicked", =>
-        @layout.close()
+        # @layout.close()
         App.vent.trigger "customer:destroyed", customer
 
       @layout.panelRegion.show view
