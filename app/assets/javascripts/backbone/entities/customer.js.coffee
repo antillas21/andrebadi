@@ -8,7 +8,7 @@
       editableFields = ['name', 'email', 'phone']
       @editableFields = editableFields
 
-  class Entities.CustomersCollection extends Backbone.Collection
+  class Entities.CustomersCollection extends Backbone.QueryCollection
     url: ->
       Routes.api_customers_path()
 
