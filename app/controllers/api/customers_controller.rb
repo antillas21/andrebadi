@@ -28,7 +28,9 @@ class Api::CustomersController < Api::BaseController
 
   def destroy
     @customer.destroy
-    head :ok
+    # head :ok
+    # @customer.destroy
+    render json: {}
   end
 
   private
