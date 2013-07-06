@@ -41,6 +41,7 @@ gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 group :development do
   gem 'quiet_assets'
   gem 'letter_opener'
+  gem 'capistrano'
 end
 
 group :test, :development do
