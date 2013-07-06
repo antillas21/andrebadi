@@ -64,19 +64,21 @@
       </div>
     </div>
 
-    <div class="container" id="page">
-        <div class="row">
-          <div class="span12">
-            <% flash.each do |key, value| %>
-              <div id="flash-messages" class="flash-message">
-                <%= content_tag :div, value, :class => "flash alert alert-#{key}" unless value.blank? %>
-              </div>
-            <% end %>
-            <div id="main-region">
-              <%= yield %>
+    <div class="container" id="message-center">
+      <div class="row">
+        <div class="span12">
+          <% flash.each do |key, value| %>
+            <div id="flash-messages" class="flash-message">
+              <%= content_tag :div, value, :class => "flash alert alert-#{key}" unless value.blank? %>
             </div>
-          </div>
-        </div><!--/row-->
+          <% end %>
+        </div>
+      </div><!--/row-->
+    </div>
+    <div class="container" id="page">
+      <div id="main-region">
+        <%= yield %>
+      </div>
 
 
     </div> <!-- /container -->

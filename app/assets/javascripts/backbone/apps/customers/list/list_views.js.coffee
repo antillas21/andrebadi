@@ -24,6 +24,9 @@
     itemViewContainer: 'tbody'
     emptyView: List.Empty
 
+    collectionEvents:
+      "reset" : "render"
+
 
   class List.Panel extends Marionette.ItemView
     className: 'js-view'
@@ -31,3 +34,4 @@
 
     triggers:
       "click #add-customer" : "add:customer:button:clicked"
+      "submit" : "search:customers"

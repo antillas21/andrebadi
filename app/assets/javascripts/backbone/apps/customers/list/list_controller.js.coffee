@@ -46,8 +46,30 @@
       panelView.on "add:customer:button:clicked", (customers) =>
         @newRegion @customers
 
+      panelView.on "search:customers", (panel) =>
+        console.log panel.view.el
+        data = Backbone.Syphon.serialize panel.view
+        console.log data
+        @filterCustomers data
+
       @layout.panelRegion.show panelView
 
     getPanelView: (customers) ->
       new List.Panel
         collection: @customers
+
+    filterCustomers: (filter) ->
+      console.log "filterCustomers", filter
+      unless _.isEmpty(filter.query)
+        filteredCustomers = @getFilteredCustomers filter.query
+        @customersRegion filteredCustomers
+      else
+        console.log "@customers", @customers
+        @customersRegion @customers
+
+    getFilteredCustomers: (search) ->
+      matched = @customers.query
+        name:
+          $likeI: search
+      new App.Entities.CustomersCollection matched
+
