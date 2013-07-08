@@ -30,6 +30,7 @@ gem 'less-rails'
 gem 'compass-rails'
 gem 'handlebars_assets'
 gem 'eco'
+gem 'yui-compressor'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'libv8', '~> 3.11.8'
