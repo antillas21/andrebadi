@@ -9,7 +9,8 @@ gem 'rails', '4.0.0'
 gem 'unicorn'
 gem 'pg'
 # gem 'backbone-on-rails', '1.0.0.0'
-gem 'twitter-bootstrap-rails', '~> 2.1.0'
+# gem 'twitter-bootstrap-rails', '~> 2.1.0'
+gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails', branch: 'master'
 
 # client side helper gems
 gem 'rabl'
