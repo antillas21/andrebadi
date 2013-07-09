@@ -21,7 +21,7 @@ AndreBadi::Application.configure do
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.assets.initialize_on_precompile = true
-  config.serve_static_assets = false
+  config.serve_static_assets = true
   config.static_cache_control = "public, max-age=#{2.months.to_i}"
 
   # Compress JavaScripts and CSS.
