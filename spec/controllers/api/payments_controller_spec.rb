@@ -5,6 +5,7 @@ describe Api::PaymentsController do
   let(:other_user) { create(:user) }
   let(:customer) { create(:customer, user: user) }
   let(:token) { user.authentication_token }
+  let(:other_token) { other_user.authentication_token }
 
   describe 'GET #index' do
     before do
@@ -28,6 +29,29 @@ describe Api::PaymentsController do
   end
 
   describe 'POST #create' do
+    context 'with valid attributes' do
+      it 'creates a new Payment for a given Customer' do
+        post 'create', payment: { amount: 900, customer_id: customer.id}, token: token, format: :json
+        response.should be_success
+        Payment.count.should eq 1
+      end
+    end
+
+    context 'with invalid attributes' do
+      it 'returns an error message' do
+        post 'create', payment: { amount: nil, customer_id: nil}, token: token, format: :json
+        response.should_not be_success
+        Payment.count.should eq 0
+      end
+
+      it 'returns an error when attempting to add payments for other users records' do
+        post 'create', payment: { amount: 9000, customer_id: customer.id }, token: other_token, format: :json
+
+        json_error = JSON.parse(response.body)
+        json_error.values.should include("customer_id value does not belong to any Customer on your records. Operation not allowed.")
+        response.status.should == 403
+      end
+    end
   end
 
   describe 'GET #show' do
@@ -51,7 +75,7 @@ describe Api::PaymentsController do
 
     context 'valid attributes' do
       before :each do
-        put 'update', id: payment.id, payment: { amount: 7000.0 },
+        put 'update', id: payment.id, payment: { amount: 7000.0, customer_id: customer.id },
           token: token, format: :json
       end
 
@@ -78,6 +102,13 @@ describe Api::PaymentsController do
 
       it 'returns an error' do
         response.status.should eql 422
+      end
+
+      it 'does not allow to update payments for Customers that do not belong to User' do
+        put 'update', id: payment.id, payment: { amount: 300, customer_id: customer.id},
+          token: other_token, format: :json
+
+        response.status.should eq 403
       end
     end
   end
