@@ -5,6 +5,7 @@ describe Api::PurchasesController do
   let(:other_user) { create(:user) }
   let(:customer) { create(:customer, user: user) }
   let(:token) { user.authentication_token }
+  let(:other_token) { other_user.authentication_token }
 
   describe 'GET #index' do
     before do
@@ -28,6 +29,28 @@ describe Api::PurchasesController do
   end
 
   describe 'POST #create' do
+    context 'with valid params' do
+      let(:coat) { attributes_for(:coat, cost: 400, price: 900) }
+      it ' creates a new Purchase for a given Customer' do
+        post 'create', purchase: { customer_id: customer.id, line_items_attributes: [coat]}, token: token, format: :json
+        response.should be_success
+        Purchase.count.should eq 1
+        LineItem.count.should eq 1
+      end
+    end
+
+    context 'with invalid params' do
+      let(:coat) { attributes_for(:coat, cost: 400, price: 900) }
+
+      it 'does not allow to create a purchase if Customer record does not belong to user' do
+        post 'create', purchase: { customer_id: customer.id, line_items_attributes: [coat] },
+          token: other_token, format: :json
+
+        response.should_not be_success
+        Purchase.count.should eq 0
+        LineItem.count.should eq 0
+      end
+    end
   end
 
   describe 'GET #show' do

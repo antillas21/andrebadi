@@ -1,5 +1,6 @@
 class Api::PurchasesController < Api::BaseController
   before_filter :find_purchase, only: [:show, :update, :destroy]
+  before_filter :find_customer, only: [:create]
 
   def index
     @purchases = logged_user.purchases
@@ -8,6 +9,12 @@ class Api::PurchasesController < Api::BaseController
 
   def show
     respond_with @purchase
+  end
+
+  def create
+    @purchase = @customer.purchases.new(accepted_params)
+    @purchase.save
+    respond_with @purchase, location: api_purchase_url(@purchase)
   end
 
   def update
@@ -28,7 +35,17 @@ class Api::PurchasesController < Api::BaseController
       respond_with(error, status: 404)
   end
 
+  def find_customer
+    @customer = logged_user.customers.find(accepted_params[:customer_id])
+    rescue ActiveRecord::RecordNotFound
+      error = { error: "customer_id value does not belong to any Customer in your account."}
+      render json: error, status: 403, location: api_purchases_url
+  end
+
   def accepted_params
-    params.require(:purchase).permit(:amount, :customer, :customer_id, :line_items_attributes, :line_items)
+    params.require(:purchase).permit(
+      :amount, :customer, :customer_id,
+      line_items_attributes: [:name, :color, :size, :cost, :price, :qty]
+    )
   end
 end
