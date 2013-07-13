@@ -42,6 +42,7 @@
         focusFirstInput: true
         buttons: @getDefaultButtons config.buttons
         errors: true
+        syncing: true
 
     getDefaultButtons: (buttons = {}) ->
       _.defaults buttons,

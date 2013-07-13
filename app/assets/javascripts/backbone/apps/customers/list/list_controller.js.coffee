@@ -1,16 +1,19 @@
 @Badi.module "CustomersApp.List", (List, App, Backbone, Marionette, $, _) ->
 
-  List.Controller =
-    listCustomers: ->
+  class List.Controller extends App.Controllers.Base
+    initialize: ->
       @customers = App.request "customers:fetch"
 
       @layout = @getLayoutView()
 
-      @layout.on "show", =>
+      @listenTo @layout, "show", =>
         @panelRegion @customers
         @customersRegion @customers
 
-      App.mainRegion.show @layout
+      @show @layout
+
+    onClose: ->
+      console.info "closing controller", @
 
     getLayoutView: ->
       new List.Layout
@@ -26,14 +29,17 @@
     newRegion: (customers) ->
       customer = App.request "new:customer:entity", customers
 
-      customer.on "created", =>
-        App.vent.trigger "customer:created", customer, customers
-        @layout.newRegion.close()
-
       newView = App.request "new:customer:form:view", customer, @customers
+      console.log newView
       formView = App.request "form:wrapper", newView
 
-      newView.on "form:cancel", =>
+      @listenTo customer, "created", =>
+        App.vent.trigger "customer:created", customer, customers
+        newView.close()
+        @layout.newRegion.close()
+
+      @listenTo newView, "form:cancel", =>
+        newView.close()
         @layout.newRegion.close()
 
       @layout.newRegion.show formView
@@ -43,13 +49,11 @@
 
     panelRegion: (customers) ->
       panelView = @getPanelView customers
-      panelView.on "add:customer:button:clicked", (customers) =>
+      @listenTo panelView, "add:customer:button:clicked", (customers) =>
         @newRegion @customers
 
-      panelView.on "search:customers", (panel) =>
-        console.log panel.view.el
+      @listenTo panelView, "search:customers", (panel) =>
         data = Backbone.Syphon.serialize panel.view
-        console.log data
         @filterCustomers data
 
       @layout.panelRegion.show panelView
@@ -64,7 +68,6 @@
         filteredCustomers = @getFilteredCustomers filter.query
         @customersRegion filteredCustomers
       else
-        console.log "@customers", @customers
         @customersRegion @customers
 
     getFilteredCustomers: (search) ->

@@ -14,6 +14,8 @@
 
     modelEvents:
       "change:_errors" : "changeErrors"
+      "sync:start" : "syncStart"
+      "sync:stop" : "syncStop"
 
     changeErrors: (model, errors, options) ->
       if @options.config.errors
@@ -43,3 +45,13 @@
 
     focusFirstInput: ->
       @$(":input:visible:enabled:first").focus()
+
+    syncStart: (model) ->
+      console.log "sync start"
+      @$el.find("input").attr("disabled", "disabled")
+      @$el.find(".btn").addClass "disabled"
+
+    syncStop: (model) ->
+      console.log "sync stop"
+      @$el.find("input").removeAttr "disabled"
+      @$el.find(".btn").removeClass "disabled"

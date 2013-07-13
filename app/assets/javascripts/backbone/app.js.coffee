@@ -7,10 +7,10 @@
     App.addRegions
       mainRegion: options.appContainer
 
+  App.reqres.setHandler "default:region", ->
+    App.mainRegion
+
   App.on "initialize:after", ->
     @startHistory()
-    # @navigate( @rootRoute, trigger: true ) unless @getCurrentRoute()
-    # if Backbone.history
-    #   Backbone.history.start()
 
   App

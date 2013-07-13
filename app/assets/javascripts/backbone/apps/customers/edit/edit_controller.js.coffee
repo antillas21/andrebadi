@@ -1,9 +1,10 @@
 @Badi.module "CustomersApp.Edit", (Edit, App, Backbone, Marionette, $, _) ->
 
-  Edit.Controller =
-    editCustomer: (customer)->
+  class Edit.Controller extends App.Controllers.Base
+    initialize: (options = {}) ->
+      { customer } = options
       editView = @getEditView customer
-      editView
+      @editCustomerView = editView
 
     getEditView: (customer) ->
       new Edit.EditCustomerForm
