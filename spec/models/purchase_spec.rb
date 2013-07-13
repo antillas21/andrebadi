@@ -22,6 +22,16 @@ describe Purchase do
     end
   end
 
+  describe 'total_cost' do
+    let(:item) { build(:coat, cost: 900, qty: 3) }
+    let(:purchase) { create(:purchase, line_items: [item]) }
+
+    it 'auto-calculates total cost based on the sum of all line items costs' do
+      purchase.cost.should_not == 0
+      purchase.cost.should eq 2700.0
+    end
+  end
+
   describe 'deleting a purchase' do
     let(:purchase) { create(:purchase) }
 
