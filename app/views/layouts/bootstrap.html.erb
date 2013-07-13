@@ -8,7 +8,7 @@
     <% if current_user %>
       <meta name="auth-token" content="<%= current_user.authentication_token %>">
     <% end %>
-    <title><%= content_for?(:title) ? yield(:title) : "AndreBadi" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "SaleTrackr" %></title>
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
