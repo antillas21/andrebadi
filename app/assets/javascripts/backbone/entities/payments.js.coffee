@@ -22,9 +22,19 @@
 
       payments
 
+    getPayment: (id) ->
+      payment = new Entities.Payment
+        id: id
+
+      payment.fetch()
+      payment
+
   App.reqres.setHandler "new:payment:entity", (customerId) ->
     new Entities.Payment
       customer_id: customerId
 
   App.reqres.setHandler "payments:fetch", ->
     API.fetchPayments()
+
+  App.reqres.setHandler "payment:fetch", (paymentId) ->
+    API.getPayment paymentId

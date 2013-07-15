@@ -11,8 +11,9 @@
       console.log "Listing Payments from PaymentsApp"
       new PaymentsApp.List.Controller
 
-    showPayment: (options = {}) ->
-      console.log "Showing Payment", options
+    showPayment: (paymentId) ->
+      console.log "Showing Payment", paymentId
+      new PaymentsApp.Show.Controller paymentId
 
     editPayment: (options = {}) ->
       console.log "Edit Payment", options
@@ -26,6 +27,5 @@
       controller: API
 
   App.reqres.setHandler "add:payment:form", (payment) ->
-    # console.log 'catched call to payment form for customer with id ' + payment
     API.newPayment
       payment: payment

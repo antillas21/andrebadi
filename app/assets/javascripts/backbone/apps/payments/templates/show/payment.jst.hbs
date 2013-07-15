@@ -1,0 +1,11 @@
+<h2>RECEIPT #{{ id }}</h2>
+
+<div class="well">
+  <div class="">
+    <div class="amount large">{{ toCurrency amount }}</div>
+    <div class="payment-date">Date received: {{ formattedDateOnly created_at }}</div>
+  </div>
+  <hr />
+  Received from: {{ customer.name }}
+  <div class="concept">As partial payment on account balance.</div>
+</div>
