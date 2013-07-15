@@ -9,6 +9,7 @@
   API =
     listPayments: ->
       console.log "Listing Payments from PaymentsApp"
+      new PaymentsApp.List.Controller
 
     showPayment: (options = {}) ->
       console.log "Showing Payment", options

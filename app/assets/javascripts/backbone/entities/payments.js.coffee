@@ -8,6 +8,23 @@
     url: ->
       Routes.api_payments_path()
 
+    model: Entities.Payment
+
+    comparator: (model) ->
+      date = new Date(model.get('created_at'))
+      -date.getTime()
+
+  API =
+    fetchPayments: ->
+      payments = new Entities.PaymentsCollection
+      payments.fetch
+        reset: true
+
+      payments
+
   App.reqres.setHandler "new:payment:entity", (customerId) ->
     new Entities.Payment
       customer_id: customerId
+
+  App.reqres.setHandler "payments:fetch", ->
+    API.fetchPayments()
