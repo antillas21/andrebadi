@@ -1,4 +1,4 @@
-@Badi.module "PaymentsApp", (PaymentsApp, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "PaymentsApp", (PaymentsApp, App, Backbone, Marionette, $, _) ->
 
   class PaymentsApp.Router extends Marionette.AppRouter
     appRoutes:

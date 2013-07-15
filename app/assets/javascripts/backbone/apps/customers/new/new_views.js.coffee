@@ -1,4 +1,4 @@
-@Badi.module "CustomersApp.New", (New, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "CustomersApp.New", (New, App, Backbone, Marionette, $, _) ->
 
   class New.Form extends Marionette.ItemView
     # className: 'js-form new'

@@ -1,4 +1,4 @@
-@Badi.module "DashboardApp", (DashboardApp, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "DashboardApp", (DashboardApp, App, Backbone, Marionette, $, _) ->
 
   class DashboardApp.Router extends Marionette.AppRouter
     appRoutes:

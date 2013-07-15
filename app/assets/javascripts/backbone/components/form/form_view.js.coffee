@@ -1,4 +1,4 @@
-@Badi.module "Components.Form", (Form, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "Components.Form", (Form, App, Backbone, Marionette, $, _) ->
 
   class Form.FormWrapper extends Marionette.Layout
     template: 'form/form'

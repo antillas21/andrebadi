@@ -1,3 +1,3 @@
 $ ->
-  Badi.start
+  SaleTrackr.start
     appContainer: '#main-region'

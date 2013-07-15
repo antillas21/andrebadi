@@ -1,4 +1,4 @@
-@Badi.module "CustomersApp", (CustomersApp, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "CustomersApp", (CustomersApp, App, Backbone, Marionette, $, _) ->
   class CustomersApp.Router extends Marionette.AppRouter
     appRoutes:
       "customers" : "listCustomers"

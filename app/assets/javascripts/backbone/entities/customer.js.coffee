@@ -1,4 +1,4 @@
-@Badi.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
   class Entities.Customer extends Entities.Model
     urlRoot: ->

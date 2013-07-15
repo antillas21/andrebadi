@@ -1,4 +1,4 @@
-@Badi.module "DashboardApp.Display", (Display, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "DashboardApp.Display", (Display, App, Backbone, Marionette, $, _) ->
 
   Display.Controller =
     showDashboard: ->

@@ -1,4 +1,4 @@
-@Badi = do (Backbone, Marionette) ->
+@SaleTrackr = do (Backbone, Marionette) ->
   App = new Marionette.Application
 
   App.rootRoute = Routes.dashboard_path()

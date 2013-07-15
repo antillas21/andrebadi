@@ -35,9 +35,9 @@ postgres=# \password postgres
 
 # create a superadmin user for easier testing
 
-$ sudo -u postgres createuser --superuser andre_badi
+$ sudo -u postgres createuser --superuser sale_trackr
 $ sudo -u postgres psql
-postgres=# \password andre_badi
+postgres=# \password sale_trackr
 
 
 * uncomment `listen_addresses = 'localhost'` in `postgresql.conf`

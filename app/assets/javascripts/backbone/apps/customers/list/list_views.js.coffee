@@ -1,4 +1,4 @@
-@Badi.module "CustomersApp.List", (List, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "CustomersApp.List", (List, App, Backbone, Marionette, $, _) ->
 
   class List.Layout extends Marionette.Layout
     className: 'js-layout customers-layout'

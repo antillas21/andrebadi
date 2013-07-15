@@ -1,4 +1,4 @@
-@Badi.module "CustomersApp.Show", (Show, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "CustomersApp.Show", (Show, App, Backbone, Marionette, $, _) ->
 
   class Show.TransactionItem extends Marionette.ItemView
     template: 'customers/templates/show/transactions_item'

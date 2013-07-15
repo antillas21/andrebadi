@@ -1,4 +1,4 @@
-@Badi.module "CustomersApp.Show", (Show, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "CustomersApp.Show", (Show, App, Backbone, Marionette, $, _) ->
 
   class Show.Controller extends App.Controllers.Base
     initialize: (customerId) ->

@@ -1,4 +1,4 @@
-@Badi.module "PaymentsApp.New", (New, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "PaymentsApp.New", (New, App, Backbone, Marionette, $, _) ->
 
   class New.Controller extends App.Controllers.Base
     initialize: (options = {}) ->

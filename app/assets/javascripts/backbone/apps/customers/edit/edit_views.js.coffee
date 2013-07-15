@@ -1,4 +1,4 @@
-@Badi.module "CustomersApp.Edit", (Edit, App, Backbone, Marionette, $, _) ->
+@SaleTrackr.module "CustomersApp.Edit", (Edit, App, Backbone, Marionette, $, _) ->
 
   class Edit.EditCustomerForm extends Marionette.ItemView
     template: 'customers/templates/edit/form'
