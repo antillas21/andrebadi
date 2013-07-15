@@ -39,7 +39,18 @@
         App.request "add:purchase:form:view", customer.id
 
       @listenTo view, "add:payment:button:clicked", =>
-        App.request "add:payment:form:view", customer.id
+        payment = App.request "new:payment:entity", customer.id
+        paymentView = App.request "add:payment:form", payment
+
+
+        @listenTo paymentView, "form:cancel", ->
+          App.vent.trigger "payment:cancel", customer
+
+        @listenTo payment, "created", ->
+          App.vent.trigger "payment:created", customer
+
+        paymentFormView = App.request "form:wrapper", paymentView
+        @layout.actionsRegion.show paymentFormView
 
       @listenTo view, "delete:customer:button:clicked", =>
         App.vent.trigger "customer:destroyed", customer
@@ -53,7 +64,7 @@
     editCustomer: (customer) ->
       editView = App.request "edit:customer:form", customer
       @listenTo editView, "form:cancel", ->
-        App.vent.trigger "customer:cancelled", customer
+        App.vent.trigger "customer:cancel", customer
 
       formView = App.request "form:wrapper", editView
 

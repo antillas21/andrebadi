@@ -18,6 +18,7 @@
 
     regions:
       panelRegion: "#panel-region"
+      actionsRegion: "#actions-region"
       customerRegion: "#customer-region"
       transactionsRegion: "#transactions-region"
 
