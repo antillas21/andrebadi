@@ -2,4 +2,4 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 use Rack::Deflater
-run AndreBadi::Application
+run SaleTrackr::Application

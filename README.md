@@ -1,4 +1,4 @@
-# About AndreBadi
+# About SaleTrackr
 This is a sample app that will be used (for real) to track:
 
 * customers

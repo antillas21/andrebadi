@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-AndreBadi::Application.load_tasks
+SaleTrackr::Application.load_tasks
