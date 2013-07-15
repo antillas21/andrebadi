@@ -1,3 +1,9 @@
-<td class="span4">{{ type }}</td>
-<td class="span4">{{ formattedDate created_at }}</td>
-<td class="span4 currency">{{ toCurrency amount }}</td>
+<td class="span8">
+  <div class="transaction-type">{{ type }}</div>
+  <div class="transaction-date">{{ formattedDate created_at }}</div>
+  <div class="actions">
+    <a href="#" class="btn btn-link">View</a>
+    <a href="#" class="btn btn-link">Delete</a>
+  </div>
+</td>
+<td class="span4">{{ toCurrency amount }}</td>
