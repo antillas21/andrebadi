@@ -9,6 +9,7 @@ describe Transaction do
   describe 'validations' do
     it { should validate_presence_of :amount }
     it { should validate_presence_of :customer_id }
+    it { should validate_presence_of :uid }
   end
 
 end
