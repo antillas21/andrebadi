@@ -40,7 +40,7 @@ gem 'therubyracer', :platforms => :ruby
 gem 'uglifier', '>= 1.3.0'
 
 gem 'jquery-rails'
-gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
+gem 'devise', '3.0.0'
 
 group :development do
   gem 'quiet_assets'
