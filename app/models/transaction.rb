@@ -3,7 +3,7 @@ class Transaction < ActiveRecord::Base
   before_create :generate_uid
 
   # validations
-  validates :amount, :customer_id, :uid, presence: true
+  validates :amount, :customer_id, presence: true
 
   # realtionships
   belongs_to :customer
