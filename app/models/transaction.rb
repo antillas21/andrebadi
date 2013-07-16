@@ -1,6 +1,6 @@
 class Transaction < ActiveRecord::Base
 
-  before_create :generate_uid
+  before_create :assign_uid
 
   # validations
   validates :amount, :customer_id, presence: true
@@ -11,6 +11,13 @@ class Transaction < ActiveRecord::Base
   default_scope { order('transactions.created_at ASC') }
 
   def generate_uid
-    self.uid = (Time.now.to_f / 100).to_i
+    factor = rand(256)
+    stamp = Time.now.to_f
+    @data = (factor * stamp).to_s[0..7].to_i
+  end
+
+  def assign_uid
+    generate_uid
+    self.uid = @data
   end
 end
