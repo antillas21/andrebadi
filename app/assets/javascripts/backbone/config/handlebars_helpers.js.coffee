@@ -13,3 +13,6 @@ Handlebars.registerHelper 'formattedDate', (date) ->
 
 Handlebars.registerHelper 'formattedDateOnly', (date) ->
   moment(date).format('MMM D, YYYY')
+
+Handlebars.registerHelper 'toCents', (amount) ->
+  amount * 100
