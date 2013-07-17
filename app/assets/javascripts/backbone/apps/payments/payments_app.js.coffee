@@ -17,6 +17,7 @@
 
     editPayment: (options = {}) ->
       console.log "Edit Payment", options
+      new PaymentsApp.Edit.Controller(options).editPaymentView
 
     newPayment: (options = {}) ->
       console.log "New Payment", options
@@ -30,6 +31,13 @@
     API.newPayment
       payment: payment
 
+  App.reqres.setHandler "edit:payment:form", (payment) ->
+    API.editPayment
+      payment: payment
+
   App.vent.on "payment:destroyed", (payment) ->
     payment.destroy()
     App.navigate( Routes.payments_path(), trigger: true )
+
+  App.vent.on "payment:edit:cancel payment:updated", (payment) ->
+    API.showPayment payment.id
