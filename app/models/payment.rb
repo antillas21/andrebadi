@@ -1,6 +1,7 @@
 class Payment < Transaction
 
   after_save :update_customer_balance
+  after_destroy :update_customer_balance
 
   def update_customer_balance
     new_balance = customer.total_purchases - customer.total_payments

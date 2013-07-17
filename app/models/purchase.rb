@@ -8,6 +8,7 @@ class Purchase < Transaction
   before_save :calculate_amount
   before_save :calculate_cost
   after_save :update_customer_balance
+  after_destroy :update_customer_balance
 
   def calculate_amount
     items_array = line_items.collect{|item| [item.qty, item.price]}
