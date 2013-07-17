@@ -29,3 +29,7 @@
   App.reqres.setHandler "add:payment:form", (payment) ->
     API.newPayment
       payment: payment
+
+  App.vent.on "payment:destroyed", (payment) ->
+    payment.destroy()
+    App.navigate( Routes.payments_path(), trigger: true )

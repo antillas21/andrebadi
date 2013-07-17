@@ -7,6 +7,9 @@
 
       paymentView = @getPaymentView payment
 
+      @listenTo paymentView, "payment:delete:clicked", =>
+        App.vent.trigger "payment:destroyed", payment
+
       @show paymentView
 
     onClose: ->

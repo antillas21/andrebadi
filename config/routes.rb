@@ -6,6 +6,7 @@ SaleTrackr::Application.routes.draw do
 
   ## resources declaration to be available on Marionette Routing
   resources :customers
+  resources :payments
 
   namespace :api do
 

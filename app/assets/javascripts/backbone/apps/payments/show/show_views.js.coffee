@@ -6,3 +6,6 @@
 
     modelEvents:
       "sync" : "render"
+
+    triggers:
+      "click #delete-payment" : "payment:delete:clicked"
