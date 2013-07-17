@@ -16,3 +16,6 @@ Handlebars.registerHelper 'formattedDateOnly', (date) ->
 
 Handlebars.registerHelper 'toCents', (amount) ->
   amount * 100
+
+Handlebars.registerHelper 'downcasePluralize', (type) ->
+   type.toLowerCase() + 's'

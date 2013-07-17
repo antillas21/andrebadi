@@ -9,6 +9,9 @@
 
       @show paymentView
 
+    onClose: ->
+      console.log "closing controller", @
+
     getPaymentView: (payment) ->
       new Show.Payment
         model: payment

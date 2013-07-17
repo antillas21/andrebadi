@@ -2,8 +2,7 @@
   <div class="transaction-type">{{ type }}</div>
   <div class="transaction-date">{{ formattedDate created_at }}</div>
   <div class="actions">
-    <a href="#" class="btn btn-link">View</a>
-    <a href="#" class="btn btn-link">Delete</a>
+    <a href="/#/{{ downcasePluralize type }}/{{ id }}" class="btn btn-link">View</a>
   </div>
 </td>
 <td class="span4">
