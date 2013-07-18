@@ -12,15 +12,12 @@
       new PaymentsApp.List.Controller
 
     showPayment: (paymentId) ->
-      console.log "Showing Payment", paymentId
       new PaymentsApp.Show.Controller paymentId
 
     editPayment: (options = {}) ->
-      console.log "Edit Payment", options
       new PaymentsApp.Edit.Controller(options).editPaymentView
 
     newPayment: (options = {}) ->
-      console.log "New Payment", options
       new PaymentsApp.New.Controller(options).paymentView
 
   App.addInitializer ->

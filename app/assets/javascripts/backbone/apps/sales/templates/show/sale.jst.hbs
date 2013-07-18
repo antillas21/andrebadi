@@ -1,0 +1,44 @@
+<div class="sale-header row">
+  <div class="span8">Bill to: <strong>{{ customer.name }}</strong></div>
+  <div class="span4">Date: {{ formattedDateOnly created_at }}</div>
+</div>
+
+<div class="sale-details">
+  <table class="table table-striped bordered">
+    <thead>
+      <th>Items</th>
+      <th class="currency">Totals</th>
+    </thead>
+    <tbody>
+      {{#each line_items }}
+        <tr>
+          <td class="span9">
+            <div class="hidden-desktop">
+              <div>{{ name }}</div>
+              <div><small>Qty: {{ qty }}</small></div>
+              <div><small>Color: {{ color }}</small></div>
+              <div><small>Size: {{ size }}</small></div>
+              <div><small>Unit price: {{ toCurrency price }}</small></div>
+            </div>
+            <div class="visible-desktop">
+              <div class="">{{ name }}</div>
+              <div class="span2"><small>Qty: {{ qty }}</small></div>
+              <div class="span2"><small>Color: {{ color }}</small></div>
+              <div class="span2"><small>Size: {{ size }}</small></div>
+              <div class="span3"><small>Unit price: {{ toCurrency price }}</small></div>
+            </div>
+          </td>
+          <td class="currency span3">{{ toCurrency item_sale_total }}</td>
+        </tr>
+      {{/each}}
+      <tr>
+        <td class="span6 currency">Sale Total</td>
+        <td class="span3 amount currency">{{ toCurrency amount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="sale-footer monotype">
+  <div>{{ toCents amount }}||{{ customer.uid }}||{{ uid }}</div>
+</div>
