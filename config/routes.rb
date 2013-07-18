@@ -7,12 +7,13 @@ SaleTrackr::Application.routes.draw do
   ## resources declaration to be available on Marionette Routing
   resources :customers
   resources :payments
+  resources :sales
 
   namespace :api do
 
     resources :customers
     resources :payments
-    resources :purchases
+    resources :sales
   end
 
   # post '/api/registration' => 'api/registrations#create'

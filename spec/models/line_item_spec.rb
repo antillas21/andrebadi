@@ -8,7 +8,7 @@ describe LineItem do
   end
 
   describe 'relationships' do
-    it { should belong_to :purchase }
+    it { should belong_to :sale }
   end
 
   describe 'item_sale_total' do

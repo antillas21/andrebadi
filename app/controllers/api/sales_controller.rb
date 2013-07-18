@@ -1,35 +1,35 @@
-class Api::PurchasesController < Api::BaseController
-  before_filter :find_purchase, only: [:show, :update, :destroy]
+class Api::SalesController < Api::BaseController
+  before_filter :find_sale, only: [:show, :update, :destroy]
   before_filter :find_customer, only: [:create]
 
   def index
-    @purchases = logged_user.purchases
-    respond_with @purchases.includes(:customer, :line_items)
+    @sales = logged_user.sales
+    respond_with @sales.includes(:customer, :line_items)
   end
 
   def show
-    respond_with @purchase
+    respond_with @sale
   end
 
   def create
-    @purchase = @customer.purchases.new(accepted_params)
-    @purchase.save
-    respond_with @purchase, location: api_purchase_url(@purchase)
+    @sale = @customer.sales.new(accepted_params)
+    @sale.save
+    respond_with @sale, location: api_sale_url(@sale)
   end
 
   def update
-    @purchase.update_attributes(accepted_params)
-    respond_with @purchase, location: api_purchase_url(@purchase)
+    @sale.update_attributes(accepted_params)
+    respond_with @sale, location: api_sale_url(@sale)
   end
 
   def destroy
-    @purchase.destroy
+    @sale.destroy
     head :ok
   end
 
   private
-  def find_purchase
-    @purchase = logged_user.purchases.find(params[:id])
+  def find_sale
+    @sale = logged_user.sales.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       error = { error: "Record could not be found or access not allowed." }
       respond_with(error, status: 404)
@@ -39,11 +39,11 @@ class Api::PurchasesController < Api::BaseController
     @customer = logged_user.customers.find(accepted_params[:customer_id])
     rescue ActiveRecord::RecordNotFound
       error = { error: "customer_id value does not belong to any Customer in your account."}
-      render json: error, status: 403, location: api_purchases_url
+      render json: error, status: 403, location: api_sales_url
   end
 
   def accepted_params
-    params.require(:purchase).permit(
+    params.require(:sale).permit(
       :amount, :customer, :customer_id,
       line_items_attributes: [:name, :color, :size, :cost, :price, :qty]
     )

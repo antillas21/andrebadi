@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130716001427) do
+ActiveRecord::Schema.define(version: 20130718003025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20130716001427) do
     t.integer  "qty",             default: 1
     t.string   "name"
     t.float    "item_sale_total"
-    t.integer  "purchase_id"
+    t.integer  "sale_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.string   "color"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20130716001427) do
   end
 
   add_index "line_items", ["name"], name: "index_purchase_items_on_name", using: :btree
-  add_index "line_items", ["purchase_id"], name: "index_purchase_items_on_purchase_id", using: :btree
+  add_index "line_items", ["sale_id"], name: "index_purchase_items_on_purchase_id", using: :btree
 
   create_table "transactions", force: true do |t|
     t.string   "type"

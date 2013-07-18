@@ -1,4 +1,4 @@
-class Purchase < Transaction
+class Sale < Transaction
   # attr_accessible :amount, :customer, :customer_id, :line_items_attributes, :line_items
   # relationships
   has_many :line_items, dependent: :destroy
@@ -23,7 +23,7 @@ class Purchase < Transaction
   end
 
   def update_customer_balance
-    new_balance = customer.total_purchases - customer.total_payments
+    new_balance = customer.total_sales - customer.total_payments
     customer.update_attribute(:balance, new_balance)
   end
 end

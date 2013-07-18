@@ -3,7 +3,7 @@ class LineItem < ActiveRecord::Base
 
   validates :name, :qty, :price, presence: true
 
-  belongs_to :purchase
+  belongs_to :sale
 
   before_save :calculate_sale_total
   before_save :calculate_cost_total

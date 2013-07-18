@@ -6,12 +6,12 @@ class Customer < ActiveRecord::Base
   validates :name, presence: true
 
   belongs_to :user
-  has_many :purchases, dependent: :destroy
+  has_many :sales, dependent: :destroy
   has_many :payments, dependent: :destroy
   has_many :transactions
 
-  def total_purchases
-    self.purchases.sum(:amount)
+  def total_sales
+    self.sales.sum(:amount)
   end
 
   def total_payments

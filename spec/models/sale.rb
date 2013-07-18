@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Purchase do
+describe Sale do
  describe 'relationships' do
     it { should belong_to :customer }
     it { should have_many :line_items }
@@ -13,47 +13,47 @@ describe Purchase do
 
   describe 'amount' do
     let(:item) { build(:coat) }
-    let(:purchase) { create(:purchase, line_items: [item]) }
+    let(:sale) { create(:sale, line_items: [item]) }
 
     it 'is auto-calculated with the sum of all line_items' do
-      # purchase = FactoryGirl.create(:purchase_and_items)
-      purchase.amount.should_not == 0
-      purchase.amount.should == 1200.0
+      # sale = FactoryGirl.create(:sale_and_items)
+      sale.amount.should_not == 0
+      sale.amount.should == 1200.0
     end
   end
 
   describe 'total_cost' do
     let(:item) { build(:coat, cost: 900, qty: 3) }
-    let(:purchase) { create(:purchase, line_items: [item]) }
+    let(:sale) { create(:sale, line_items: [item]) }
 
     it 'auto-calculates total cost based on the sum of all line items costs' do
-      purchase.cost.should_not == 0
-      purchase.cost.should eq 2700.0
+      sale.cost.should_not == 0
+      sale.cost.should eq 2700.0
     end
   end
 
-  describe 'deleting a purchase' do
-    let(:purchase) { create(:purchase) }
+  describe 'deleting a sale' do
+    let(:sale) { create(:sale) }
 
     it 'deletes associated line_items' do
-      item = build(:coat, purchase: purchase)
-      purchase.line_items << item
-      purchase.save
+      item = build(:coat, sale: sale)
+      sale.line_items << item
+      sale.save
 
       LineItem.count.should == 1
-      purchase.line_items.should include item
+      sale.line_items.should include item
 
-      expect{ purchase.destroy }.to change{ LineItem.count }.to(0)
+      expect{ sale.destroy }.to change{ LineItem.count }.to(0)
     end
   end
 
   describe 'role on customer balance' do
     let(:customer) { create(:customer) }
     let(:item) { build(:coat) }
-    let(:purchase) { build(:purchase, customer: customer, line_items: [item]) }
+    let(:sale) { build(:sale, customer: customer, line_items: [item]) }
 
     it 'updates customer balance' do
-      expect{ purchase.save }.to change{ customer.balance }
+      expect{ sale.save }.to change{ customer.balance }
     end
   end
 end

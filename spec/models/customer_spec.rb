@@ -6,21 +6,21 @@ describe Customer do
   end
 
   describe 'relationships' do
-    it { should have_many :purchases }
+    it { should have_many :sales }
     it { should have_many :payments }
 
     it { should belong_to :user }
   end
 
-  describe '#total_purchases' do
+  describe '#total_sales' do
     let(:customer) { create(:customer) }
 
-    it 'returns sum of purchase amounts' do
+    it 'returns sum of sale amounts' do
       2.times do
         item = build(:coat)
-        purchase = create(:purchase, customer: customer, line_items: [item])
+        sale = create(:sale, customer: customer, line_items: [item])
       end
-      customer.total_purchases.should == 2400.0
+      customer.total_sales.should == 2400.0
     end
   end
 
@@ -36,16 +36,16 @@ describe Customer do
   describe "#balance" do
     let(:customer) { create(:customer) }
 
-    it 'returns balance between purchases and payments' do
+    it 'returns balance between sales and payments' do
       2.times do
         item = build(:coat)
-        purchase = create(:purchase, customer: customer, line_items: [item])
+        sale = create(:sale, customer: customer, line_items: [item])
       end
       1.times { create(:payment, customer: customer) }
 
       customer.balance.should_not == 0
 
-      customer.balance.should == ( customer.total_purchases - customer.total_payments )
+      customer.balance.should == ( customer.total_sales - customer.total_payments )
     end
   end
 

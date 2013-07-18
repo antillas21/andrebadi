@@ -19,7 +19,7 @@ Customer.find_each do |customer|
     sweaters = rand(1..4)
     li = FactoryGirl.build(:coat, qty: coats)
     lo = FactoryGirl.build(:sweater, qty: sweaters)
-    customer.purchases.create(line_items: [li, lo])
+    customer.sales.create(line_items: [li, lo])
   end
 
   2.times do

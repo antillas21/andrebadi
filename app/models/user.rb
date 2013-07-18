@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   has_many :customers
   has_many :payments, through: :customers
-  has_many :purchases, through: :customers
+  has_many :sales, through: :customers
 
   before_save :ensure_authentication_token
 end
