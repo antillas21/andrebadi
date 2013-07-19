@@ -19,3 +19,7 @@
   App.addInitializer ->
     new SalesApp.Router
       controller: API
+
+  App.vent.on "sale:destroyed", (sale) ->
+    sale.destroy()
+    App.navigate( Routes.sales_path(), trigger: true )

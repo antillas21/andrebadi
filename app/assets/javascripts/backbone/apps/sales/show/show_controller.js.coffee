@@ -19,6 +19,15 @@
 
     actionsRegion: (sale) ->
       actionsView = @getActionsView sale
+
+      @listenTo actionsView, "sale:delete:clicked", =>
+        App.vent.trigger "sale:destroyed", sale
+
+      @listenTo actionsView, "edit:sale:clicked", =>
+        @layout.actionsRegion.close()
+        console.log "edit sale", sale
+        # @editPayment payment
+
       @layout.actionsRegion.show actionsView
 
     getSaleView: (sale) ->

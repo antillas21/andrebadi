@@ -9,3 +9,6 @@
     show: (view) ->
       @listenTo view, "close", @close
       @region.show view
+
+    onClose: ->
+      console.log "closing controller", @
