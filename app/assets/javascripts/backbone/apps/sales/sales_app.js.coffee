@@ -8,7 +8,7 @@
 
   API =
     listSales: ->
-      console.log "listing Sales"
+      new SalesApp.List.Controller
 
     showSale: (id) ->
       new SalesApp.Show.Controller id

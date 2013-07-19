@@ -1,0 +1,14 @@
+<td class="span8">
+  <div class="customer-data">
+    {{ customer.name }}
+  </div>
+  <div class="transaction-date">
+    {{ formattedDate created_at }}
+  </div>
+  <div class="actions">
+    <a href="/#/sales/{{ id }}" class="btn btn-link">View</a>
+  </div>
+</td>
+<td class="span4">
+  <div class="amount">{{ toCurrency amount }}</div>
+</td>
