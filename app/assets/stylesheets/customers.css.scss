@@ -71,4 +71,8 @@ and (max-width : 480px) {
   .btn {
     padding: 9px 7px 10px;
   }
+  .btn-group>.btn+.dropdown-toggle {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
