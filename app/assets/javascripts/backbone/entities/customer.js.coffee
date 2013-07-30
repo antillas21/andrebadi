@@ -4,10 +4,6 @@
     urlRoot: ->
       Routes.api_customers_path()
 
-    initialize: ->
-      editableFields = ['name', 'email', 'phone']
-      @editableFields = editableFields
-
   class Entities.CustomersCollection extends Backbone.QueryCollection
     url: ->
       Routes.api_customers_path()
@@ -22,16 +18,21 @@
         reset: true
       customers
 
-    fetchCustomer: (customerId, cb) ->
-      customer = new Entities.Customer id: customerId
-      customer.fetch
-        success: ->
-          cb customer
-
     getCustomer: (customerId) ->
       customer= new Entities.Customer id: customerId
       customer.fetch()
       customer
+
+    fetchCustomer: (customerId) ->
+      defer = $.Deferred()
+      customer = new Entities.Customer
+        id: customerId
+
+      customer.fetch
+        success: (data) ->
+          defer.resolve data
+
+      defer.promise()
 
     newCustomer: ->
       new Entities.Customer
@@ -39,8 +40,8 @@
   App.reqres.setHandler "customers:fetch", ->
     API.fetchCustomers()
 
-  App.reqres.setHandler "customer:fetch", (customerId, cb) ->
-    API.fetchCustomer(customerId, cb)
+  App.reqres.setHandler "customer:fetch", (customerId) ->
+    API.fetchCustomer customerId
 
   App.reqres.setHandler "customer:get", (customerId) ->
     API.getCustomer customerId

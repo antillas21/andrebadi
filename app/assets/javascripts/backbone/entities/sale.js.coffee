@@ -15,13 +15,16 @@
       -date.getTime()
 
   API =
-    fetchSale: (id, cb) ->
+    fetchSale: (id) ->
+      defer = $.Deferred()
       sale = new Entities.Sale
         id: id
 
       sale.fetch
-        success: ->
-          cb sale
+        success: (data) ->
+          defer.resolve sale
+
+      defer.promise()
 
     fetchSales: ->
       sales = new Entities.SalesCollection
@@ -30,8 +33,8 @@
 
       sales
 
-  App.reqres.setHandler "sale:fetch", (id, cb) ->
-    API.fetchSale id, cb
+  App.reqres.setHandler "sale:fetch", (id) ->
+    API.fetchSale id
 
   App.reqres.setHandler "sales:fetch", ->
     API.fetchSales()

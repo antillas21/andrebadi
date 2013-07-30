@@ -2,25 +2,24 @@
 
   class Show.Controller extends App.Controllers.Base
     initialize: (customerId) ->
-      App.request "customer:fetch", customerId, (customer) =>
+      fetchingCustomer = App.request 'customer:fetch', customerId
 
+      $.when(fetchingCustomer).done (customer) =>
+        console.log 'completed retrieving customer', customer
 
-        customer.on "updated", ->
-          App.vent.trigger "customer:updated", customer
+        customer.on 'updated', ->
+          App.vent.trigger 'customer:updated', customer
 
         transactions = @buildTransactions customer.attributes.transactions
 
         @layout = new Show.CustomerLayout
 
-        @listenTo @layout, "show", =>
+        @listenTo @layout, 'show', =>
           @panelRegion customer
           @customerRegion customer
           @transactionsRegion transactions
 
         @show @layout
-
-    onClose: ->
-      console.info "closing controller", @
 
     buildTransactions: (collection) ->
       transactions = new App.Entities.TransactionsCollection collection

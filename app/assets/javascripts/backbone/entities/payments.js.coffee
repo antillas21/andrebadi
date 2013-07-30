@@ -22,13 +22,16 @@
 
       payments
 
-    getPayment: (id, cb) ->
+    getPayment: (paymentId) ->
+      defer = $.Deferred()
       payment = new Entities.Payment
-        id: id
+        id: paymentId
 
       payment.fetch
-        success: ->
-          cb payment
+        success: (data) ->
+          defer.resolve data
+
+      defer.promise()
 
   App.reqres.setHandler "new:payment:entity", (customerId) ->
     new Entities.Payment
@@ -37,5 +40,5 @@
   App.reqres.setHandler "payments:fetch", ->
     API.fetchPayments()
 
-  App.reqres.setHandler "payment:fetch", (paymentId, cb) ->
-    API.getPayment paymentId, cb
+  App.reqres.setHandler "payment:fetch", (paymentId) ->
+    API.getPayment paymentId

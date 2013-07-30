@@ -2,22 +2,18 @@
 
   class Show.Controller extends App.Controllers.Base
     initialize: (id) ->
-      App.request "payment:fetch", id, (payment) =>
-        console.log payment
-
-        payment.on "updated", ->
-          App.vent.trigger "payment:updated", payment
+      fetchingPayment = App.request 'payment:fetch', id
+      $.when(fetchingPayment).done (payment) =>
+        payment.on 'updated', ->
+          App.vent.trigger 'payment:updated', payment
 
         @layout = @getLayout payment
 
-        @listenTo @layout, "show", =>
+        @listenTo @layout, 'show',  =>
           @paymentRegion payment
           @actionsRegion payment
 
         @show @layout
-
-    onClose: ->
-      console.log "closing controller", @
 
     getLayout: (payment) ->
       new Show.Layout

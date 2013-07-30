@@ -2,12 +2,11 @@
 
   class Show.Controller extends App.Controllers.Base
     initialize: (id) ->
-      App.request "sale:fetch", id, (sale) =>
-
-        window.sale = sale
+      fetchingSale = App.request 'sale:fetch', id
+      $.when(fetchingSale).done (sale) =>
         @layout = @getLayout sale
 
-        @listenTo @layout, "show", ->
+        @listenTo @layout, 'show', =>
           @saleRegion sale
           @actionsRegion sale
 
@@ -26,7 +25,6 @@
       @listenTo actionsView, "edit:sale:clicked", =>
         @layout.actionsRegion.close()
         console.log "edit sale", sale
-        # @editPayment payment
 
       @layout.actionsRegion.show actionsView
 
