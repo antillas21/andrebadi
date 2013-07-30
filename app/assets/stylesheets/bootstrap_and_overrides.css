@@ -13,3 +13,6 @@
 .row > div {
   margin-bottom: 0.5em;
 }
+.btn {
+  padding: 5px 7px;
+}

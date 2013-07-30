@@ -15,6 +15,8 @@
 //= require accounting.min
 //= require moment.min
 //= require twitter/bootstrap
+//= require flatui-checkbox
+//= require flatui-radio
 //= require lib/underscore
 //= require lib/json2
 //= require lib/backbone
