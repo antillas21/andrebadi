@@ -2,44 +2,49 @@
 
   class New.Controller extends App.Controllers.Base
     initialize: (options = {}) ->
-      App.navigate( Routes.new_sale_path() )
+      # App.navigate( Routes.new_sale_path() )
       { customer_id, customer } = options
 
-      console.log customer_id, customer
-
       sale = App.request "new:sale:entity", customer_id
-      console.log sale
+      sale.save()
 
-      @layout = @getLayout()
+      sale.on 'created', =>
+        App.vent.trigger 'sale:created', sale
 
-      @listenTo @layout, "show", =>
-        @headerRegion customer
-        @actionsRegion sale
-      #   @saleRegion sale
 
-      @show @layout
+    #   @layout = @getLayout()
 
-    getLayout: ->
-      new New.Layout
+    #   @listenTo @layout, "show", =>
+    #     @headerRegion customer
+    #     @actionsRegion sale
+    #   #   @saleRegion sale
 
-    headerRegion: (customer) ->
-      view = new New.Header
-        model: customer
-      @layout.headerRegion.show view
+    #   @show @layout
 
-    actionsRegion: (sale) ->
-      actionsView = @getActionsView sale
-      console.log actionsView
-      @layout.actionsRegion.show actionsView
+    # getLayout: ->
+    #   new New.Layout
 
-    saleRegion: (sale) ->
-      saleView = @getSaleView sale
-      @layout.saleRegion.show saleView
+    # headerRegion: (customer) ->
+    #   view = new New.Header
+    #     model: customer
+    #   @layout.headerRegion.show view
 
-    getSaleView: (sale) ->
-      new New.Sale
-        model: sale
+    # actionsRegion: (sale) ->
+    #   actionsView = @getActionsView sale
 
-    getActionsView: (sale) ->
-      new New.Actions
-        model: sale
+    #   actionsView.on 'save:sale', =>
+    #     sale.save()
+
+    #   @layout.actionsRegion.show actionsView
+
+    # saleRegion: (sale) ->
+    #   saleView = @getSaleView sale
+    #   @layout.saleRegion.show saleView
+
+    # getSaleView: (sale) ->
+    #   new New.Sale
+    #     model: sale
+
+    # getActionsView: (sale) ->
+    #   new New.Actions
+    #     model: sale

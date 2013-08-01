@@ -1,6 +1,6 @@
 @SaleTrackr.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
-  class Entities.Sale extends Backbone.Model
+  class Entities.Sale extends Entities.Model
     urlRoot: ->
       Routes.api_sales_path()
 
@@ -16,9 +16,8 @@
 
   API =
     newSale: (id, customer)->
-      sale = new Entities.Sale
+      new Entities.Sale
         customer_id: id
-      sale
 
     fetchSale: (id) ->
       defer = $.Deferred()
@@ -27,7 +26,7 @@
 
       sale.fetch
         success: (data) ->
-          defer.resolve sale
+          defer.resolve data
 
       defer.promise()
 
@@ -45,5 +44,4 @@
     API.fetchSales()
 
   App.reqres.setHandler "new:sale:entity", (customerId, customer) ->
-    console.log 'creating a Sale for Customer', customerId, customer
     API.newSale customerId, customer

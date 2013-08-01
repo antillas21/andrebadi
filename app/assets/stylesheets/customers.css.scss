@@ -75,4 +75,7 @@ and (max-width : 480px) {
     padding-left: 8px;
     padding-right: 8px;
   }
+  #panel-region .btn-group>.btn:first-child {
+    margin-left: -5px;
+  }
 }

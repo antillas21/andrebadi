@@ -11,6 +11,9 @@
   class New.Actions extends Marionette.ItemView
     template: 'sales/templates/new/actions'
 
+    triggers:
+      'click #save-sale' : 'save:sale'
+
   class New.Empty extends Marionette.ItemView
     template: 'sales/templates/new/empty'
     className: 'well'

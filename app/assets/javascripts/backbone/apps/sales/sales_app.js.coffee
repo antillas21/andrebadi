@@ -15,10 +15,10 @@
       new SalesApp.Show.Controller id
 
     editSale: (id) ->
-      console.log "editing Sale id: ", id
+      new SalesApp.Edit.Controller
+        id: id
 
     newSale: (id, customer) ->
-      console.log 'from SalesApp.Router via API.createSale', id, customer
       new SalesApp.New.Controller
         customer_id: id
         customer: customer
@@ -32,5 +32,10 @@
     App.navigate( Routes.sales_path(), trigger: true )
 
   App.vent.on "sale:new", (customerId, customer) ->
-    console.log 'should create a Sale for CustomerId', customerId, customer
     API.newSale customerId, customer
+
+  App.vent.on "sale:created", (sale) ->
+    API.editSale sale.id
+
+  App.vent.on "sale:updated", (sale) ->
+    API.showSale sale.id
