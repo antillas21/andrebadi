@@ -4,6 +4,7 @@
     template: 'sales/templates/new/layout'
 
     regions:
+      headerRegion: '#header'
       saleRegion: '#sale'
       actionsRegion: '#actions'
 
@@ -17,6 +18,9 @@
   class New.ListItem extends Marionette.ItemView
     tagName: 'tr'
     template: 'sales/templates/new/list_item'
+
+  class New.Header extends Marionette.ItemView
+    template: 'sales/templates/new/header'
 
   class New.Sale extends Marionette.CompositeView
     tagName: 'table'

@@ -35,7 +35,7 @@
         @editCustomer customer
 
       @listenTo view, "add:purchase:button:clicked", =>
-        App.request "add:purchase:form:view", customer.id
+        App.vent.trigger "sale:new", customer.id, customer
 
       @listenTo view, "add:payment:button:clicked", =>
         payment = App.request "new:payment:entity", customer.id

@@ -15,6 +15,11 @@
       -date.getTime()
 
   API =
+    newSale: (id, customer)->
+      sale = new Entities.Sale
+        customer_id: id
+      sale
+
     fetchSale: (id) ->
       defer = $.Deferred()
       sale = new Entities.Sale
@@ -38,3 +43,7 @@
 
   App.reqres.setHandler "sales:fetch", ->
     API.fetchSales()
+
+  App.reqres.setHandler "new:sale:entity", (customerId, customer) ->
+    console.log 'creating a Sale for Customer', customerId, customer
+    API.newSale customerId, customer

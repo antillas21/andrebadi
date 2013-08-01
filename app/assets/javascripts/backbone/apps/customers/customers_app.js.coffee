@@ -34,12 +34,6 @@
     API.editCustomer
       customer: customer
 
-  App.reqres.setHandler "add:purchase:form:view", (customerId) ->
-    console.log 'catched call to purchase form for customer with id ' + customerId
-
-  # App.reqres.setHandler "add:payment:form:view", (customerId) ->
-  #   console.log 'catched call to payment form for customer with id ' + customerId
-
   App.vent.on "customer:cancel customer:updated payment:cancel payment:created", (customer) ->
     API.showCustomer customer.id
 

@@ -3,21 +3,29 @@
   class New.Controller extends App.Controllers.Base
     initialize: (options = {}) ->
       App.navigate( Routes.new_sale_path() )
-      { customer_id } = options
+      { customer_id, customer } = options
+
+      console.log customer_id, customer
 
       sale = App.request "new:sale:entity", customer_id
       console.log sale
 
       @layout = @getLayout()
 
-      @listenTo @layout, "show", ->
+      @listenTo @layout, "show", =>
+        @headerRegion customer
         @actionsRegion sale
-        @saleRegion sale
+      #   @saleRegion sale
 
       @show @layout
 
     getLayout: ->
       new New.Layout
+
+    headerRegion: (customer) ->
+      view = new New.Header
+        model: customer
+      @layout.headerRegion.show view
 
     actionsRegion: (sale) ->
       actionsView = @getActionsView sale
