@@ -7,6 +7,8 @@ class LineItem < ActiveRecord::Base
 
   before_save :calculate_sale_total
   before_save :calculate_cost_total
+  after_save :update_sale
+  after_destroy :update_sale
 
   def calculate_sale_total
     self.item_sale_total = self.qty * self.price
@@ -14,5 +16,9 @@ class LineItem < ActiveRecord::Base
 
   def calculate_cost_total
     self.item_cost_total = self.qty * self.cost
+  end
+
+  def update_sale
+    self.sale.save
   end
 end
