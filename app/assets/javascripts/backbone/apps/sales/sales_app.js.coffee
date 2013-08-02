@@ -4,7 +4,6 @@
     appRoutes:
       "sales"           : "listSales"
       "sales/:id"       : "showSale"
-      "sales/:id/edit"  : "editSale"
       "sales/new"       : 'newSale'
 
   API =
@@ -13,10 +12,6 @@
 
     showSale: (id) ->
       new SalesApp.Show.Controller id
-
-    editSale: (id) ->
-      new SalesApp.Edit.Controller
-        id: id
 
     newSale: (id, customer) ->
       new SalesApp.New.Controller
