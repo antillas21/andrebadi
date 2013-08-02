@@ -10,32 +10,13 @@
       <th class="currency">Totals</th>
     </thead>
     <tbody>
-      {{#each line_items }}
-        <tr>
-          <td class="span9">
-            <div class="hidden-desktop">
-              <div>{{ name }}</div>
-              <div><small>Qty: {{ qty }}</small></div>
-              <div><small>Color: {{ color }}</small></div>
-              <div><small>Size: {{ size }}</small></div>
-              <div><small>Unit price: {{ toCurrency price }}</small></div>
-            </div>
-            <div class="visible-desktop">
-              <div class="">{{ name }}</div>
-              <div class="span2"><small>Qty: {{ qty }}</small></div>
-              <div class="span2"><small>Color: {{ color }}</small></div>
-              <div class="span2"><small>Size: {{ size }}</small></div>
-              <div class="span3"><small>Unit price: {{ toCurrency price }}</small></div>
-            </div>
-          </td>
-          <td class="currency span3">{{ toCurrency item_sale_total }}</td>
-        </tr>
-      {{/each}}
-      <tr>
-        <td class="span6 currency">Sale Total</td>
-        <td class="span3 amount currency">{{ toCurrency amount }}</td>
-      </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td class="span6 currency"><strong>Sale Total</strong></td>
+        <td class="span3 amount currency"><strong>{{ toCurrency amount }}</strong></td>
+      </tr>
+    </tfoot>
   </table>
 </div>
 

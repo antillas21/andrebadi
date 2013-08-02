@@ -57,6 +57,9 @@ td.currency, .payment-date {
 @media only screen
 and (max-width : 480px) {
 /* Styles */
+  .btn {
+    padding: 7px 10px 7px;
+  }
   .dropdown-menu {
     background: #fff;
     position: absolute;

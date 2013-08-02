@@ -5,15 +5,18 @@
       fetchingSale = App.request 'sale:fetch', id
       $.when(fetchingSale).done (sale) =>
         @layout = @getLayout sale
+        @line_items = new App.Entities.LineItems sale.attributes.line_items
 
         @listenTo @layout, 'show', =>
-          @saleRegion sale
+          @saleRegion sale, @line_items
           @actionsRegion sale
 
         @show @layout
 
-    saleRegion: (sale) ->
-      saleView = @getSaleView sale
+    saleRegion: (sale, items) ->
+      saleView = @getSaleView sale, items
+      console.log saleView
+
       @layout.saleRegion.show saleView
 
     actionsRegion: (sale) ->
@@ -22,15 +25,16 @@
       @listenTo actionsView, "sale:delete:clicked", =>
         App.vent.trigger "sale:destroyed", sale
 
-      @listenTo actionsView, "edit:sale:clicked", =>
-        @layout.actionsRegion.close()
-        console.log "edit sale", sale
+      @listenTo actionsView, "add:item:clicked", =>
+        # @layout.actionsRegion.close()
+        console.log "add item to sale", sale
 
       @layout.actionsRegion.show actionsView
 
-    getSaleView: (sale) ->
+    getSaleView: (sale, items) ->
       new Show.Sale
         model: sale
+        collection: items
 
     getActionsView: (sale) ->
       new Show.Actions

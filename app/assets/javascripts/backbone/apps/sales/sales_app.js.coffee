@@ -35,7 +35,7 @@
     API.newSale customerId, customer
 
   App.vent.on "sale:created", (sale) ->
-    API.editSale sale.id
+    API.showSale sale.id
 
   App.vent.on "sale:updated", (sale) ->
     API.showSale sale.id
