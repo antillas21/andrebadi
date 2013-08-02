@@ -7,5 +7,6 @@ describe User do
 
   describe 'relationships' do
     it { should have_many :customers }
+    it { should have_one :account_setting }
   end
 end
