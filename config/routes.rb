@@ -10,10 +10,10 @@ SaleTrackr::Application.routes.draw do
   resources :sales
 
   namespace :api do
-
     resources :customers
     resources :payments
     resources :sales
+    resources :line_items
   end
 
   # post '/api/registration' => 'api/registrations#create'

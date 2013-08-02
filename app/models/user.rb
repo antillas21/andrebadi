@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :customers
   has_many :payments, through: :customers
   has_many :sales, through: :customers
+  has_many :line_items, through: :sales
 
   before_save :ensure_authentication_token
 end

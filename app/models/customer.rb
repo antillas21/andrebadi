@@ -10,6 +10,8 @@ class Customer < ActiveRecord::Base
   has_many :payments, dependent: :destroy
   has_many :transactions
 
+  has_many :line_items, through: :sales
+
   def total_sales
     self.sales.sum(:amount)
   end
