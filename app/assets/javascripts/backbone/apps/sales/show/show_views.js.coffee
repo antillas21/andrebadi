@@ -4,6 +4,9 @@
     tagName: 'tr'
     template: 'sales/templates/show/line_item'
 
+    triggers:
+      'click a.destroy-link' : 'item:remove'
+
   class Show.Empty extends Marionette.ItemView
     tagName: 'tr'
     template: 'sales/templates/show/empty'

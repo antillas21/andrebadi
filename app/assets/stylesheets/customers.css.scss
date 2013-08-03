@@ -53,6 +53,12 @@ td.currency, .payment-date, .currency {
 .monotype {
   font-family: 'Share Tech Mono', sans-serif;
 }
+.destroy {
+  margin-top: 1em;
+}
+.destroy-link {
+  color: red;
+}
 
 @media only screen
 and (max-width : 480px) {

@@ -22,7 +22,7 @@
       @saleLayout = new Show.SaleLayout
 
       @listenTo @saleLayout, 'show', =>
-        @renderItems items
+        @renderItems items, sale
         @renderTotals sale
 
       @layout.saleRegion.show @saleLayout
@@ -38,9 +38,14 @@
 
       @layout.actionsRegion.show actionsView
 
-    renderItems: (items) ->
+    renderItems: (items, sale) ->
       lineItemsView = new Show.SaleItems
         collection: items
+
+      lineItemsView.on 'itemview:item:remove', (childview, model) =>
+        @line_items.remove childview.model
+        childview.model.destroy()
+        App.vent.trigger 'update:sale:totals', sale
 
       @saleLayout.itemsRegion.show lineItemsView
 
