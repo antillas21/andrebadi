@@ -34,3 +34,7 @@
 
   App.vent.on "sale:updated", (sale) ->
     API.showSale sale.id
+
+  App.vent.on "update:sale:totals", (sale) ->
+    console.log 'we triggered update:sale:totals for ', sale
+    sale.fetch

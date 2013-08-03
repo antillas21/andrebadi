@@ -2,10 +2,15 @@
 
   class Show.Controller extends App.Controllers.Base
     initialize: (id) ->
+      App.navigate( Routes.sale_path id )
       fetchingSale = App.request 'sale:fetch', id
       $.when(fetchingSale).done (sale) =>
         @layout = @getLayout sale
         @line_items = new App.Entities.LineItems sale.attributes.line_items
+
+        @listenTo @line_items, 'add', ->
+          console.log 'we should have triggered rendering totalsView'
+          App.vent.trigger 'update:sale:totals', sale
 
         @listenTo @layout, 'show', =>
           @saleRegion sale, @line_items
@@ -14,10 +19,13 @@
         @show @layout
 
     saleRegion: (sale, items) ->
-      saleView = @getSaleView sale, items
-      console.log saleView
+      @saleLayout = new Show.SaleLayout
 
-      @layout.saleRegion.show saleView
+      @listenTo @saleLayout, 'show', =>
+        @renderItems items
+        @renderTotals sale
+
+      @layout.saleRegion.show @saleLayout
 
     actionsRegion: (sale) ->
       actionsView = @getActionsView sale
@@ -26,10 +34,26 @@
         App.vent.trigger "sale:destroyed", sale
 
       @listenTo actionsView, "add:item:clicked", =>
-        # @layout.actionsRegion.close()
-        console.log "add item to sale", sale
+        @newItemRegion sale, @line_items
 
       @layout.actionsRegion.show actionsView
+
+    renderItems: (items) ->
+      lineItemsView = new Show.SaleItems
+        collection: items
+
+      @saleLayout.itemsRegion.show lineItemsView
+
+    renderTotals: (sale) ->
+      totalsView = new Show.SaleTotals
+        model: sale
+
+      totalsView.listenTo App.vent, 'update:sale:totals', =>
+        sale.fetch()
+        console.log 'catching from totalsView instance', @, sale, totalsView
+
+      @saleLayout.totalsRegion.show totalsView
+
 
     getSaleView: (sale, items) ->
       new Show.Sale
@@ -43,3 +67,20 @@
     getLayout: (sale) ->
       new Show.Layout
         model: sale
+
+    newItemRegion: (sale, items) ->
+      lineItem = App.request 'new:item:entity', sale.id
+
+      newView = App.request "new:item:form:view", lineItem, @line_items
+      formView = App.request "form:wrapper", newView
+
+      @listenTo lineItem, "created", =>
+        App.vent.trigger "item:created", lineItem, @line_items
+        newView.close()
+        @layout.newItemRegion.close()
+
+      @listenTo newView, "form:cancel", =>
+        newView.close()
+        @layout.newItemRegion.close()
+
+      @layout.newItemRegion.show formView
