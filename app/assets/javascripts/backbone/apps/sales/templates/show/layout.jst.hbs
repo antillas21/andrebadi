@@ -2,7 +2,7 @@
   <div class="span12">
     <h3>INVOICE #{{ uid }}</h3>
   </div>
-  <div class="span7">Bill to: <strong>{{ customer.name }}</strong></div>
+  <div class="span7">Bill to: <strong><a href="/#/customers/{{ customer.id }}">{{ customer.name }}</a></strong></div>
   <div class="span4">Date: {{ formattedDateOnly created_at }}</div>
   <div class="clearfix"></div>
 </div>

@@ -9,7 +9,7 @@ Handlebars.registerHelper 'toCurrency', (amount) ->
       zero: "%s %v"
 
 Handlebars.registerHelper 'formattedDate', (date) ->
-  moment(date).format('MMM D, YYYY • h:mm a')
+  moment(date).format('MMM D, YYYY • H:mm')
 
 Handlebars.registerHelper 'formattedDateOnly', (date) ->
   moment(date).format('MMM D, YYYY')
