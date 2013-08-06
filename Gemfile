@@ -41,6 +41,7 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'jquery-rails'
 gem 'devise', '3.0.0'
+gem 'breach-mitigation-rails'
 
 group :development do
   gem 'quiet_assets'
