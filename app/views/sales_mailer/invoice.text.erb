@@ -1,12 +1,13 @@
-Your most recent purchase with us:
+-----------------------------------------------------------------------
+                   I N V O I C E  #<%= @sale.uid %>
 -----------------------------------------------------------------------
 
-INVOICE #<%= @sale.uid %>
 Bill to: <%= @customer.name %>
 Date: <%= @sale.created_at %>
 
-Items:
 
+
+Items:
 <% @sale.line_items.each do |item| %>
 
 <%= item.qty %> <%= item.name %>

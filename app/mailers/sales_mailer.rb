@@ -6,11 +6,11 @@ class SalesMailer < ActionMailer::Base
   #
   #   en.sales.invoice.subject
   #
-  def invoice( sale, customer )
+  def invoice( sale, customer, store_owner )
     @sale = sale
     @customer = customer
 
-    mail( to: "#{@customer.name} <#{@customer.email}>", from: "user@example.com",
+    mail( to: "#{@customer.name} <#{@customer.email}>", from: store_owner.email,
           subject: 'Your purchase with Lizbeth Ojeda' )
   end
 end

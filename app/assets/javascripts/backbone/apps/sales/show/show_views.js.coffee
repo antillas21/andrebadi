@@ -49,6 +49,13 @@
       "click #edit-sale"    : "edit:sale:clicked"
       "click #add-item"     : "add:item:clicked"
 
+    events:
+      "click #email-sale" : "emailInvoice"
+
+    emailInvoice: (e) ->
+      e.preventDefault()
+      @model.send_by_email()
+
   class Show.Layout extends Marionette.Layout
     template: 'sales/templates/show/layout'
 

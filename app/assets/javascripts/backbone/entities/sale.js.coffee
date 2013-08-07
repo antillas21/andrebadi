@@ -4,6 +4,17 @@
     urlRoot: ->
       Routes.api_sales_path()
 
+    send_by_email: (opts = {}) ->
+      model = @
+      url = model.url() + '/email'
+      options =
+        url: url
+        type: 'POST'
+
+      _.extend options, opts
+
+      (@.sync || Backbone.sync).call @, null, @, options
+
   class Entities.SalesCollection extends Backbone.QueryCollection
     url: ->
       Routes.api_sales_path()
