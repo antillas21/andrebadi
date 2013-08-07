@@ -1,5 +1,7 @@
 <div class="form-actions">
-  <a href="#" id="email-sale" class="btn btn-inverse"><i class="icon-envelope"></i> Email</a>
+  {{#if customer.email}}
+    <a href="#" id="email-sale" class="btn btn-inverse"><i class="icon-envelope"></i> Email</a>
+  {{/if}}
   <a href="#" class="btn btn-primary" id="add-item"><i class="icon-plus-sign"></i> Item</a>
 
 
