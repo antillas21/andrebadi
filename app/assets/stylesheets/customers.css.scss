@@ -59,6 +59,9 @@ td.currency, .payment-date, .currency {
 .destroy-link {
   color: red;
 }
+#messages {
+  margin: 1em 0;
+}
 
 @media only screen
 and (max-width : 480px) {

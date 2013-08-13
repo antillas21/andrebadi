@@ -55,6 +55,10 @@
     emailInvoice: (e) ->
       e.preventDefault()
       @model.send_by_email()
+      @displayEmailSentMessage()
+
+    displayEmailSentMessage: ->
+      @trigger "email:sent", @model
 
   class Show.Layout extends Marionette.Layout
     template: 'sales/templates/show/layout'
@@ -70,4 +74,8 @@
     regions:
       itemsRegion: '#line-items'
       totalsRegion: '#totals'
+      messagesRegion: '#messages'
 
+  class Show.Messages extends Marionette.ItemView
+    template: 'sales/templates/show/messages'
+    className: 'flash-message'

@@ -30,8 +30,8 @@ class Api::SalesController < Api::BaseController
   def send_by_email
     # @sale.email_to_owner!
     SalesMailer.invoice( @sale, @sale.customer, logged_user ).deliver
-    message = { message: "We need to implement a send by email method in the model now."}
-    respond_with message.to_json, location: email_api_sale_url(@sale), status: 200
+    message = { message: "Successfully sent Sale Invoice to Customer"}
+    respond_with message.to_json, location: api_sale_url(@sale), status: 200
   end
 
   private

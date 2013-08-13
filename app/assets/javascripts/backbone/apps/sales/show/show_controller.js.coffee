@@ -36,6 +36,10 @@
       @listenTo actionsView, "add:item:clicked", =>
         @newItemRegion sale, @line_items
 
+      @listenTo actionsView, "email:sent", (sale) =>
+        view = new Show.Messages
+        @saleLayout.messagesRegion.show view
+
       @layout.actionsRegion.show actionsView
 
     renderItems: (items, sale) ->
