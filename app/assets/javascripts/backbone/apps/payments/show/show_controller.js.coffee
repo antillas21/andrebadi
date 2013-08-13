@@ -34,6 +34,10 @@
         @layout.actionsRegion.close()
         @editPayment payment
 
+      @listenTo actionsView, "email:sent", (payment) =>
+        view = new Show.Message
+        @layout.messagesRegion.show view
+
       @layout.actionsRegion.show actionsView
 
     getPaymentView: (payment) ->
