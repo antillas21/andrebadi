@@ -26,4 +26,8 @@ class Sale < Transaction
     new_balance = customer.total_sales - customer.total_payments
     customer.update_attribute(:balance, new_balance)
   end
+
+  def email_to_owner!
+    SalesMailer.invoice(self, self.customer).deliver
+  end
 end

@@ -1,0 +1,24 @@
+-----------------------------------------------------------------------
+                   I N V O I C E  #<%= @sale.uid %>
+-----------------------------------------------------------------------
+
+Bill to: <%= @customer.name %>
+Date: <%= @sale.created_at.strftime("%b %d, %Y") %>
+
+
+
+Items:
+<% @sale.line_items.each do |item| %>
+
+<%= item.qty %> <%= item.name %>
+************************************************************  <%= number_to_currency item.item_sale_total %>
+Color: <%= item.color %> / Size: <%= item.size %> / Unit price: <%= number_to_currency item.price %>
+
+<% end %>
+
+
+-----------------------------------------------------------------------
+                                                 Sale Total: <%= number_to_currency @sale.amount %>
+-----------------------------------------------------------------------
+
+<%= @sale.amount.to_i * 100 %>||<%= @customer.uid %>||<%= @sale.uid %>

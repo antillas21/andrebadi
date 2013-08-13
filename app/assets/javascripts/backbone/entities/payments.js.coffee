@@ -4,6 +4,17 @@
     urlRoot: ->
       Routes.api_payments_path()
 
+    send_by_email: (opts = {}) ->
+      model = @
+      url = model.url() + '/email'
+      options =
+        url: url
+        type: 'POST'
+
+      _.extend options, opts
+
+      (@.sync || Backbone.sync).call @, null, @, options
+
   class Entities.PaymentsCollection extends Backbone.QueryCollection
     url: ->
       Routes.api_payments_path()

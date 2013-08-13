@@ -1,5 +1,5 @@
 class Api::SalesController < Api::BaseController
-  before_filter :find_sale, only: [:show, :update, :destroy]
+  before_filter :find_sale, only: [:show, :update, :destroy, :send_by_email]
   before_filter :find_customer, only: [:create]
 
   def index
@@ -25,6 +25,12 @@ class Api::SalesController < Api::BaseController
   def destroy
     @sale.destroy
     head :ok
+  end
+
+  def send_by_email
+    TransactionMailer.invoice( @sale, @sale.customer, logged_user ).deliver
+    message = { message: "Successfully sent Sale Invoice to Customer"}
+    respond_with message.to_json, location: api_sale_url(@sale), status: 200
   end
 
   private
