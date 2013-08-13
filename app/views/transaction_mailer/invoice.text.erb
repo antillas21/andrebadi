@@ -3,7 +3,7 @@
 -----------------------------------------------------------------------
 
 Bill to: <%= @customer.name %>
-Date: <%= @sale.created_at %>
+Date: <%= @sale.created_at.strftime("%b %d, %Y") %>
 
 
 

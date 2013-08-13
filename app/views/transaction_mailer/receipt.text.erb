@@ -1,0 +1,12 @@
+-----------------------------------------------------------------------
+              P A Y M E N T   R E C E I P T  #<%= @payment.uid %>
+-----------------------------------------------------------------------
+
+Received from: <%= @customer.name %>
+Amount: <%= number_to_currency @payment.amount %>
+Date: <%= @payment.created_at.strftime("%b %d, %Y") %>
+
+As partial payment on account balance.
+
+-----------------------------------------------------------------------
+<%= @payment.amount.to_i * 100 %>||<%= @customer.uid %>||<%= @payment.uid %>

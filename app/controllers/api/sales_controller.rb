@@ -28,8 +28,7 @@ class Api::SalesController < Api::BaseController
   end
 
   def send_by_email
-    # @sale.email_to_owner!
-    SalesMailer.invoice( @sale, @sale.customer, logged_user ).deliver
+    TransactionMailer.invoice( @sale, @sale.customer, logged_user ).deliver
     message = { message: "Successfully sent Sale Invoice to Customer"}
     respond_with message.to_json, location: api_sale_url(@sale), status: 200
   end

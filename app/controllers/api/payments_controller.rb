@@ -1,5 +1,5 @@
 class Api::PaymentsController < Api::BaseController
-  before_filter :find_payment, only: [:show, :update, :destroy]
+  before_filter :find_payment, only: [:show, :update, :destroy, :send_by_email]
   before_filter :find_customer, only: [:create]
 
   def index
@@ -25,6 +25,12 @@ class Api::PaymentsController < Api::BaseController
   def destroy
     @payment.destroy
     head :ok
+  end
+
+  def send_by_email
+   TransactionMailer.receipt( @payment, @payment.customer, logged_user ).deliver
+    message = { message: "Successfully sent Payment Receipt to Customer"}
+    respond_with message.to_json, location: api_payment_url(@payment), status: 200
   end
 
   private
