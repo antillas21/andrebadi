@@ -3,6 +3,7 @@ ruby "2.0.0"
 
 gem 'rails', '4.0.0'
 gem 'rack-cache'
+gem 'rack-cors', :require => 'rack/cors'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

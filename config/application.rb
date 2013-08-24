@@ -70,6 +70,14 @@ module SaleTrackr
     # Version of your assets, change this if you want to expire all your assets
     # config.assets.version = '1.0'
 
+    # enabling CORS for cross-domain requests
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+
     # test suite config
     config.generators do |g|
       g.test_framework :rspec,
