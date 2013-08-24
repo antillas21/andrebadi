@@ -15,7 +15,8 @@ class LineItem < ActiveRecord::Base
   end
 
   def calculate_cost_total
-    self.item_cost_total = self.qty * self.cost
+    item_cost = self.cost || 0
+    self.item_cost_total = self.qty * item_cost
   end
 
   def update_sale

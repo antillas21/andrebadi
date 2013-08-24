@@ -18,7 +18,7 @@ class Sale < Transaction
 
   def calculate_cost
     items_array = line_items.collect{ |item| [item.qty, item.cost] }
-    total = items_array.inject(0){ |sum, item| sum + (item[0] * item[1]) }
+    total = items_array.inject(0){ |sum, item| sum + (item[0] * (item[1] || 0)) }
     self.cost = total
   end
 
