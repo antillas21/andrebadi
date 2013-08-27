@@ -78,6 +78,8 @@ module SaleTrackr
       end
     end
 
+    config.middleware.insert_before Warden::Manager, Rack::Cors
+
     # test suite config
     config.generators do |g|
       g.test_framework :rspec,
