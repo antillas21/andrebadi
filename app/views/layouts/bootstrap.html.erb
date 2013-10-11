@@ -52,10 +52,10 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <% if current_user %>
-                <li><%= link_to 'Dashboard', '/#/dashboard' %></li>
-                <li><%= link_to 'Customers', '/#/customers' %></li>
-                <li><%= link_to 'Sales', '/#/sales' %></li>
-                <li><%= link_to 'Payments', '/#/payments' %></li>
+                <li><%= link_to 'Dashboard', '/dashboard' %></li>
+                <li><%= link_to 'Customers', customers_path %></li>
+                <li><%= link_to 'Sales', sales_path %></li>
+                <li><%= link_to 'Payments', payments_path %></li>
                 <li><%= link_to 'My Account', edit_user_registration_path %></li>
                 <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
               <% else %>

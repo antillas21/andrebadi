@@ -1,0 +1,81 @@
+<div id="header row">
+  <div class="span12">
+    <h3>INVOICE #{{ uid }}</h3>
+  </div>
+  <div class="span7">Bill to: <strong><a href="/#/customers/{{ customer.id }}">{{ customer.name }}</a></strong></div>
+  <div class="span4">Date: {{ formattedDateOnly created_at }}</div>
+  <div class="clearfix"></div>
+</div>
+
+<div id="sale">
+  <div class="sale-details" id="line-items">
+    <table class="table table-striped">
+      <thead>
+        <th>Items</th>
+        <th class="currency">Totals</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="2">
+            Click below to add items to this Sale.
+          </td>
+        </tr>
+        <tr>
+          <td class="span9">
+            <div class="hidden-desktop">
+              <div>{{ name }}</div>
+              <div><small>Qty: {{ qty }}</small></div>
+              <div><small>Color: {{ color }}</small></div>
+              <div><small>Size: {{ size }}</small></div>
+              <div><small>Unit price: {{ toCurrency price }}</small></div>
+            </div>
+            <div class="visible-desktop">
+              <div class="">{{ name }}</div>
+              <div class="span2"><small>Qty: {{ qty }}</small></div>
+              <div class="span2"><small>Color: {{ color }}</small></div>
+              <div class="span2"><small>Size: {{ size }}</small></div>
+              <div class="span3"><small>Unit price: {{ toCurrency price }}</small></div>
+            </div>
+            <div class="actions">
+              <a href="#" class="destroy-link"><i class="icon-remove-circle"></i> Remove</a>
+            </div>
+          </td>
+          <td class="currency span3">{{ toCurrency item_sale_total }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="totals" class="sale-footer">
+    <div class="currency well"><strong>Sale Total {{ toCurrency amount }}</strong></div>
+    <hr />
+    <div class="monotype">{{ toCents amount }}||{{ customer.uid }}||{{ uid }}</div>
+  </div>
+
+  <div id="messages">
+    <div class="flash alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      Invoice has been queued for delivery.
+    </div>
+  </div>
+</div>
+
+<div id="new-item"></div>
+
+<div id="actions">
+  <div class="form-actions">
+    {{#if customer.email}}
+      <a href="#" id="email-sale" class="btn btn-inverse"><i class="icon-envelope"></i> Email</a>
+    {{/if}}
+    <a href="#" class="btn btn-primary" id="add-item"><i class="icon-plus-sign"></i> Item</a>
+
+    <div class="btn-group">
+      <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
+        <i class="icon icon-remove-sign"></i> Delete
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#" id="delete-sale">Yes, Delete</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

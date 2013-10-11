@@ -1,0 +1,41 @@
+<div id="panel">
+  <div class="row">
+    <form class="form-search span12">
+      <div class="input-append">
+        <input type="text" class="span2 search-query input-large" name="query" id="query" />
+        <button type="submit" class="btn" id="search"><i class="icon icon-search"></i> </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="sales">
+  <table>
+    <thead>
+      <tr>
+        <th>Sales</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>No Sales found.</td>
+      </tr>
+      <tr>
+        <td class="span8">
+          <div class="customer-data">
+            {{ customer.name }}
+          </div>
+          <div class="transaction-date">
+            {{ formattedDate created_at }}
+          </div>
+          <div class="actions">
+            <a href="/#/sales/{{ id }}"><i class="icon-eye-open"></i> View</a>
+          </div>
+        </td>
+        <td class="span4">
+          <div class="amount">{{ toCurrency amount }}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

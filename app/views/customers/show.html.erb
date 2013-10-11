@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="span12">
+
+    <div id="panel-region" class="extra-margin">
+      <div class="btn-group">
+        <a href="#" class="btn" id="edit-customer">Edit</a>
+        <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+          <i class="icon icon-plus-sign"></i> Transactions
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" id="add-purchase">Add Purchase</a></li>
+          <li><a href="#" id="add-payment">Add Payment</a></li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
+          <i class="icon icon-remove-sign"></i> Delete
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" id="delete-customer">Yes, Delete</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="actions-region" class=""></div>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <div id="customer-region" class="well">
+      <div itemscope="" itemtype="http://schema.org/Person">
+        <div class="row">
+          <div class="span5">
+            <h2><span itemprop="name">{{ name }}</span></h2>
+          </div>
+          <div class="span5">
+            <p>
+              <strong>Balance: {{ toCurrency balance }}</strong>
+            </p>
+            <p>
+              <span itemprop="email">
+                <i class="icon-envelope-alt"></i> <a href="mailto:{{ email }}">{{ email }}</a>
+              </span>
+            </p>
+            <p>
+              <span itemprop="telephone">
+                <i class="icon-phone-sign"></i> <a href="tel:{{ phone }}">{{ phone }}</a>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="transactions-region" class="span12">
+    <h4>Transactions</h4>
+
+    <table class="table table-striped" id="transaction-list">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <td class="span8">
+          <div class="transaction-type">{{ type }}</div>
+          <div class="transaction-date">{{ formattedDate created_at }}</div>
+          <div class="actions">
+            <a href="/#/{{ downcasePluralize type }}/{{ id }}" class=""><i class="icon-eye-open"></i> View</a>
+          </div>
+        </td>
+        <td class="span4">
+          <div class="amount">{{ toCurrency amount }}</div>
+        </td>
+      </tbody>
+    </table>
+  </div>
+</div>

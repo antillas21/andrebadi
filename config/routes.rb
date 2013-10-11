@@ -8,6 +8,7 @@ SaleTrackr::Application.routes.draw do
   resources :customers
   resources :payments
   resources :sales
+  resources :line_items
 
   namespace :api do
     resources :customers
@@ -87,7 +88,7 @@ SaleTrackr::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'welcome#index'
-  get '*path' => 'welcome#index'
+  # get '*path' => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
