@@ -1,9 +1,12 @@
 <div id="header row">
   <div class="span12">
-    <h3>INVOICE #{{ uid }}</h3>
+    <h3>INVOICE #<%= @sale.uid %></h3>
   </div>
-  <div class="span7">Bill to: <strong><a href="/#/customers/{{ customer.id }}">{{ customer.name }}</a></strong></div>
-  <div class="span4">Date: {{ formattedDateOnly created_at }}</div>
+  <div class="span7">Bill to: <strong>
+      <%= link_to @customer.name, customer_path(@customer) %>
+    </strong>
+  </div>
+  <div class="span4">Date: <%= @sale.created_at.strftime('%Y-%m-%d') %></div>
   <div class="clearfix"></div>
 </div>
 
@@ -15,48 +18,75 @@
         <th class="currency">Totals</th>
       </thead>
       <tbody>
-        <tr>
-          <td colspan="2">
-            Click below to add items to this Sale.
-          </td>
-        </tr>
-        <tr>
-          <td class="span9">
-            <div class="hidden-desktop">
-              <div>{{ name }}</div>
-              <div><small>Qty: {{ qty }}</small></div>
-              <div><small>Color: {{ color }}</small></div>
-              <div><small>Size: {{ size }}</small></div>
-              <div><small>Unit price: {{ toCurrency price }}</small></div>
-            </div>
-            <div class="visible-desktop">
-              <div class="">{{ name }}</div>
-              <div class="span2"><small>Qty: {{ qty }}</small></div>
-              <div class="span2"><small>Color: {{ color }}</small></div>
-              <div class="span2"><small>Size: {{ size }}</small></div>
-              <div class="span3"><small>Unit price: {{ toCurrency price }}</small></div>
-            </div>
-            <div class="actions">
-              <a href="#" class="destroy-link"><i class="icon-remove-circle"></i> Remove</a>
-            </div>
-          </td>
-          <td class="currency span3">{{ toCurrency item_sale_total }}</td>
-        </tr>
+        <% unless @sale.line_items.any? %>
+          <tr>
+            <td colspan="2">
+              Click below to add items to this Sale.
+            </td>
+          </tr>
+        <% else %>
+          <% @items.each do |item| %>
+            <tr>
+              <td class="span9">
+                <div class="hidden-desktop">
+                  <div><%= item.name %></div>
+                  <div><small>Qty: <%= item.qty %></small></div>
+                  <div><small>Color: <%= item.color %></small></div>
+                  <div><small>Size: <%= item.size %></small></div>
+                  <div><small>Unit price: <%= number_to_currency item.price %></small></div>
+                </div>
+                <div class="visible-desktop">
+                  <div class=""><%= item.name %></div>
+                  <div class="span2"><small>Qty: <%= item.qty %></small></div>
+                  <div class="span2"><small>Color: <%= item.color %></small></div>
+                  <div class="span2"><small>Size: <%= item.size %></small></div>
+                  <div class="span3"><small>Unit price: <%= number_to_currency item.price %></small></div>
+                </div>
+                <div class="actions">
+                  <%= link_to '<i class="icon-remove-circle"></i> Remove'.html_safe, line_item_path(item), method: :delete, class: 'destroy-link' %>
+                </div>
+              </td>
+              <td class="currency span3"><%= number_to_currency item.item_sale_total %></td>
+            </tr>
+          <% end %>
+        <% end %>
       </tbody>
     </table>
   </div>
 
-  <div id="totals" class="sale-footer">
-    <div class="currency well"><strong>Sale Total {{ toCurrency amount }}</strong></div>
-    <hr />
-    <div class="monotype">{{ toCents amount }}||{{ customer.uid }}||{{ uid }}</div>
+  <div id="new" class="span12">
+    <%= form_for @item, html: { class: 'form form-hidden' } do |f| %>
+      <legend>Add Item</legend>
+      <div class="control-group">
+        <%= f.text_field :qty, placeholder: 'Qty' %>
+      </div>
+      <div class="control-group">
+        <%= f.text_field :name, placeholder: "Name" %>
+      </div>
+      <div class="control-group">
+        <%= f.text_field :color, placeholder: "Color" %>
+      </div>
+      <div class="control-group">
+        <%= f.text_field :size, placeholder: "Size" %>
+      </div>
+      <div class="control-group">
+        <%= f.text_field :price, placeholder: "Unit price" %>
+        <%= f.hidden_field :sale_id %>
+      </div>
+      <div class="control-group">
+        <%= f.submit 'Add', class: 'btn btn-primary' %>
+        <button class="btn btn-cancel">Cancel</button>
+      </div>
+    <% end %>
   </div>
+  <div class="clearfix"></div>
 
-  <div id="messages">
-    <div class="flash alert alert-success">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      Invoice has been queued for delivery.
+  <div id="totals" class="sale-footer">
+    <div class="currency well">
+      <strong>Sale Total <%= number_to_currency @sale.amount %></strong>
     </div>
+    <hr />
+    <div class="monotype"><%= @sale.amount.to_i * 100 %>||<%= @customer.uid %>||<%= @sale.uid %></div>
   </div>
 </div>
 
@@ -64,17 +94,17 @@
 
 <div id="actions">
   <div class="form-actions">
-    {{#if customer.email}}
-      <a href="#" id="email-sale" class="btn btn-inverse"><i class="icon-envelope"></i> Email</a>
-    {{/if}}
-    <a href="#" class="btn btn-primary" id="add-item"><i class="icon-plus-sign"></i> Item</a>
+    <% if !@customer.email.empty? %>
+      <%= link_to '<i class="icon-envelope"></i> Email'.html_safe, email_sale_path(@sale), method: :post, class: 'btn btn-info' %>
+    <% end %>
+    <a href="#" class="btn btn-primary btn-add" id="add-item"><i class="icon-plus-sign"></i> Item</a>
 
     <div class="btn-group">
       <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">
         <i class="icon icon-remove-sign"></i> Delete
       </a>
       <ul class="dropdown-menu">
-        <li><a href="#" id="delete-sale">Yes, Delete</a></li>
+        <li><%= link_to "Yes, Delete", sale_path(@sale), method: :delete %></li>
       </ul>
     </div>
   </div>

@@ -8,6 +8,9 @@ class SalesController < ApplicationController
   end
 
   def show
+    @customer = @sale.customer
+    @items = @sale.line_items
+    @item = @sale.line_items.new
   end
 
   def new
@@ -24,7 +27,7 @@ class SalesController < ApplicationController
   end
 
   def edit
-    
+    @customer = @sale.customer
   end
 
   def update
@@ -36,19 +39,19 @@ class SalesController < ApplicationController
   end
 
   def destroy
+    @customer = @sale.customer
     @sale.destroy
-    redirect_to sales_path, notice: 'Successfully deleted sale.'
+    redirect_to @customer, notice: 'Successfully deleted sale.'
   end
 
   def send_by_email
     TransactionMailer.invoice( @sale, @sale.customer, current_user ).deliver
-    message = { message: "Successfully sent Sale Invoice to Customer"}
-    # respond_with message.to_json, location: api_sale_url(@sale), status: 200
+    redirect_to @sale, notice: 'Invoice has been queued for delivery.'
   end
 
   private
   def find_sale
-    @sale = current_user.sales.find(params[:id])
+    @sale = current_user.sales.includes(:line_items).find(params[:id])
     rescue ActiveRecord::RecordNotFound
       # error = { error: "Record could not be found or access not allowed." }
       # respond_with(error, status: 404)

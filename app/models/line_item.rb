@@ -20,6 +20,10 @@ class LineItem < ActiveRecord::Base
   end
 
   def update_sale
-    self.sale.save
+    sale = self.sale
+    begin
+      sale.calculate_cost && sale.calculate_amount
+      sale.save
+    end
   end
 end
