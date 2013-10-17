@@ -3,6 +3,6 @@ class ApplicationController < ActionController::Base
   layout 'bootstrap'
 
   def after_sign_in_path_for(resource)
-    '/#dashboard'
+    customers_path
   end
 end
