@@ -35,7 +35,7 @@ class CustomersController < ApplicationController
     if @customer.update_attributes(accepted_params)
       redirect_to @customer, notice: 'Successfully updated'
     else
-      render :edit
+      render :show
     end
   end
 

@@ -3,7 +3,7 @@
 
     <div id="panel-region" class="extra-margin">
       <div class="btn-group">
-        <a href="#" class="btn" id="edit-customer">Edit</a>
+        <a href="#" class="btn btn-edit" id="edit-customer">Edit</a>
         <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
           <i class="icon icon-plus-sign"></i> Transactions
           <span class="caret"></span>
@@ -60,6 +60,22 @@
           </div>
         </div>
       </div>
+      <%= form_for @customer, html: { class: 'form form-hidden' } do |f| %>
+        <legend>Edit Customer</legend>
+        <div class="control-group">
+          <%= f.text_field :name, placeholder: "Name" %>
+        </div>
+        <div class="control-group">
+          <%= f.email_field :email, placeholder: "Email" %>
+        </div>
+        <div class="control-group">
+          <%= f.text_field :phone, placeholder: "Phone" %>
+        </div>
+        <div class="control-group">
+          <%= f.submit 'Update', class: 'btn btn-primary' %>
+          <button class="btn btn-cancel">Cancel</button>
+        </div>
+      <% end %>
     </div>
   </div>
 
