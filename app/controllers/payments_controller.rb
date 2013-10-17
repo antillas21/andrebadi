@@ -21,6 +21,7 @@ class PaymentsController < ApplicationController
   end
 
   def show
+    @customer = @payment.customer
   end
 
   def edit
@@ -35,14 +36,14 @@ class PaymentsController < ApplicationController
   end
 
   def destroy
+    @customer = @payment.customer
     @payment.destroy
-    redirect_to payments_path, notice: 'Successfully deleted payment.'
+    redirect_to @customer, notice: 'Successfully deleted payment.'
   end
 
   def send_by_email
-   TransactionMailer.receipt( @payment, @payment.customer, current_user ).deliver
-    # message = { message: "Successfully sent Payment Receipt to Customer"}
-    # respond_with message.to_json, location: api_payment_url(@payment), status: 200
+    TransactionMailer.receipt( @payment, @payment.customer, current_user ).deliver
+    redirect_to @payment, notice: 'Payment Receipt has been queued for delivery.'
   end
 
   private

@@ -9,7 +9,7 @@ $ ->
     e.preventDefault()
     $(@).parents('form.form').hide('fast')
 
-  $('.btn-add').on 'click', (e) ->
+  $('.btn-add, .btn-edit').on 'click', (e) ->
     e.preventDefault()
     $('form.form.form-hidden').show('fast')
 

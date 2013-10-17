@@ -1,33 +1,39 @@
 <div id="payment-header">
-  <h3>RECEIPT #{{ uid }}</h3>
+  <h3>RECEIPT #<%= @payment.uid %></h3>
 </div>
 
 <div id="payment-data" class="well">
+  <%= form_for @payment, html: {class: 'form form-hidden'} do |f| %>
+    <div class="control-group">
+      <%= f.text_field :amount %>
+    </div>
+    <div class="control-group">
+      <%= f.submit 'Update', class: 'btn btn-primary' %>
+      <button class="btn btn-cancel">Cancel</button>
+    </div>
+  <% end %>
   <div class="">
-    <div class="amount large">{{ toCurrency amount }}</div>
-    <div class="payment-date">Date received: {{ formattedDateOnly created_at }}</div>
+    <div class="amount large"><%= number_to_currency @payment.amount %></div>
+    <div class="payment-date">Date received: <%= @payment.created_at.strftime('%Y-%m-%d') %></div>
   </div>
   <hr />
   Received from: <br />
-  <strong><a href="/#/customers/{{ customer.id }}">{{ customer.name }}</a></strong>
+  <strong>
+    <%= link_to @customer.name, customer_path(@customer.name) %>
+  </strong>
   <div class="concept">As partial payment on account balance.</div>
   <hr />
   <div class="monotype">
-    {{ toCents amount }}||{{ customer.uid }}||{{ uid }}
-  </div>
-</div>
-
-<div id="messages">
-  <div class="flash alert alert-success">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    Payment Receipt has been queued for delivery.
+    <%= "#{@payment.amount.to_i * 100}||#{@customer.uid}||#{@payment.uid}" %>
   </div>
 </div>
 
 <div id="payment-actions">
   <div class="form-actions">
-    <a href="#" class="btn btn-primary" id="email-payment"><i class="icon-envelope"></i> Email</a>
-    <a href="#" class="btn btn-info" id="edit-payment"><i class="icon-edit"></i> Edit</a>
+    <% if !@customer.email.empty? %>
+      <%= link_to '<i class="icon-envelope"></i> Email'.html_safe, email_payment_path(@payment), method: :post, class: 'btn btn-primary' %>
+    <% end %>
+    <a href="#" class="btn btn-info btn-edit" id="edit-payment"><i class="icon-edit"></i> Edit</a>
 
 
     <div class="btn-group">
@@ -35,7 +41,9 @@
         <i class="icon icon-remove-sign"></i> Delete
       </a>
       <ul class="dropdown-menu">
-        <li><a href="#" id="delete-payment">Yes, Delete</a></li>
+        <li>
+          <%= link_to "Yes, Delete", payment_path(@payment), method: :delete %>
+        </li>
       </ul>
     </div>
   </div>
