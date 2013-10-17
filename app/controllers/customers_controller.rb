@@ -3,7 +3,11 @@ class CustomersController < ApplicationController
   before_filter :retrieve_customer, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @customers = current_user.customers
+    @customers = current_user.customers.order(:name)
+    if params[:query]
+      @customers = @customers.where("name ILIKE ?", "%#{params[:query]}%")
+    end
+    @customers
   end
 
   def new
@@ -17,15 +21,10 @@ class CustomersController < ApplicationController
     else
       render :new
     end
-    # if @customer.valid?
-    #   respond_with @customer, location: api_customer_url(@customer)
-    # else
-    #   respond_with @customer
-    # end
   end
 
   def show
-    # respond_with @customer
+    @transactions = @customer.transactions.order("created_at DESC")
   end
 
   def edit
@@ -38,7 +37,6 @@ class CustomersController < ApplicationController
     else
       render :edit
     end
-    # respond_with @customer, location: api_customer_url(@customer)
   end
 
   def destroy

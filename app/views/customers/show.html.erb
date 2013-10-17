@@ -33,22 +33,28 @@
       <div itemscope="" itemtype="http://schema.org/Person">
         <div class="row">
           <div class="span5">
-            <h2><span itemprop="name">{{ name }}</span></h2>
+            <h2><span itemprop="name"><%= @customer.name %></span></h2>
           </div>
           <div class="span5">
             <p>
-              <strong>Balance: {{ toCurrency balance }}</strong>
+              <strong>Balance: <%= number_to_currency @customer.balance %></strong>
             </p>
+            <% if !@customer.email.empty? %>
             <p>
               <span itemprop="email">
-                <i class="icon-envelope-alt"></i> <a href="mailto:{{ email }}">{{ email }}</a>
+                <i class="icon-envelope-alt"></i> 
+                <%= link_to @customer.email, "mailto:#{@customer.email}" %>
               </span>
             </p>
+            <% end %>
+            <% if !@customer.phone.empty? %>
             <p>
               <span itemprop="telephone">
-                <i class="icon-phone-sign"></i> <a href="tel:{{ phone }}">{{ phone }}</a>
+                <i class="icon-phone-sign"></i> 
+                <%= link_to @customer.phone, "#{@customer.phone}" %>
               </span>
             </p>
+            <% end %>
           </div>
         </div>
       </div>
@@ -66,16 +72,26 @@
         </tr>
       </thead>
       <tbody>
-        <td class="span8">
-          <div class="transaction-type">{{ type }}</div>
-          <div class="transaction-date">{{ formattedDate created_at }}</div>
-          <div class="actions">
-            <a href="/#/{{ downcasePluralize type }}/{{ id }}" class=""><i class="icon-eye-open"></i> View</a>
-          </div>
-        </td>
-        <td class="span4">
-          <div class="amount">{{ toCurrency amount }}</div>
-        </td>
+        <% if @transactions.any? %>
+          <% @transactions.each do |transaction| %>
+            <tr>
+              <td class="span8">
+                <div class="transaction-type"><%= transaction.type %></div>
+                <div class="transaction-date"><%= transaction.created_at.strftime('%Y-%m-%d') %></div>
+                <div class="actions">
+                  <%= transaction_type_link(transaction) %>
+                </div>
+              </td>
+              <td class="span4">
+                <div class="amount"><%= number_to_currency transaction.amount %></div>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="2">No Sales or payments yet. Click above to add a Sale or Payment.</td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>

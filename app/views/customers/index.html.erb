@@ -3,29 +3,37 @@
   <div id="panel" class="span12">
     <div class="row">
       <div class="span4">
-        <a class="btn" id="add-customer"><i class="icon icon-plus-sign"></i> Add Customer</a>
+        <a class="btn btn-add" id="add-customer"><i class="icon icon-plus-sign"></i> Add Customer</a>
       </div>
       <div class="span4"></div>
-      <form class="form-search span-4">
+      <%= form_tag(customers_path, method: :get, class: 'form-search span4') do %>
         <div class="input-append">
-          <input type="text" class="span2 search-query " name="query" id="query" />
+          <%= text_field_tag "query", params[:query], class: 'span2 search-query', placeholder: 'Search...' %>
           <button type="submit" class="btn btn-mini" id="search"><i class="icon icon-search"></i> </button>
         </div>
+      <% end %>
+      <form class="form-search span-4">
       </form>
     </div>
   </div>
 
   <div id="new" class="span12">
-    <legend>New Customer</legend>
-    <div class="control-group">
-      <input type="text" placeholder="Name" name="name" value="{{ name }}" />
-    </div>
-    <div class="control-group">
-      <input type="text" placeholder="Email" name="email" value="{{ email }}" />
-    </div>
-    <div class="control-group">
-      <input type="text" placeholder="Phone" name="phone" value="{{ phone }}" /><br />
-    </div>
+    <%= form_tag(customers_path, class: 'form form-hidden') do %>
+      <legend>New Customer</legend>
+      <div class="control-group">
+        <%= text_field_tag "customer[name]", nil, placeholder: "Name" %>
+      </div>
+      <div class="control-group">
+        <%= email_field_tag "customer[email]", nil, placeholder: "Email" %>
+      </div>
+      <div class="control-group">
+        <%= text_field_tag "customer[phone]", nil, placeholder: "Phone" %>
+      </div>
+      <div class="control-group">
+        <%= submit_tag 'Add', class: 'btn btn-primary' %>
+        <button class="btn btn-cancel">Cancel</button>
+      </div>
+    <% end %>
   </div>
 
   <div id="customers" class="span12">
@@ -36,31 +44,42 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>No records found</td>
-        </tr>
-        <tr>
-          <td>
-            <div itemscope="" itemtype="http://schema.org/Person">
-              <div class="right-side">
-                Due: {{ toCurrency balance }}
-              </div>
-              <div>
-                <strong><span itemprop="name"><a href="/#/customers/{{ id }}">{{ name }}</a></span></strong>
-              </div>
-              <p>
-                <span itemprop="email">
-                  email: <a href="mailto:{{ email }}">{{ email }}</a>
-                </span>
-              </p>
-              <p>
-                <span itemprop="telephone">
-                  tel: <a href="tel:{{ phone }}">{{ phone }}</a>
-                </span>
-              </p>
-            </div>
-          </td>
-        </tr>
+        <% if @customers.any? %>
+          <% @customers.each do |customer| %>
+            <tr>
+              <td>
+                <div itemscope="" itemtype="http://schema.org/Person">
+                  <div class="right-side">
+                    Due: <%= number_to_currency customer.balance %>
+                  </div>
+                  <div>
+                    <strong><span itemprop="name">
+                    <%= link_to customer.name, customer_path(customer) %>
+                    </span></strong>
+                  </div>
+                  <% if !customer.email.empty? %>
+                  <p>
+                    <span itemprop="email">
+                      email: <%= link_to customer.email, "mailto:#{customer.email}" %>
+                    </span>
+                  </p>
+                  <% end %>
+                  <% if !customer.phone.empty? %>
+                  <p>
+                    <span itemprop="telephone">
+                      tel: <%= link_to customer.phone, "tel:#{customer.phone}" %>
+                    </span>
+                  </p>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="2">No records found</td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
