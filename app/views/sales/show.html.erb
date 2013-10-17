@@ -18,13 +18,7 @@
         <th class="currency">Totals</th>
       </thead>
       <tbody>
-        <% unless @sale.line_items.any? %>
-          <tr>
-            <td colspan="2">
-              Click below to add items to this Sale.
-            </td>
-          </tr>
-        <% else %>
+        <% if @items.any? %>
           <% @items.each do |item| %>
             <tr>
               <td class="span9">
@@ -49,32 +43,38 @@
               <td class="currency span3"><%= number_to_currency item.item_sale_total %></td>
             </tr>
           <% end %>
+        <% else %>
+          <tr>
+            <td colspan="2">
+              Click below to add items to this Sale.
+            </td>
+          </tr>
         <% end %>
       </tbody>
     </table>
   </div>
 
   <div id="new" class="span12">
-    <%= form_for @item, html: { class: 'form form-hidden' } do |f| %>
+    <%= form_tag line_items_path, class: 'form form-hidden' do %>
       <legend>Add Item</legend>
       <div class="control-group">
-        <%= f.text_field :qty, placeholder: 'Qty' %>
+        <%= text_field_tag "line_item[qty]", nil, placeholder: 'Qty' %>
       </div>
       <div class="control-group">
-        <%= f.text_field :name, placeholder: "Name" %>
+        <%= text_field_tag "line_item[name]", nil, placeholder: "Name" %>
       </div>
       <div class="control-group">
-        <%= f.text_field :color, placeholder: "Color" %>
+        <%= text_field_tag "line_item[color]", nil, placeholder: "Color" %>
       </div>
       <div class="control-group">
-        <%= f.text_field :size, placeholder: "Size" %>
+        <%= text_field_tag "line_item[size]", nil, placeholder: "Size" %>
       </div>
       <div class="control-group">
-        <%= f.text_field :price, placeholder: "Unit price" %>
-        <%= f.hidden_field :sale_id %>
+        <%= text_field_tag "line_item[price]", nil, placeholder: "Unit price" %>
+        <%= hidden_field_tag "line_item[sale_id]", @sale.id %>
       </div>
       <div class="control-group">
-        <%= f.submit 'Add', class: 'btn btn-primary' %>
+        <%= submit_tag 'Add', class: 'btn btn-primary' %>
         <button class="btn btn-cancel">Cancel</button>
       </div>
     <% end %>

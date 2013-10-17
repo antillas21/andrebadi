@@ -9,7 +9,9 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#" id="add-purchase">Add Sale</a></li>
+          <li>
+            <%= link_to 'Add Sale', sales_path(sale: { customer_id: @customer.id }), method: :post %>
+          </li>
           <li><%= link_to 'Add Payment', new_customer_payment_path(@customer) %></li>
         </ul>
       </div>

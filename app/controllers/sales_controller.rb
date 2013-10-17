@@ -10,7 +10,6 @@ class SalesController < ApplicationController
   def show
     @customer = @sale.customer
     @items = @sale.line_items
-    @item = @sale.line_items.new
   end
 
   def new
@@ -20,7 +19,7 @@ class SalesController < ApplicationController
   def create
     @sale = @customer.sales.new(accepted_params)
     if @sale.save
-      redirect_to @sale, notice: 'Successfully created sale.'
+      redirect_to @sale
     else
       render :new
     end
