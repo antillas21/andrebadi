@@ -9,8 +9,8 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#" id="add-purchase">Add Purchase</a></li>
-          <li><a href="#" id="add-payment">Add Payment</a></li>
+          <li><a href="#" id="add-purchase">Add Sale</a></li>
+          <li><%= link_to 'Add Payment', new_customer_payment_path(@customer) %></li>
         </ul>
       </div>
       <div class="btn-group">
@@ -19,7 +19,9 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#" id="delete-customer">Yes, Delete</a></li>
+          <li>
+            <%= link_to 'Yes, Delete', customer_path(@customer), method: :delete %>
+          </li>
         </ul>
       </div>
     </div>

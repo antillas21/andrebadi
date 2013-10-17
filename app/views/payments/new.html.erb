@@ -1,0 +1,27 @@
+<div id="payment-header">
+  <h3>RECEIPT #<%= @payment.uid %></h3>
+</div>
+
+<div id="payment-data" class="well">
+  <%= form_for [@customer, @payment], html: {class: 'form'} do |f| %>
+    <div class="control-group">
+      <%= f.text_field :amount, placeholder: 'Amount ($)' %>
+    </div>
+    <div class="control-group">
+      <%= f.submit 'Add', class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', :back, class: 'btn' %>
+    </div>
+  <% end %>
+  <div class="">
+  </div>
+  <hr />
+  Received from: <br />
+  <strong>
+    <%= link_to @customer.name, customer_path(@customer.name) %>
+  </strong>
+  <div class="concept">As partial payment on account balance.</div>
+  <hr />
+  <div class="monotype">
+    <%= "#{@payment.amount.to_i * 100}||#{@customer.uid}||#{@payment.uid}" %>
+  </div>
+</div>

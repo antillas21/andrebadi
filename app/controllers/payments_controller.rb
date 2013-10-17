@@ -55,7 +55,7 @@ class PaymentsController < ApplicationController
   end
 
   def find_customer
-    @customer = current_user.customers.find(accepted_params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     rescue ActiveRecord::RecordNotFound
       # error = { error: "customer_id value does not belong to any Customer on your records. Operation not allowed."}
       # respond_with error, status: 403, location: api_payments_url

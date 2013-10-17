@@ -5,7 +5,9 @@ SaleTrackr::Application.routes.draw do
   end
 
   ## resources declaration to be available on Marionette Routing
-  resources :customers
+  resources :customers do
+    resources :payments
+  end
   resources :payments do
     member do
       post :send_by_email, as: :email, path: 'email'
