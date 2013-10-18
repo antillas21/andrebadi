@@ -19,6 +19,7 @@ SaleTrackr::Application.routes.draw do
     end
   end
   resources :line_items
+  resources :account_settings, only: [:edit, :update]
 
   namespace :api do
     resources :customers
