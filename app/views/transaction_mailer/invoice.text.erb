@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------
-                   I N V O I C E  #<%= @sale.uid %>
+                   S A L E     R E C E I P T  #<%= @sale.uid %>
 -----------------------------------------------------------------------
 
 Bill to: <%= @customer.name %>
@@ -22,3 +22,11 @@ Color: <%= item.color %> / Size: <%= item.size %> / Unit price: <%= number_to_cu
 -----------------------------------------------------------------------
 
 <%= @sale.amount.to_i * 100 %>||<%= @customer.uid %>||<%= @sale.uid %>
+
+
+
+
+-----------------------------------------------------------------------
+Sale receipt sent from SaleTrackr. (http://saletrackr.me)
+Do you need to track customers, sales and payments?
+Open a FREE account: http://saletrackr.me/register
