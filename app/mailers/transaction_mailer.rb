@@ -12,7 +12,7 @@ class TransactionMailer < ActionMailer::Base
     @store = store_owner.account_setting.store_name
 
     mail( to: "#{@customer.name} <#{@customer.email}>", from: store_owner.email,
-          subject: 'Your purchase with Lizbeth Ojeda' )
+          subject: "Your purchase at #{@store}" )
   end
 
   def receipt( payment, customer, store_owner )
