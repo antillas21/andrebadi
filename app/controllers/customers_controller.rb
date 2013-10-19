@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   before_action :authenticate_user!
-  before_filter :retrieve_customer, only: [ :show, :edit, :update, :destroy ]
+  before_filter :retrieve_customer, only: [:show, :edit, :update, :destroy]
 
   def index
     @customers = current_user.customers.order(:name)

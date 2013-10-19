@@ -10,14 +10,14 @@ class Sale < Transaction
   after_destroy :update_customer_balance
 
   def calculate_amount
-    items_array = line_items.collect{|item| [item.qty, item.price]}
-    total = items_array.inject(0){|sum, item| sum + (item[0] * item[1])}
+    items_array = line_items.map{ |item| [item.qty, item.price] }
+    total = items_array.reduce(0){ |sum, item| sum + (item[0] * item[1]) }
     self.amount = total
   end
 
   def calculate_cost
-    items_array = line_items.collect{ |item| [item.qty, item.cost] }
-    total = items_array.inject(0){ |sum, item| sum + (item[0] * (item[1] || 0)) }
+    items_array = line_items.map{ |item| [item.qty, item.cost] }
+    total = items_array.reduce(0){ |sum, item| sum + (item[0] * (item[1] || 0)) }
     self.cost = total
   end
 

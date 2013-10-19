@@ -6,22 +6,22 @@ class TransactionMailer < ActionMailer::Base
   #
   #   en.sales.invoice.subject
   #
-  def invoice( sale, customer, store_owner )
+  def invoice(sale, customer, store_owner)
     @sale = sale
     @customer = customer
     @store = store_owner.account_setting.store_name
 
-    mail( to: "#{@customer.name} <#{@customer.email}>", from: store_owner.email,
-          subject: "Your purchase at #{@store}" )
+    mail(to: "#{@customer.name} <#{@customer.email}>", from: store_owner.email,
+          subject: "Your purchase at #{@store}")
   end
 
-  def receipt( payment, customer, store_owner )
+  def receipt(payment, customer, store_owner)
     @payment = payment
     @customer = customer
     @store = store_owner.account_setting.store_name
 
 
-    mail( to: "#{@customer.name} <#{@customer.email}>", from: store_owner.email,
-          subject: 'Your payment receipt.' )
+    mail(to: "#{@customer.name} <#{@customer.email}>", from: store_owner.email,
+          subject: 'Your payment receipt.')
   end
 end

@@ -44,7 +44,7 @@ class SalesController < ApplicationController
   end
 
   def send_by_email
-    TransactionMailer.invoice( @sale, @sale.customer, current_user ).deliver
+    TransactionMailer.invoice(@sale, @sale.customer, current_user).deliver
     redirect_to @sale, notice: 'Invoice has been queued for delivery.'
   end
 

@@ -42,7 +42,7 @@ class PaymentsController < ApplicationController
   end
 
   def send_by_email
-    TransactionMailer.receipt( @payment, @payment.customer, current_user ).deliver
+    TransactionMailer.receipt(@payment, @payment.customer, current_user).deliver
     redirect_to @payment, notice: 'Payment Receipt has been queued for delivery.'
   end
 

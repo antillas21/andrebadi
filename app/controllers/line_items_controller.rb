@@ -14,7 +14,7 @@ class LineItemsController < ApplicationController
 
 
   def update
-    @item.update_attributes( accepted_params )
+    @item.update_attributes(accepted_params)
     redirect_to @sale, notice: 'Updated item.'
   end
 

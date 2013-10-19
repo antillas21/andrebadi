@@ -45,7 +45,7 @@ describe Customer do
 
       customer.balance.should_not == 0
 
-      customer.balance.should == ( customer.total_sales - customer.total_payments )
+      customer.balance.should == (customer.total_sales - customer.total_payments)
     end
   end
 

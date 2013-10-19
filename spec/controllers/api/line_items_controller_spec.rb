@@ -25,7 +25,7 @@ describe Api::LineItemsController do
         sale.reload
         sale.line_items.count.should eq 0
 
-        json_response = JSON.parse( response.body )
+        json_response = JSON.parse(response.body)
         json_response.keys.should include 'error'
       end
     end
