@@ -1,5 +1,4 @@
 class LineItem < ActiveRecord::Base
-  # attr_accessible :title, :body
 
   validates :name, :qty, :price, presence: true
 

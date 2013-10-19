@@ -47,7 +47,7 @@
             <p>
               <span itemprop="email">
                 <i class="icon-envelope-alt"></i> 
-                <%= link_to @customer.email, "mailto:#{@customer.email}" %>
+                <%= mail_to @customer.email, 'Send email' %>
               </span>
             </p>
             <% end %>
@@ -55,7 +55,7 @@
             <p>
               <span itemprop="telephone">
                 <i class="icon-phone-sign"></i> 
-                <%= link_to @customer.phone, "#{@customer.phone}" %>
+                <%= link_to 'Call', "tel:#{@customer.phone}".html_safe %>
               </span>
             </p>
             <% end %>
