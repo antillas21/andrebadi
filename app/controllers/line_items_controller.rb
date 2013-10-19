@@ -28,15 +28,13 @@ class LineItemsController < ApplicationController
   def find_line_item
     @item = current_user.line_items.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      # error = { error: "Record could not be found or access not allowed." }
-      # render json: error, status: 403, location: api_line_items_url
+      render '/public/404.html'
   end
 
   def find_sale
     @sale = current_user.sales.find(accepted_params[:sale_id])
     rescue ActiveRecord::RecordNotFound
-      # error = { error: "sale_id value does not belong to any Sale on your records. Operation not allowed."}
-      # respond_with error, status: 403, location: api_line_items_url
+      render '/public/404.html'
   end
 
   def accepted_params

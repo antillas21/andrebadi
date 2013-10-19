@@ -52,15 +52,13 @@ class SalesController < ApplicationController
   def find_sale
     @sale = current_user.sales.includes(:line_items).find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      # error = { error: "Record could not be found or access not allowed." }
-      # respond_with(error, status: 404)
+      render '/public/404.html'
   end
 
   def find_customer
     @customer = current_user.customers.find(accepted_params[:customer_id])
     rescue ActiveRecord::RecordNotFound
-      # error = { error: "customer_id value does not belong to any Customer in your account."}
-      # render json: error, status: 403, location: api_sales_url
+      render '/public/404.html'
   end
 
   def accepted_params

@@ -48,8 +48,7 @@ class CustomersController < ApplicationController
   def retrieve_customer
     @customer = current_user.customers.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    # error = { error: "Record could not be found or access not allowed." }
-    # respond_with(error, status: 404)
+    render '/public/404.html'
   end
 
   def accepted_params

@@ -7,8 +7,8 @@ class Api::BaseController < ActionController::Base
 
   private
   def get_auth_token
-    if auth_token = params[:token].blank? && request.headers["X-AUTH-TOKEN"]
-      params[:token] = auth_token
+    if params[:token].blank? && request.headers['X-AUTH-TOKEN']
+      params[:token] = request.headers['X-AUTH-TOKEN']
     end
   end
 
