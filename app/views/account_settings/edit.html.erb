@@ -14,6 +14,19 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label :track_cost, 'Track costs when adding items to sales', class: 'control-label' %>
+    <div class="controls">
+      <label for="" class="radio <%= 'checked' if @settings.track_cost? %>">
+        <span class="icons"><span class="first-icon fui-radio-unchecked"></span><span class="second-icon fui-radio-checked"></span></span>
+        <%= f.radio_button :track_cost, 1 %> Yes
+      </label>
+      <label for="" class="radio <%= 'checked' unless @settings.track_cost? %>">
+      <span class="icons"><span class="first-icon fui-radio-unchecked"></span><span class="second-icon fui-radio-checked"></span></span>
+        <%= f.radio_button :track_cost, 0 %> No
+      </label>
+    </div>
+  </div>
+  <div class="form-actions">
     <div class="controls">
       <%= f.submit 'Update', class: 'btn btn-primary' %>
     </div>

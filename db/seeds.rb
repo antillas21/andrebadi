@@ -7,7 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
 
-default_user = FactoryGirl.create(:user, email: 'user@example.com')
+default_user = User.create(
+  email: 'user@example.com', password: 'password', password_confirmation: 'password'
+)
 
 10.times do
   FactoryGirl.create(:customer, user: default_user)

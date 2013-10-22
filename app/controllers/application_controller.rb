@@ -11,4 +11,11 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :user_settings
+
+  def tracking_costs
+    user_settings.track_cost?
+  end
+
+  helper_method :tracking_costs
+
 end

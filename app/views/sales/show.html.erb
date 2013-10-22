@@ -73,6 +73,11 @@
         <%= text_field_tag "line_item[price]", nil, placeholder: "Unit price" %>
         <%= hidden_field_tag "line_item[sale_id]", @sale.id %>
       </div>
+      <% if tracking_costs %>
+        <div class="control-group">
+          <%= text_field_tag "line_item[cost]", nil, placeholder: "Unit cost" %>
+        </div>
+      <% end %>
       <div class="control-group">
         <%= submit_tag 'Add', class: 'btn btn-primary' %>
         <button class="btn btn-cancel">Cancel</button>

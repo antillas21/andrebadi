@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802075032) do
+ActiveRecord::Schema.define(version: 20131022080134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20130802075032) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "track_cost",           default: true
   end
 
   add_index "account_settings", ["user_id"], name: "index_account_settings_on_user_id", using: :btree

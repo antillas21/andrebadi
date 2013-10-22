@@ -14,6 +14,6 @@ class AccountSettingsController < ApplicationController
 
 private
   def accepted_params
-    params.require(:account_setting).permit(:store_name, :language)
+    params.require(:account_setting).permit(:store_name, :language, :track_cost)
   end
 end
